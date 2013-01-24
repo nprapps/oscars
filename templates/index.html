@@ -14,27 +14,15 @@
 
 {% block content %}
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
 <div id="audio-navbar">
 	<div class="branding">
-		<h2>NPR Music: In Memoriam 2012</h2>
+		<h2>Oscars 2013</h2>
 	</div>
 
 	<div id="audio">
-	
 		<div id="pop-audio" class="jp-jplayer"></div>
-		
 			<div id="jp_container_1" class="jp-audio">
 				<div class="jp-type-single">
-				
 					<div class="jp-gui jp-interface">
 						<div class="jp-controls">
 							<a href="javascript:;" class="jp-play nav-btn" tabindex="1"><i class="icon-play icon-white">play</i></a>
@@ -47,7 +35,7 @@
 								</div>
 							</div>
 							<ul id="slide-nav">
-								<li id="send" class="slide-nav-item" title="Credits"><span>Credits</span></li>
+								<li id="credits-nav" class="slide-nav-item" title="Credits"><span>Credits</span></li>
 							</ul>
 						</div>
 						<div class="jp-current-time"></div>
@@ -66,11 +54,9 @@
 
 <div id="slideshow">
 	<div id="slideshow-wrap">
-
-
-		<div id="panel0" class="panel panel-open">
-			<div id="title" class="panelbg">
-				<div class="panel-inner">
+		<div id="slide0" class="slide slide-open">
+			<div id="title" class="slidebg">
+				<div class="slide-inner">
 					<a id="title-button" href="javascript:;">
 						<h5>NPR Music presents</h5>
 						<h1>In Memoriam</h1>
@@ -81,9 +67,9 @@
 			</div>
 		</div>
 
-		<div id="panelend" class="panel panel-end">
-			<div class="panelbg">
-				<div class="panel-wrap">
+		<div id="slideend" class="slide slide-end">
+			<div class="slidebg">
+				<div class="slide-wrap">
                     <h3>Pass it on</h3>
                     <div id="share-buttons">
                         <div class="fb-like" data-href="http://apps.npr.org/music-memoriam-2012/" data-send="false" data-width="300" data-show-faces="false" data-font="arial" data-colorscheme="dark"></div>
