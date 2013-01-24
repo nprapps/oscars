@@ -128,11 +128,8 @@ def render():
 
         if rule_string.endswith('/'):
             filename = 'www' + rule_string + 'index.html'
-        elif rule_string.endswith('.html'):
-            filename = 'www' + rule_string
         else:
-            print 'Skipping %s' % name 
-            continue
+            filename = 'www' + rule_string
 
         print 'Rendering %s' % (filename)
 
@@ -144,6 +141,9 @@ def render():
             content = view()
 
             compiled_includes = g.compiled_includes
+
+        if not isinstance(content, basestring):
+            content = content[0]
 
         with open(filename, 'w') as f:
             f.write(content)

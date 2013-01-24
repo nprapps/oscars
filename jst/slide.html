@@ -1,0 +1,24 @@
+<div id="panel<%= id %>" class="panel">
+	<div class="panel-bg" style="background-image: url('img/mugs/<%= image_name %>_<%= image_width %>.jpg');"> </div>
+    <div class="panel-description">
+        <h2><%= artist_first_name %> <%= artist_last_name %></h2>
+        <% if (dob != '') { %>
+        <p class="dates"><%= dob %> &mdash; <%= dod %></p>
+        <% } %>
+        <p class="desc"><strong><%= known_as %></strong> <%= desc %></p>
+        
+        <% if (full_obit.length > 2) { %>
+        <p class="npr-obit">&rsaquo; <a href="<%= full_obit %>" target="_blank">NPR Remembrance: Audio, interviews, photos</a></p>
+        <% } %>
+        
+        <% if (artist_page_id.length > 2) { %>
+        <p class="npr-artist">&rsaquo; <a href="http://www.npr.org/artists/<%= artist_page_id %>" target="_blank">NPR Artist Page</a></p>
+        <% } %>
+        
+        <% if (song_name.length > 2) { %>
+		<p class="now-playing">Now Playing: <%= song_name %></p>
+        <% } %>
+        <p class="photo-credit">Photo: <%= photo_caption %> (<%= photo_credit %>)</p>
+    </div>
+</div>
+

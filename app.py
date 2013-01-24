@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
+import csv
 import json
 from mimetypes import guess_type
+import os
 import urllib
 
 import envoy
@@ -18,6 +20,48 @@ def index():
     Example view demonstrating rendering a simple HTML page.
     """
     return render_template('index.html', **make_context())
+
+@app.route('/live-data/slides.json')
+def data_slides_json():
+    """
+    Generate slide data.
+    """
+    with open('data/slides.csv') as f:
+        rows = list(csv.reader(f))
+
+    slides = []
+
+    for row in rows[1:]:
+        slide = {
+            'sort': [row[1], row[0]],
+            'artist_first_name': row[0],
+            'artist_last_name': row[1],
+            'artist_page_id': row[2],
+            'dob': row[3],
+            'dod': row[4],
+            'known_as': row[5],
+            'desc': row[6], # NEW
+            'full_obit': row[7],
+            'image_name': '%s_%s', # See below
+            'photo_credit': row[9],
+            'photo_caption': row[10], # NEW
+            'cue_start': 0, # See below
+            'song_name': row[12]
+        }
+
+        # Extract image_name
+        image_url = row[8]
+        filename = image_url.split('/')[-1] 
+        slide['image_name'] = os.path.splitext(filename)[0]
+
+        # Compute cue_start in seconds
+        cue_start = row[11]
+        hours, mins, secs = map(int, cue_start.split(':'))
+        slide['cue_start'] = (mins * 60) + secs
+
+        slides.append(slide)
+
+    return json.dumps(slides), 200, { 'Content-Type': 'application/javascript' }
 
 @app.route('/widget.html')
 def widget():
