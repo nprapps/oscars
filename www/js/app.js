@@ -34,23 +34,20 @@ $(document).ready(function() {
     
     if (video_supported) {
         /* 
-         * Load audio player
+         * Load video player
          */
-        $player.jPlayer({
-            ready: function () {
-                $(this).jPlayer('setMedia', {
-                    mp3: APP_CONFIG['AUDIO']['MP3'],
-                    oga: APP_CONFIG['AUDIO']['OGG'] 
-                }).jPlayer("pause");
-            },
-            ended: function (event) {
-                $(this).jPlayer("pause");
-            },
-            swfPath: "js",
-            supplied: "oga, mp3"
-        });
 
         pop = Popcorn.youtube('#video', 'http://www.youtube.com/watch?v=WJoTxywiRG0&controls=0&autoplay=0&showinfo=0&fs=0&disablekb=1');
+
+        pop.on('pause', function() {
+            $('.jp-play').show();
+            $('.jp-pause').hide();
+        });
+
+        pop.on('playing', function() {
+            $('.jp-pause').show();
+            $('.jp-play').hide();
+        });
     }
 
     function format_ap_date(mmnt) {
@@ -104,18 +101,18 @@ $(document).ready(function() {
     	 */
         if (!video_supported) {
             scroll_to_slide(id);
-        } else if ($player.data().jPlayer.status.paused || slideshow_data[id] == undefined) {
+        } else if (pop.paused() || slideshow_data[id] == undefined) {
             scroll_to_slide(id);
 
             if (slideshow_data[id] != undefined) {
-				$player.jPlayer('pause', slideshow_data[id]['cue_start']);
+                pop.pause(slideshow_data[id]['cue_start']);
             } else if (id == 0) {
-                $player.jPlayer('pause', 0);
+                pop.pause(0);
 			} else if (id == (num_slides - 1)) {
-				$player.jPlayer('pause', audio_length);
+                pop.pause(audio_length);
 			}
         } else {
-            $player.jPlayer('play', slideshow_data[id]['cue_start']);
+            pop.play(slideshow_data[id]['cue_start']);
         }
 		
         return false; 
@@ -341,15 +338,27 @@ $(document).ready(function() {
 	 */
 	$('#title-button').click(function() {
         if (video_supported) {
-            $player.jPlayer('play');
+            pop.play();
         } else {
             goto_slide(1);
         }
 	});
-	
+
+    $('.jp-play').click(function() {
+        pop.play();
+        $(this).hide();
+        $('.jp-pause').show();
+    });
+
+    $('.jp-pause').click(function() {
+        pop.pause();
+        $(this).hide();
+        $('.jp-play').show();
+    });
+
 	$audio_branding.click(function() {
 		if (video_supported) {
-            $player.jPlayer('stop');
+            pop.stop();
         }
 
 		goto_slide(0);
@@ -395,10 +404,10 @@ $(document).ready(function() {
 
             return false;
         } else if (ev.which == 32 && video_supported) {
-            if ($player.data().jPlayer.status.paused) {
-                $player.jPlayer('play');
+            if (pop.paused()) {
+                pop.play();
             } else {
-                $player.jPlayer('pause');
+                pop.pause();
             }
 
             return false;
