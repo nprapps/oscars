@@ -5,7 +5,7 @@ $(document).ready(function() {
 	var num_slides = 0;
 	var slideshow_data = [];
 	var pop;
-    var audio_supported = !($.browser.msie === true && $.browser.version < 9);
+    var video_supported = !($.browser.msie === true && $.browser.version < 9);
     var slide_list_open = false;
 
 	/* ELEMENTS */
@@ -26,13 +26,13 @@ $(document).ready(function() {
 	var $slides = [];
 	var $slide_images = [];
 
-    if (!audio_supported) {
+    if (!video_supported) {
         $audio.hide(); 
     }
     
     slide_list_toggle('close');
     
-    if (audio_supported) {
+    if (video_supported) {
         /* 
          * Load audio player
          */
@@ -50,7 +50,7 @@ $(document).ready(function() {
             supplied: "oga, mp3"
         });
 
-        pop = Popcorn('#jp_audio_0');
+        pop = Popcorn.youtube('#video', 'http://www.youtube.com/watch?v=WJoTxywiRG0&controls=0&autoplay=0&showinfo=0&fs=0&disablekb=1');
     }
 
     function format_ap_date(mmnt) {
@@ -102,7 +102,7 @@ $(document).ready(function() {
     	 * Determine whether to shift to the next slide
     	 * with audio, or without audio.
     	 */
-        if (!audio_supported) {
+        if (!video_supported) {
             scroll_to_slide(id);
         } else if ($player.data().jPlayer.status.paused || slideshow_data[id] == undefined) {
             scroll_to_slide(id);
@@ -179,11 +179,12 @@ $(document).ready(function() {
 				browse_output += JST.browse(context);
 				endlist_output += JST.endlist(context);
 				
-                if (audio_supported) {
+                if (video_supported) {
                     pop.code({
                         start: v["cue_start"],
                         onStart: function( options ) {         
-                            scroll_to_slide(i + 1);
+                            // scroll_to_slide(i + 1);
+                            $('#footnote').text(v['id']);
 
                             return false;
                         }
@@ -211,12 +212,12 @@ $(document).ready(function() {
 				cue_start: end_cue
 			});
 
-			if (audio_supported) {
+			if (video_supported) {
 				// Popcorn cuepoint for opening slide
 				pop.code({
 					start: 0,
 					onStart: function(options) {         
-						scroll_to_slide(0); 
+						// scroll_to_slide(0); 
 
 						return false;
 					}
@@ -226,7 +227,7 @@ $(document).ready(function() {
 				pop.code({
 					start: end_cue,
 					onStart: function(options) {         
-						scroll_to_slide(end_id); 
+						// scroll_to_slide(end_id); 
 
 						return false;
 					}
@@ -309,6 +310,7 @@ $(document).ready(function() {
 		$slideshow.width(new_width + 'px').height(new_height + 'px');
 		$slide_wrap.width((num_slides * new_width) + 'px').height(new_height + 'px');
 		$slides.width(new_width + 'px').height(new_height + 'px');
+        $('#video').width(new_width + 'px').height(new_height - $('#footer').height() + 'px');
 
 		if (new_width <= 480) {
 			$slide_images.height((Math.ceil(new_width * 9) / 16) + 'px');
@@ -338,7 +340,7 @@ $(document).ready(function() {
 	 * Click actions
 	 */
 	$('#title-button').click(function() {
-        if (audio_supported) {
+        if (video_supported) {
             $player.jPlayer('play');
         } else {
             goto_slide(1);
@@ -346,7 +348,7 @@ $(document).ready(function() {
 	});
 	
 	$audio_branding.click(function() {
-		if (audio_supported) {
+		if (video_supported) {
             $player.jPlayer('stop');
         }
 
@@ -392,7 +394,7 @@ $(document).ready(function() {
             $next.click();
 
             return false;
-        } else if (ev.which == 32 && audio_supported) {
+        } else if (ev.which == 32 && video_supported) {
             if ($player.data().jPlayer.status.paused) {
                 $player.jPlayer('play');
             } else {
@@ -409,5 +411,6 @@ $(document).ready(function() {
 	/* 
 	 * INIT
 	 */
+    $slideshow.hide(); // TODO - remove
 	load_slideshow_data();
 });
