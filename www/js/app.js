@@ -1,10 +1,10 @@
 $(document).ready(function() {
 	/* VARS */
 	var active_slide = 0;
-	var audio_length = 337; // TODO: Pass in dynamically somehow?
+	var audio_length = APP_CONFIG['AUDIO']['LENGTH']; 
 	var num_slides = 0;
 	var slideshow_data = [];
-	var pop; // Popcorn element
+	var pop;
     var audio_supported = !($.browser.msie === true && $.browser.version < 9);
     var slide_list_open = false;
 
@@ -23,8 +23,8 @@ $(document).ready(function() {
 	var $slide_list = $('#list-nav');
 	var $slide_list_end = $('#list-nav-end');
 	var $slide_browse_btn = $('#browse-btn');
-	var $slides;
-	var $slide_images;
+	var $slides = [];
+	var $slide_images = [];
 
     if (!audio_supported) {
         $audio.hide(); 
@@ -39,8 +39,8 @@ $(document).ready(function() {
         $player.jPlayer({
             ready: function () {
                 $(this).jPlayer('setMedia', {
-                    mp3: "http://apps.npr.org/music-memoriam-2012/audio/artists2012.mp3",
-                    oga: "http://apps.npr.org/music-memoriam-2012/audio/artists2012.ogg"
+                    mp3: APP_CONFIG['AUDIO']['MP3'],
+                    oga: APP_CONFIG['AUDIO']['OGG'] 
                 }).jPlayer("pause");
             },
             ended: function (event) {

@@ -45,6 +45,12 @@ NPR_DFP = {
 
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
+AUDIO = {
+    'LENGTH': 337,
+    'MP3': 'http://stage-apps.npr.org/music-memoriam-2012/audio/artists2012.mp3',
+    'OGG': 'http://stage-apps.npr.org/music-memoriam-2012/audio/artists2012.ogg'
+}
+
 def configure_targets(deployment_target):
     """
     Configure deployment targets. Abstracted so this can be
@@ -53,16 +59,23 @@ def configure_targets(deployment_target):
     global S3_BUCKETS
     global SERVERS
     global DEBUG
+    global AUDIO
 
     if deployment_target == 'production':
         S3_BUCKETS = PRODUCTION_S3_BUCKETS
         SERVERS = PRODUCTION_SERVERS
         DEBUG = False
+
+        AUDIO['MP3'] = 'http://apps.npr.org/music-memoriam-2012/audio/artists2012.mp3'
+        AUDIO['OGG'] = 'http://apps.npr.org/music-memoriam-2012/audio/artists2012.ogg'
     else:
         S3_BUCKETS = STAGING_S3_BUCKETS
         SERVERS = STAGING_SERVERS
         DEBUG = True
 
+        AUDIO['MP3'] = 'http://stage-apps.npr.org/music-memoriam-2012/audio/artists2012.mp3'
+        AUDIO['OGG'] = 'http://stage-apps.npr.org/music-memoriam-2012/audio/artists2012.ogg'
+ 
 DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
 
 configure_targets(DEPLOYMENT_TARGET)
