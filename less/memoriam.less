@@ -1,0 +1,455 @@
+// Global variables
+@img-root: '../img';
+@slide-bg-color: #262626;
+@shade-bg: rgba(50,50,50,.6);
+@shadow: 1px 2px 10px rgba(32,32,32,.7);
+@text-gray: #8b9094;
+@nav-border: #39393a;
+@audio-height: 50px;
+@nav-button-color: #343434;
+@nav-button-hover: #33363b;
+@nav-text-color: #88919a;
+@nav-text-hover: #b0b0b0;
+
+
+// TEMPLATE
+body { background-color: @slide-bg-color }
+#footer ul.bottomlist li.help a,
+#footer ul.bottomlist li.contact a { color: #fff; font-weight: bold; }
+
+
+// AUDIO NAV
+#audio-navbar {
+	position: static;
+	z-index: 1000;
+	height: @audio-height;
+	padding: 0 0 0 20px;
+	overflow: hidden;
+	background-color: @slide-bg-color;
+	border-top: 1px solid @nav-border;
+	border-bottom: 1px solid @nav-border;
+	
+	:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+	.branding { 
+		display: inline-block; 
+		padding-right: 30px;
+		padding-top: 10px;
+		float: left;
+		cursor: pointer;
+	}
+	.branding h2 { 
+		background: url('@{img-root}/hed-in-memoriam-small.png') no-repeat;
+		width: 242px; height: 30px;
+		text-indent: -9999px;
+		margin: 0;
+	}
+}
+#audio {
+	float: left;
+	height: @audio-height;
+	border-left: 1px solid @nav-border;
+	border-right: 1px solid @nav-border;
+}
+#slide-nav {
+	margin: 0 1%; padding: 0; list-style: none;
+	width: 98%; height: @audio-height;
+	position: relative;
+}
+.slide-nav-item {
+	width: 16px; height: @audio-height;
+	overflow: hidden;
+	cursor: pointer;
+	padding: 0;
+	margin-left: -5px;
+	position: absolute; top: 0;
+	
+	span { 
+		display: block;
+		width: 6px; height: 6px;
+		background-color: @nav-border;
+		border-radius: 3px;
+		margin: 21px auto 0 auto;
+		text-indent: -9999px;
+	}
+}
+.slide-nav-item:hover { background-color: @nav-button-hover; }
+.slide-nav-item.active { background-color: @nav-button-hover; }
+.slide-nav-item:hover span { background-color: @text-gray; }
+.slide-nav-item.active span { background-color: @text-gray; }
+
+.nav-btn  { 
+	color: @nav-text-color;
+	font-size: 12px; 
+	text-transform: uppercase; 
+	font-weight: bold;
+	text-align: center;
+	z-index: 1000;
+	position: relative;
+	cursor: pointer;
+	outline: none;
+	width: 40px; height: @audio-height;
+	border-right: 1px solid @nav-border; 
+	-webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;
+}
+.nav-btn i {
+	display: block;
+	position: absolute; top: 15px; left: 13px;
+	overflow: hidden; 
+	text-indent: -9999px; 
+	opacity: .5;
+}
+.nav-btn:hover {
+	background-color: @nav-button-hover;
+	color: @nav-text-hover;
+}
+.nav-btn:hover i { opacity: .8; }
+
+.nav-btn.back-next {
+	width: 60px; height: 20px;
+	padding: 15px 10px;
+	float: right;
+	border-left: 1px solid @nav-border;
+	border-right: none;
+    font-weight: bold;
+}
+
+
+/* AUDIO PLAYER */
+.jp-audio { 
+	font-size: .9em/1.6 Arial, sans-serif; 
+	color: #fff; 
+	width: 483px;
+}
+.jp-jplayer { width:0px; height:0px; background-color: #000000; }
+.jp-interface { position: relative; width: 100%; height: 100%; }
+.jp-controls {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	width: 41px;
+	float: left;
+
+	a  { display: block; }
+	a.jp-play, a.jp-pause { background-color: @nav-button-color; }
+}
+
+.jp-progress-container { 
+	width: 376px;
+//	padding-left: 5px;
+	height: 100%; 
+	float: left;
+	position: relative;
+	background-color: @nav-button-color;
+}
+.jp-progress { overflow: hidden; width: 100%; height: @audio-height; background-color: @slide-bg-color; position: absolute; top: 0; left: 0; }
+.jp-seek-bar { width: 0px; height: @audio-height; }
+.jp-play-bar { width: 0px; height: @audio-height; background-color: @nav-button-color; border-right: 1px solid @nav-border; }
+
+.jp-current-time { 
+	float: left; 
+	width: 50px; 
+	color: #8b9094; 
+	text-align: center; 
+	padding: 15px 5px 18px 5px;
+	border-left: 1px solid @nav-border;
+}
+
+
+// SLIDE NAV
+.slide-list {
+	.browse-artist { 
+		width: 25%; 
+		float: left; 
+		clear: right;
+		overflow: hidden;
+		max-height: 64px;
+	}
+	img { 
+		float: left;
+		width: 60px;
+		height: 44px;
+		margin-right: 10px;
+		border: 1px solid @nav-border;
+	}
+	h2 { font: 13px/1.3 Arial, Helvetica, sans-serif; margin: 0; }
+	a { 
+		color: @nav-text-color; 
+		display: block;
+		padding: 10px; 
+		border-top: 1px solid @nav-button-color;
+	}
+	a:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+	a:hover, a.active { 
+		color: @nav-text-hover; 
+		background-color: @nav-button-hover; 
+		text-decoration: none;
+	}
+	a:hover img, a.active img { border-color: @text-gray; }
+}
+.slide-list:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+#list-nav { 
+	width: 80%;
+	position: absolute;
+	left: 10%; // (100 - width)/2
+	z-index: 1100;
+	background-color: @slide-bg-color;
+	border-radius: 0 0 6px 6px;
+	border: 1px solid @nav-border;
+	border-top: none;
+	margin-top: -1px;
+	
+	.browse-artist.browse26 { width: 75%; }
+}
+#list-nav-end {
+	margin-bottom: 20px;
+	
+	h2, p { margin-left: 70px; }
+	img { margin-right: 0; }
+	a { padding: 0; display: inline; border: none; }
+	a:hover, a.active { background-color: none; }
+}
+#browse-btn { float: left; }
+#browse-btn.active { background-color: @nav-button-color; }
+
+
+// SLIDESHOW
+#slideshow { 
+	color: #fff; position: relative; overflow: hidden;
+}
+#slideshow-wrap {
+	z-index: 999;
+	width: 66000px;
+	overflow: hidden;
+}
+.panel {
+	background-color: @slide-bg-color;
+	position: relative;
+	overflow: hidden;
+	float: left;
+}
+.panel-bg {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0; left: 0;
+	-webkit-background-size:cover; -moz-background-size:cover; background-size:cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+#panel15 .panel-bg,
+#panel19 .panel-bg,
+#panel20 .panel-bg,
+#panel24 .panel-bg {
+	background-position: 0 0;
+}
+#panel2 .panel-bg {
+	background-position: 50% 30%;
+}
+#panel23 .panel-bg {
+	background-position: 50% 25%;
+}
+.panel-description {
+	display: block;
+	width: 35%;
+	background: #323232;
+	background: @shade-bg;
+	padding: 15px 20px 25px 20px;
+	text-decoration: none;
+	position: absolute; bottom: 10%; left: 0;
+	text-shadow: @shadow;
+	
+	a { color: #fff; font-weight: bold; }
+	h2 { margin-bottom: 10px; color: #fff; font-weight: normal; font-size: 48px; line-height: 1.1; }
+	p { font-size: 18px; line-height: 1.5; font-family: Georgia, serif; font-style: italic; }
+	.desc { margin-bottom: 20px; }
+	.npr-obit, .npr-artist { font: normal normal 14px Arial, Helvetica, sans-serif; color: #aaa; }
+	.npr-obit + .npr-artist { margin-top: -5px; }
+	.now-playing, .photo-credit { font: normal normal 12px Arial, Helvetica, sans-serif; color: #aaa; }
+	.now-playing { margin-top: 20px; margin-bottom: 5px; }
+	.photo-credit { margin-bottom: 0; }
+}
+#panel1 .panel-description,
+#panel2 .panel-description,
+#panel5 .panel-description,
+#panel9 .panel-description,
+#panel15 .panel-description,
+#panel16 .panel-description,
+#panel17 .panel-description,
+#panel20 .panel-description { left: auto; right: 0; }
+
+
+// TITLE AND CLOSING SCREENS
+.panel-open, .panel-end { 
+	background: @slide-bg-color url('@{img-root}/black_thread.png') repeat;
+	/* Background pattern via Subtle Patterns: http://subtlepatterns.com/black-thread/ */
+}
+#title-button {
+	display: block;
+	width: 60%;
+	max-width: 725px;
+	margin: 60px auto 0 auto;
+	background: @shade-bg;
+	border: 2px solid rgba(60,60,60,.6);
+	border-radius: 6px;
+	padding: 30px;
+	color: @text-gray;
+	text-decoration: none;
+	text-shadow: @shadow;
+	
+	h1 {
+		background: url('@{img-root}/hed-in-memoriam.png') no-repeat;
+		height: 73px;
+		text-indent: -9999px;
+		overflow: hidden;
+	}
+	h2 {
+		font: normal normal 30px/1.5 Georgia, serif;
+		color: #fff;
+		margin-top: 25px;
+		margin-bottom: 0;
+		outline: none;
+	}
+	h2:hover { color: @text-gray; }
+	h5, p { font: italic normal 24px/1.5 Georgia, serif; }
+}
+.panel-end {
+	text-shadow: @shadow;
+	overflow-x: hidden;
+	overflow-y: auto;
+	
+	.panel-wrap { padding: 20px; }
+	h3 { font-weight: normal; font-size: 18px; }
+	p { color: @text-gray; }
+}
+#list-nav-end {
+	margin-bottom: 20px;
+
+	.browse-artist { 
+		width: 25%; 
+		float: left; 
+		height: 60px;
+		overflow: hidden;
+		border-top: 1px solid @nav-button-color;
+		padding: 10px 0;
+	}
+	.browse-artist:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+	img { 
+		float: left;
+		width: 60px;
+		height: 44px;
+		border: 1px solid @nav-border;
+	}
+	h2 { font: bold 13px/1.4 Arial, Helvetica, sans-serif; margin: 0 0 2px 70px; color:#fff; }
+	p { font: 12px/1.4 Arial, Helvetica, sans-serif; margin: 0 0 0 70px; }
+	a { color: @nav-text-color; }
+	a:hover, a.active { color: @nav-text-hover; text-decoration: none; }
+	a:hover img, a.active img { border-color: @text-gray; }
+}
+#list-nav-end:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+
+#share-buttons {
+    margin-bottom: 20px;
+    .fb-like {
+        margin-bottom:10px;
+    }
+}
+
+// MEDIA QUERIES
+@media (min-width: 1200px) {
+	.jp-audio { width: 600px; }
+	.jp-progress-container { width: 493px; }
+	.panel-description { 
+		h2 { font-size: 48px; }
+		p { font-size: 18px; }
+	}
+	#list-nav .browse-artist  { width: 20%; }
+	#list-nav .browse-artist.browse26 { width: 100%; float: none; }
+    #browse-btn { display: none; }
+	#list-nav-end .browse-artist { height: 55px; }
+}
+@media (max-width: 979px) {
+	.jp-audio { width: 271px; }
+	.jp-progress-container { width: 225px; }
+
+	.panel-description { 
+		h2 { font-size: 42px; }
+		p { font-size: 16px; }
+	}
+	
+	#list-nav {
+		.browse-artist  { width: 33%; }
+		.browse-artist:nth-child(3n+3) { width: 34%; }
+		.browse-artist.browse26 { width: 67%; }
+	}
+	#list-nav-end .browse-artist { width: 33%; float: left; }
+}
+@media (max-width: 767px) {
+	#audio { width: 101px; }
+	.jp-audio { width: auto; }
+	.jp-progress-container { display: none; }
+	#audio-navbar .branding h2 { background-position: -129px 0; width: 113px; }
+	.jp-current-time { border-left: none; }
+	.nav-btn.back-next { padding-left: 0; padding-right: 0; width: 40px; }
+
+	#title-button {  width: auto; border: none; background: none; padding: 0; margin: 20px; }
+
+	.panel-description { 
+		h2 { font-size: 32px; }
+		p { font-size: 14px; }
+	}
+	
+	#list-nav { 
+		img { display: none; }
+		a { padding-top: 15px; padding-bottom: 15px; border-right: 1px solid @nav-border; }
+		.browse-artist:nth-child(3n+3) a { border-right: none; }
+		.browse-artist.browse26 a { border-right: none; }
+	}
+	#list-nav-end .browse-artist { height: 80px; }
+}
+@media (max-width: 640px) {
+	#title-button { 
+		h1 { background-image: url('@{img-root}/hed-in-memoriam-mobile.png'); height: 47px; }
+		h2 { font-size: 24px; }
+		h5, p { font-size: 18px; }
+	}
+	.panel-description { 
+		bottom: 0; width: auto; padding-bottom: 15px;
+		
+		h2 { font-size: 24px; }
+		p { font-size: 13px; }
+		p.dates, p.now-playing { display: inline; padding-right: 5px; border-right: 1px solid #CCC; }
+		p.desc, p.photo-credit { display: inline; }
+		p.npr-obit { margin-top: 10px; }
+	}
+	#list-nav {
+		.browse-artist, .browse-artist.browse26, .browse-artist:nth-child(3n+3)  { width: 50%; }
+		h2 { font-size: 12px; }
+		.browse-artist a { border-right: none; }
+		.browse-artist:nth-child(odd) a { border-right: 1px solid @nav-border; }
+	}
+	#list-nav-end .browse-artist { width: 50%; float: left; height: 60px; }
+}
+@media (max-width: 480px) {
+	#audio-navbar { padding-left: 0; }
+	#audio-navbar .branding { display: none; }
+	.panel-bg { height: 300px; position: relative; top: auto; left: auto; }
+	.panel-description { 
+		position: relative; bottom: auto; left: auto; top: auto; right: auto;
+		width: auto; 
+		background: none; 
+		padding: 20px;
+		margin: 0;
+		
+		h2 { font-size: 30px; }
+
+		p.dates, p.now-playing { display: block; padding-right: 0; border-right: none; }
+		p.desc, p.photo-credit { display: block; }
+	}
+	#list-nav-end .browse-artist { width: 100%; float: none; height: auto; }
+	
+	#list-nav {
+		width: 300px; left: 10px;
+		
+		.browse-artist a { display: table-cell; width: 150px; vertical-align: middle; height: 40px; padding-top: 0; padding-bottom: 0; }
+	}	
+}

@@ -1,38 +1,108 @@
 {% extends '_base.html' %}
 
-{% block header_content %}
-<header>
-	<div class="container">
-		<div class="row">
-			<div class="span12">
-				<h1>Across-The-Top Header</h1>
-				<h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h2>
-			</div>
-		</div>
-	</div>
-</header>
+{% block extra_css %}
+    {{ CSS.push('less/memoriam.less') }}
 {% endblock %}
+
+{% block extra_head_js %}
+	{{ JS.push('js/lib/jquery.smooth-scroll.min.js') }}
+	{{ JS.push('js/lib/jquery.jplayer.js') }}
+	{{ JS.push('js/lib/popcorn-complete.js') }}
+{% endblock %}
+{% block extra_head %}{% endblock %}
 
 
 {% block content %}
-<h1>{{ PROJECT_NAME }}</h1>
-<div id="story-meta">
-	<p class="byline">by <span>Name Here</span></p>
-	<p class="dateblock">
-		<span class="date">January 22, 2013</span>
-		<span class="time"> 3:37 AM</span>
-	</p>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div id="audio-navbar">
+	<div class="branding">
+		<h2>NPR Music: In Memoriam 2012</h2>
+	</div>
+
+	<div id="audio">
+	
+		<div id="pop-audio" class="jp-jplayer"></div>
+		
+			<div id="jp_container_1" class="jp-audio">
+				<div class="jp-type-single">
+				
+					<div class="jp-gui jp-interface">
+						<div class="jp-controls">
+							<a href="javascript:;" class="jp-play nav-btn" tabindex="1"><i class="icon-play icon-white">play</i></a>
+							<a href="javascript:;" class="jp-pause nav-btn" tabindex="1" style="display: none;"><i class="icon-pause icon-white">pause</i></a>
+						</div>
+						<div class="jp-progress-container">
+							<div class="jp-progress">
+								<div class="jp-seek-bar">
+									<div class="jp-play-bar"></div>
+								</div>
+							</div>
+							<ul id="slide-nav">
+								<li id="send" class="slide-nav-item" title="Credits"><span>Credits</span></li>
+							</ul>
+						</div>
+						<div class="jp-current-time"></div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+    <div id="browse-btn" class="nav-btn"><i class="icon-th-list icon-white"></i></div>
+
+    <div id="next-btn" class="nav-btn back-next" title="Next">Next&nbsp;&rsaquo;</div>
+    <div id="back-btn" class="nav-btn back-next" title="Back">&lsaquo;&nbsp;Back</div>
 </div>
 
-<p id="template-example"></p>
-{% endblock %}
+<div id="list-nav" class="slide-list"></div>
+
+<div id="slideshow">
+	<div id="slideshow-wrap">
 
 
-{% block wide_content %}
-<div class="row">
-	<div class="span12">
-		<h2>This content goes to 12</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+		<div id="panel0" class="panel panel-open">
+			<div id="title" class="panelbg">
+				<div class="panel-inner">
+					<a id="title-button" href="javascript:;">
+						<h5>NPR Music presents</h5>
+						<h1>In Memoriam</h1>
+						<p>NPR Music remembers the singers, instrumentalists, songwriters and personalities who died in 2012. Explore their musical&nbsp;legacies.</p>
+						<h2>Begin &rsaquo;</h2>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div id="panelend" class="panel panel-end">
+			<div class="panelbg">
+				<div class="panel-wrap">
+                    <h3>Pass it on</h3>
+                    <div id="share-buttons">
+                        <div class="fb-like" data-href="http://apps.npr.org/music-memoriam-2012/" data-send="false" data-width="300" data-show-faces="false" data-font="arial" data-colorscheme="dark"></div>
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-via="nprmusic">Tweet</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    </div>
+					<h3>Featured Artists</h3>
+					<div id="list-nav-end"></div>
+					<h3>Project Credits</h3>
+					<p>Christopher Groskopf, Alyson Hurt, Suraya Mohamed, Amy Schriefer / NPR</p>
+				</div>
+			</div>
+		</div>
+
+
 	</div>
 </div>
 {% endblock %}
+
+
+{% block extra_foot_js %}{% endblock %}
+{% block extra_foot %}{% endblock %}
