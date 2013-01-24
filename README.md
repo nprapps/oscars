@@ -1,26 +1,5 @@
-nprapps' Project Template
-=========================
-
-* [About this template](#about-this-template)
-* [What's in here?](#whats-in-here)
-* [Copy the template](#copy-the-template)
-* [Configure the project](#configure-the-project)
-* [Install requirements](#install-requirements)
-* [Project secrets](#project-secrets)
-* [Bootstrap issues](#bootstrap-issues)
-* [Generate index.html](#generate-indexhtml)
-* [Adding a template/view](#adding-a-templateview)
-* [Run the project locally](#run-the-project-locally)
-* [Run javascript tests](#run-javascript-tests)
-* [Compile static assets](#compile-static-assets)
-* [Test the rendered app](#test-the-rendered-app)
-* [Deploy to S3](#deploy-to-s3)
-* [Deploy to EC2](#deploy-to-ec2)
-
-About this template
--------------------
-
-This template provides a a project skeleton suitable for any project that is to be served entirely as flat files. Facilities are provided for rendering html from data, compiling LESS into CSS, deploying to S3, etc. (It actually supports deploying to servers too, but that's less well-tested.)
+oscars
+======
 
 What's in here?
 ---------------
@@ -37,29 +16,6 @@ The project contains the following folders and important files:
 * ``app.py`` -- A [Flask](http://flask.pocoo.org/) app for rendering the project locally.
 * ``app_config.py`` -- Global project configuration for scripts, deployment, etc.
 * ``fabfile.py`` -- [Fabric](http://docs.fabfile.org/en/latest/) commands automating setup and deployment
-
-Copy the template
------------------
-
-```
-git clone git@github.com:nprapps/app-template.git $NEW_PROJECT_NAME
-
-# Optional: checkout an initial project branch
-# git checkout [init-map|init-table|init-chat]
-
-cd $NEW_PROJECT_NAME
-rm -rf .git
-git init
-git add * .gitignore
-git commit -am "Initial import from app-template."
-git remote add origin git@github.com:nprapps/$NEW_PROJECT_NAME.git
-git push -u origin master
-```
-
-Configure the project
----------------------
-
-Update ``app_config.py`` with the name of the new project and any other relevant configuration details.
 
 Install requirements
 --------------------
@@ -84,21 +40,6 @@ Project secrets
 ---------------
 
 Project secrets should **never** be stored in ``app_config.py`` or anywhere else in the repository. They will be leaked to the client if you do. Instead, always store passwords, keys, etc. in environment variables and document that they are needed here in the README.
-
-Bootstrap issues
-----------------
-
-The app-template can automatically setup your Github repo with our default labels and tickets by running ``fab bootstrap_issues``. You will be prompted for your Github username and password.
-
-Generate index.html
--------------------
-
-The app-template ships with several example templates and corresponding views.
-
-* Choose from the available templates which one to base your project on, e.g. ``templates/table.html``. Move this template to ``templates/index.html`` and delete the others.
-* Never edit ``www/index.html`` or other dynamically generated assets. Instead edit the templates.
-* Choose the view from ``app.py`` that matches your chosen index template. Rename it to ``index``, apply the ``@app.route('/')`` decorator to it and delete the others.  
-* Uncomment and update the ad code and Facebook tags at the top of ``templates/_base.html``. (or make yourself a ticket to do it later).
 
 Adding a template/view
 ----------------------
