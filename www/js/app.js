@@ -330,7 +330,7 @@ $(document).ready(function() {
 
 	$audio_branding.click(function() {
 		if (video_supported) {
-            pop.stop();
+            pop.pause(0);
         }
 
 		goto_slide(0);
