@@ -155,7 +155,6 @@ $(document).ready(function() {
                 // via Underscore template / JST
                 var context = v;
                 context['id'] = i + 1;
-                context['movie_name']
 
                 context['position'] = (v["cue_start"] / video_length) * 100;
                 audio_output += JST.cuenav(context);
