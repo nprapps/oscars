@@ -152,7 +152,7 @@ $(document).ready(function() {
         var browse_output = '';
         var endlist_output = '';
 
-        $.getJSON('live-data/slides.json', function(data) {
+        $.getJSON('live-data/test-data.json', function(data) {
             // Title card (cue 0) has no cue data
             cue_data.push(undefined);
 
@@ -162,6 +162,7 @@ $(document).ready(function() {
                 // via Underscore template / JST
                 var context = v;
                 context['id'] = i + 1;
+                context['movie_name']
 
                 context['position'] = (v["cue_start"] / video_length) * 100;
                 audio_output += JST.cuenav(context);
@@ -247,9 +248,7 @@ $(document).ready(function() {
 
                 $cue_list.append(JST.browse({
                     'id': num_cues - 1,
-                    'image_name': null,
-                    'artist_first_name': '',
-                    'artist_last_name': 'Index & Credits'
+                    'movie_name': 'Index & Credits'
                 }));
 
             $cue_list.find('a').click(function() {

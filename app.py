@@ -51,11 +51,38 @@ def data_slides_json():
 
         # Extract image_name
         image_url = row[8]
-        filename = image_url.split('/')[-1] 
+        filename = image_url.split('/')[-1]
         slide['image_name'] = os.path.splitext(filename)[0]
 
         # Compute cue_start in seconds
         cue_start = row[11]
+        hours, mins, secs = map(int, cue_start.split(':'))
+        slide['cue_start'] = (mins * 60) + secs
+
+        slides.append(slide)
+
+    return json.dumps(slides), 200, { 'Content-Type': 'application/javascript' }
+
+@app.route('/live-data/test-data.json')
+def test_slides_json():
+    """
+    Generate slide data.
+    """
+    with open('data/test-data.csv') as f:
+        rows = list(csv.reader(f))
+
+    slides = []
+
+    for row in rows[1:]:
+        slide = {
+            'sort': row[0],
+            'movie_name': row[0],
+            'npr_content': row[1],
+            'cue_start': 0 # See below
+        }
+
+        # Compute cue_start in seconds
+        cue_start = row[2]
         hours, mins, secs = map(int, cue_start.split(':'))
         slide['cue_start'] = (mins * 60) + secs
 

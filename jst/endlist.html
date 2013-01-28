@@ -1,12 +1,7 @@
 <div class="browse<%= id %> browse-artist">
-    <% if (image_name) { %>
     <a href="javascript:;" class="cuelink" data-id="<%= id %>">
-        <img src="img/mugs/<%= image_name %>_120.jpg" />
-        <h2><%= artist_first_name %> <%= artist_last_name %></h2>
+        <h2><%= movie_name %></h2>
     </a>
-    <% } %>
 
-    <% if (full_obit.length > 2) { %>
-    <p class="npr-obit"><a href="<%= full_obit %>" target="_blank">More from our archives &rsaquo;</a></p>
-    <% } %>
+    <p class="npr-obit"><a href="<%= npr_content %>" target="_blank">More from our archives &rsaquo;</a></p>
 </div>
