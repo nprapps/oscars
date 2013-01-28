@@ -19,7 +19,7 @@ $(document).ready(function() {
     var $audio_nav = $('#audio-navbar');
     var $audio_branding = $audio_nav.find('.branding');
     var $audio = $('#audio');
-    var $progress = $audio.find('.jp-progress-container');
+    var $progress = $audio.find('.jp-play-bar');
     var $player = $('#pop-audio');
     var $play_button = $('.jp-play');
     var $pause_button = $('.jp-pause');
@@ -56,6 +56,8 @@ $(document).ready(function() {
             }
             var m = parseInt((pop.currentTime() / 60) % 60);
             $current_time.text(m + ':' + s);
+
+            $progress.width(Math.floor((pop.currentTime() / video_length) * 100) + '%');
         });
     }
 
