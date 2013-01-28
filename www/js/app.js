@@ -127,13 +127,13 @@ $(document).ready(function() {
          * Toggle visibility of the cue browser.
          */
         if (cue_list_open || mode == 'close') {
-                $cue_list.hide();
-                $cue_browse_btn.removeClass('active');
-                cue_list_open = false;
+            $cue_list.hide();
+            $cue_browse_btn.removeClass('active');
+            cue_list_open = false;
         } else if (!cue_list_open || mode == 'open') {
-                $cue_list.show();
-                $cue_browse_btn.addClass('active');
-                cue_list_open = true;
+            $cue_list.show();
+            $cue_browse_btn.addClass('active');
+            cue_list_open = true;
         }
     }
 
@@ -176,16 +176,13 @@ $(document).ready(function() {
                 num_cues++;
             });
 
+            $cue_nav.append(audio_output);
+
             // Title cue and closing cue
-            $('#credits-nav').before(audio_output);
             num_cues += 2;
 
             var end_id = num_cues - 1;
-            var end_cue = video_length;
-
-            $('#credits-nav').attr('id', 'cuenav' + end_id);
-            $('#cuenav' + end_id).attr('data-id', end_id);
-            $('#cuenav' + end_id).css('left', ((end_cue / video_length) * 100) + '%');
+            var end_cue = video_length - 1;
 
             cue_data.push({
                 id: end_id,
@@ -235,12 +232,12 @@ $(document).ready(function() {
             });
 
             // Setup cue browser
-                $cue_list.append(browse_output);
+            $cue_list.append(browse_output);
 
-                $cue_list.append(JST.browse({
-                    'id': num_cues - 1,
-                    'movie_name': 'Index & Credits'
-                }));
+            $cue_list.append(JST.browse({
+                'id': end_id,
+                'movie_name': 'Index & Credits'
+            }));
 
             $cue_list.find('a').click(function() {
                 var id = parseInt($(this).attr('data-id'));
