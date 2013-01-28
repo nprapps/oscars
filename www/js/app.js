@@ -37,7 +37,6 @@ $(document).ready(function() {
         /* 
          * Load video player
          */
-
         pop = Popcorn.youtube('#video', APP_CONFIG['VIDEO']['URL']);
 
         pop.on('pause', function() {
@@ -54,9 +53,33 @@ $(document).ready(function() {
     function play_video(cue) {
         $title.hide();
         $credits.hide();
-        $video.show();
 
-        pop.play(cue);
+        if (pop.readyState < 2) {
+            pop.on('canplay', function() {
+                pop.play(cue);
+            });
+        
+            $video.show();
+        } else {
+            $video.show();
+            pop.play(cue);
+        }
+    }
+
+    function pause_video(cue) {
+        $title.hide();
+        $credits.hide();
+
+        if (pop.readyState < 2) {
+            pop.on('canplay', function() {
+                pop.pause(cue);
+            });
+        
+            $video.show();
+        } else {
+            $video.show();
+            pop.pause(cue);
+        }
     }
 
     function set_active_cue(id) {
@@ -92,15 +115,15 @@ $(document).ready(function() {
         if (!video_supported) {
             set_active_cue(id);
         } else if (pop.paused() || cue_data[id] === undefined) {
-            set_active_cue(id);
-
             if (cue_data[id] != undefined) {
-                pop.pause(cue_data[id]['cue_start']);
+                pause_video(cue_data[id]['cue_start']);
             } else if (id == 0) {
-                pop.pause(0);
+                pause_video(0);
 			} else if (id == (num_cues - 1)) {
-                pop.pause(video_length);
+                pause_video(video_length);
 			}
+            
+            set_active_cue(id);
         } else {
             play_video(cue_data[id]['cue_start']);
         }
@@ -169,10 +192,10 @@ $(document).ready(function() {
 			num_cues += 2;
 
 			var end_id = num_cues - 1;
-			var end_cue = video_length - 1;
+			var end_cue = video_length;
 
-			$('#credits-nav').attr('id', 's' + end_id);
-			$('#cuenav' + end_id).attr('data-id', end_id);
+			$('#credits-nav').attr('id', 'cuenav' + end_id);
+            $('#cuenav' + end_id).attr('data-id', end_id);
 			$('#cuenav' + end_id).css('left', ((end_cue / video_length) * 100) + '%');
 
 			cue_data.push({
@@ -323,7 +346,7 @@ $(document).ready(function() {
 
 	$audio_branding.click(function() {
 		if (video_supported) {
-            pop.pause(0);
+            pause_video(0);
         }
 
 		goto_cue(0);
@@ -372,7 +395,7 @@ $(document).ready(function() {
             if (pop.paused()) {
                 play_video();
             } else {
-                pop.pause();
+                pause_video();
             }
 
             return false;
