@@ -45,10 +45,9 @@ NPR_DFP = {
 
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
-AUDIO = {
+VIDEO = {
     'LENGTH': 337,
-    'MP3': 'http://stage-apps.npr.org/music-memoriam-2012/audio/artists2012.mp3',
-    'OGG': 'http://stage-apps.npr.org/music-memoriam-2012/audio/artists2012.ogg'
+    'URL': 'http://www.youtube.com/watch?v=WJoTxywiRG0&controls=0&autoplay=0&showinfo=0&fs=0&disablekb=1'
 }
 
 def configure_targets(deployment_target):
@@ -65,16 +64,10 @@ def configure_targets(deployment_target):
         S3_BUCKETS = PRODUCTION_S3_BUCKETS
         SERVERS = PRODUCTION_SERVERS
         DEBUG = False
-
-        AUDIO['MP3'] = 'http://apps.npr.org/music-memoriam-2012/audio/artists2012.mp3'
-        AUDIO['OGG'] = 'http://apps.npr.org/music-memoriam-2012/audio/artists2012.ogg'
     else:
         S3_BUCKETS = STAGING_S3_BUCKETS
         SERVERS = STAGING_SERVERS
         DEBUG = True
-
-        AUDIO['MP3'] = 'http://stage-apps.npr.org/music-memoriam-2012/audio/artists2012.mp3'
-        AUDIO['OGG'] = 'http://stage-apps.npr.org/music-memoriam-2012/audio/artists2012.ogg'
  
 DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
 

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	/* VARS */
 	var active_cue = 0;
-	var audio_length = APP_CONFIG['AUDIO']['LENGTH']; 
+	var video_length = APP_CONFIG['VIDEO']['LENGTH']; 
 	var num_cues = 0;
 	var cue_data = [];
 	var pop = null;
@@ -21,12 +21,14 @@ $(document).ready(function() {
     var $audio = $('#audio');
 	var $progress = $audio.find('.jp-progress-container');
 	var $player = $('#pop-audio');
+    var $play_button = $('.jp-play');
+    var $pause_button = $('.jp-pause');
 	var $cue_list = $('#list-nav');
 	var $cue_list_end = $('#list-nav-end');
 	var $cue_browse_btn = $('#browse-btn');
 
     if (!video_supported) {
-        $audio.hide(); 
+        $video.hide(); 
     }
     
     cue_list_toggle('close');
@@ -36,21 +38,43 @@ $(document).ready(function() {
          * Load video player
          */
 
-        pop = Popcorn.youtube('#video', 'http://www.youtube.com/watch?v=WJoTxywiRG0&controls=0&autoplay=0&showinfo=0&fs=0&disablekb=1');
+        pop = Popcorn.youtube('#video', APP_CONFIG['VIDEO']['URL']);
 
         pop.on('pause', function() {
-            $('.jp-play').show();
-            $('.jp-pause').hide();
+            $play_button.show();
+            $pause_button.hide();
         });
 
         pop.on('playing', function() {
-            $('.jp-pause').show();
-            $('.jp-play').hide();
+            $pause_button.show();
+            $play_button.hide();
         });
+    }
+
+    function play_video(cue) {
+        $title.hide();
+        $credits.hide();
+        $video.show();
+
+        pop.play(cue);
     }
 
     function set_active_cue(id) {
         cue_list_toggle('close');
+
+        if (id === 0) {
+            $credits.hide();
+            $video.hide();
+            $title.show();
+        } else if (id === num_cues - 1) {
+            $title.hide();
+            $video.hide();
+            $credits.show();
+        } else {
+            $title.hide();
+            $credits.hide();
+            $video.show();
+        }
 
         $cue_nav.find('li').removeClass('active');
         $cue_nav.find('#cue-nav' + id).addClass('active');
@@ -63,11 +87,11 @@ $(document).ready(function() {
     function goto_cue(id) {
     	/*
     	 * Determine whether to shift to the next cue 
-    	 * with audio, or without audio.
+    	 * with video, or without video.
     	 */
         if (!video_supported) {
             set_active_cue(id);
-        } else if (pop.paused() || cue_data[id] == undefined) {
+        } else if (pop.paused() || cue_data[id] === undefined) {
             set_active_cue(id);
 
             if (cue_data[id] != undefined) {
@@ -75,10 +99,10 @@ $(document).ready(function() {
             } else if (id == 0) {
                 pop.pause(0);
 			} else if (id == (num_cues - 1)) {
-                pop.pause(audio_length);
+                pop.pause(video_length);
 			}
         } else {
-            pop.play(cue_data[id]['cue_start']);
+            play_video(cue_data[id]['cue_start']);
         }
 		
         return false; 
@@ -112,14 +136,14 @@ $(document).ready(function() {
             cue_data.push(undefined);
 
 			$.each(data, function(i, v) {
-				cue_data.push(v);
+                cue_data.push(v);
 			
 				// Markup for this cue in the cue nav
 				// via Underscore template / JST
                 var context = v;
                 context['id'] = i + 1;
 
-                context['position'] = (v["cue_start"] / audio_length) * 100;
+                context['position'] = (v["cue_start"] / video_length) * 100;
 ;
 
 				audio_output += JST.cuenav(context);
@@ -130,8 +154,7 @@ $(document).ready(function() {
                     pop.code({
                         start: v["cue_start"],
                         onStart: function( options ) {         
-                            // set_active_cue(i + 1);
-                            $('#footnote').text(v['id']);
+                            set_active_cue(i + 1);
 
                             return false;
                         }
@@ -146,11 +169,11 @@ $(document).ready(function() {
 			num_cues += 2;
 
 			var end_id = num_cues - 1;
-			var end_cue = audio_length - 30;
+			var end_cue = video_length - 1;
 
 			$('#credits-nav').attr('id', 's' + end_id);
 			$('#cuenav' + end_id).attr('data-id', end_id);
-			$('#cuenav' + end_id).css('left', ((end_cue / audio_length) * 100) + '%');
+			$('#cuenav' + end_id).css('left', ((end_cue / video_length) * 100) + '%');
 
 			cue_data.push({
 				id: end_id,
@@ -162,7 +185,11 @@ $(document).ready(function() {
 				pop.code({
 					start: 0,
 					onStart: function(options) {         
-						// set_active_cue(0); 
+						set_active_cue(0); 
+            
+                        $credits.hide();
+                        $video.hide();
+                        $title.show();
 
 						return false;
 					}
@@ -172,7 +199,11 @@ $(document).ready(function() {
 				pop.code({
 					start: end_cue,
 					onStart: function(options) {         
-						// set_active_cue(end_id); 
+						set_active_cue(end_id); 
+
+                        $title.hide();
+                        $video.hide();
+                        $credits.show();
 
 						return false;
 					}
@@ -272,22 +303,22 @@ $(document).ready(function() {
 	 */
 	$('#title-button').click(function() {
         if (video_supported) {
-            pop.play();
+            $play_button.click();
         } else {
             goto_cue(1);
         }
 	});
 
-    $('.jp-play').click(function() {
-        pop.play();
+    $play_button.click(function() {
+        play_video()
         $(this).hide();
-        $('.jp-pause').show();
+        $pause_button.show();
     });
 
-    $('.jp-pause').click(function() {
+    $pause_button.click(function() {
         pop.pause();
         $(this).hide();
-        $('.jp-play').show();
+        $play_button.show();
     });
 
 	$audio_branding.click(function() {
@@ -339,7 +370,7 @@ $(document).ready(function() {
             return false;
         } else if (ev.which == 32 && video_supported) {
             if (pop.paused()) {
-                pop.play();
+                play_video();
             } else {
                 pop.pause();
             }
