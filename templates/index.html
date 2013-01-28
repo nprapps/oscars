@@ -33,8 +33,8 @@
 									<div class="jp-play-bar"></div>
 								</div>
 							</div>
-							<ul id="slide-nav">
-								<li id="credits-nav" class="slide-nav-item" title="Credits"><span>Credits</span></li>
+							<ul id="cue-nav">
+								<li id="credits-nav" class="cue-nav-item" title="Credits"><span>Credits</span></li>
 							</ul>
 						</div>
 						<div class="jp-current-time"></div>
@@ -49,46 +49,33 @@
     <div id="back-btn" class="nav-btn back-next" title="Back">&lsaquo;&nbsp;Back</div>
 </div>
 
-<div id="list-nav" class="slide-list"></div>
+<div id="list-nav" class="cue-list"></div>
 
 <div id="video"></div>
-<div id="footnote"></div>
 
-<div id="slideshow">
-	<div id="slideshow-wrap">
-		<div id="slide0" class="slide slide-open">
-			<div id="title" class="slidebg">
-				<div class="slide-inner">
-					<a id="title-button" href="javascript:;">
-						<h5>NPR Music presents</h5>
-						<h1>In Memoriam</h1>
-						<p>NPR Music remembers the singers, instrumentalists, songwriters and personalities who died in 2012. Explore their musical&nbsp;legacies.</p>
-						<h2>Begin &rsaquo;</h2>
-					</a>
-				</div>
-			</div>
-		</div>
-
-		<div id="slideend" class="slide slide-end">
-			<div class="slidebg">
-				<div class="slide-wrap">
-                    <h3>Pass it on</h3>
-                    <div id="share-buttons">
-                        <div class="fb-like" data-href="http://apps.npr.org/music-memoriam-2012/" data-send="false" data-width="300" data-show-faces="false" data-font="arial" data-colorscheme="dark"></div>
-                        <a href="https://twitter.com/share" class="twitter-share-button" data-via="nprmusic">Tweet</a>
-                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                    </div>
-					<h3>Featured Artists</h3>
-					<div id="list-nav-end"></div>
-					<h3>Project Credits</h3>
-					<p>Christopher Groskopf, Alyson Hurt, Suraya Mohamed, Amy Schriefer / NPR</p>
-				</div>
-			</div>
-		</div>
-
-
-	</div>
+<div id="title">
+    <a id="title-button" href="javascript:;">
+        <h5>NPR Music presents</h5>
+        <h1>In Memoriam</h1>
+        <p>NPR Music remembers the singers, instrumentalists, songwriters and personalities who died in 2012. Explore their musical&nbsp;legacies.</p>
+        <h2>Begin &rsaquo;</h2>
+    </a>
 </div>
+
+<div id="credits">
+        <h3>Pass it on</h3>
+        <div id="share-buttons">
+            <div class="fb-like" data-href="http://apps.npr.org/music-memoriam-2012/" data-send="false" data-width="300" data-show-faces="false" data-font="arial" data-colorscheme="dark"></div>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="nprmusic">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+        <h3>Featured Artists</h3>
+        <div id="list-nav-end"></div>
+        <h3>Project Credits</h3>
+        <p>Christopher Groskopf, Alyson Hurt, Suraya Mohamed, Amy Schriefer / NPR</p>
+    </div>
+</div>
+
 {% endblock %}
 
 

@@ -1,6 +1,6 @@
 // Global variables
 @img-root: '../img';
-@slide-bg-color: #262626;
+@bg-color: #262626;
 @shade-bg: rgba(50,50,50,.6);
 @shadow: 1px 2px 10px rgba(32,32,32,.7);
 @text-gray: #8b9094;
@@ -13,7 +13,7 @@
 
 
 // TEMPLATE
-body { background-color: @slide-bg-color }
+body { background-color: @bg-color }
 #footer ul.bottomlist li.help a,
 #footer ul.bottomlist li.contact a { color: #fff; font-weight: bold; }
 
@@ -25,7 +25,7 @@ body { background-color: @slide-bg-color }
 	height: @audio-height;
 	padding: 0 0 0 20px;
 	overflow: hidden;
-	background-color: @slide-bg-color;
+	background-color: @bg-color;
 	border-top: 1px solid @nav-border;
 	border-bottom: 1px solid @nav-border;
 	
@@ -50,12 +50,12 @@ body { background-color: @slide-bg-color }
 	border-left: 1px solid @nav-border;
 	border-right: 1px solid @nav-border;
 }
-#slide-nav {
+#cue-nav {
 	margin: 0 1%; padding: 0; list-style: none;
 	width: 98%; height: @audio-height;
 	position: relative;
 }
-.slide-nav-item {
+.cue-nav-item {
 	width: 16px; height: @audio-height;
 	overflow: hidden;
 	cursor: pointer;
@@ -72,10 +72,10 @@ body { background-color: @slide-bg-color }
 		text-indent: -9999px;
 	}
 }
-.slide-nav-item:hover { background-color: @nav-button-hover; }
-.slide-nav-item.active { background-color: @nav-button-hover; }
-.slide-nav-item:hover span { background-color: @text-gray; }
-.slide-nav-item.active span { background-color: @text-gray; }
+.cue-nav-item:hover { background-color: @nav-button-hover; }
+.cue-nav-item.active { background-color: @nav-button-hover; }
+.cue-nav-item:hover span { background-color: @text-gray; }
+.cue-nav-item.active span { background-color: @text-gray; }
 
 .nav-btn  { 
 	color: @nav-text-color;
@@ -141,7 +141,7 @@ body { background-color: @slide-bg-color }
 	position: relative;
 	background-color: @nav-button-color;
 }
-.jp-progress { overflow: hidden; width: 100%; height: @audio-height; background-color: @slide-bg-color; position: absolute; top: 0; left: 0; }
+.jp-progress { overflow: hidden; width: 100%; height: @audio-height; background-color: @bg-color; position: absolute; top: 0; left: 0; }
 .jp-seek-bar { width: 0px; height: @audio-height; }
 .jp-play-bar { width: 0px; height: @audio-height; background-color: @nav-button-color; border-right: 1px solid @nav-border; }
 
@@ -155,8 +155,8 @@ body { background-color: @slide-bg-color }
 }
 
 
-// SLIDE NAV
-.slide-list {
+// CUE NAV
+.cue-list {
 	.browse-artist { 
 		width: 25%; 
 		float: left; 
@@ -186,13 +186,13 @@ body { background-color: @slide-bg-color }
 	}
 	a:hover img, a.active img { border-color: @text-gray; }
 }
-.slide-list:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.cue-list:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
 #list-nav { 
 	width: 80%;
 	position: absolute;
 	left: 10%; // (100 - width)/2
 	z-index: 1100;
-	background-color: @slide-bg-color;
+	background-color: @bg-color;
 	border-radius: 0 0 6px 6px;
 	border: 1px solid @nav-border;
 	border-top: none;
@@ -212,17 +212,16 @@ body { background-color: @slide-bg-color }
 #browse-btn.active { background-color: @nav-button-color; }
 
 
-// SLIDESHOW
-#slideshow { 
-	color: #fff; position: relative; overflow: hidden;
+// TITLE AND CLOSING SCREENS
+#title, #credits {
+    display: none;
+	
+    /* Background pattern via Subtle Patterns: http://subtlepatterns.com/black-thread/ */
+	background: @bg-color url('@{img-root}/black_thread.png') repeat;
 }
-#slideshow-wrap {
-	z-index: 999;
-	width: 66000px;
-	overflow: hidden;
-}
-.slide {
-	background-color: @slide-bg-color;
+
+/*.slide {
+	background-color: @bg-color;
 	position: relative;
 	overflow: hidden;
 	float: left;
@@ -235,54 +234,8 @@ body { background-color: @slide-bg-color }
 	-webkit-background-size:cover; -moz-background-size:cover; background-size:cover;
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
-}
-#slide15 .slide-bg,
-#slide19 .slide-bg,
-#slide20 .slide-bg,
-#slide24 .slide-bg {
-	background-position: 0 0;
-}
-#slide2 .slide-bg {
-	background-position: 50% 30%;
-}
-#slide23 .slide-bg {
-	background-position: 50% 25%;
-}
-.slide-description {
-	display: block;
-	width: 35%;
-	background: #323232;
-	background: @shade-bg;
-	padding: 15px 20px 25px 20px;
-	text-decoration: none;
-	position: absolute; bottom: 10%; left: 0;
-	text-shadow: @shadow;
-	
-	a { color: #fff; font-weight: bold; }
-	h2 { margin-bottom: 10px; color: #fff; font-weight: normal; font-size: 48px; line-height: 1.1; }
-	p { font-size: 18px; line-height: 1.5; font-family: Georgia, serif; font-style: italic; }
-	.desc { margin-bottom: 20px; }
-	.npr-obit, .npr-artist { font: normal normal 14px Arial, Helvetica, sans-serif; color: #aaa; }
-	.npr-obit + .npr-artist { margin-top: -5px; }
-	.now-playing, .photo-credit { font: normal normal 12px Arial, Helvetica, sans-serif; color: #aaa; }
-	.now-playing { margin-top: 20px; margin-bottom: 5px; }
-	.photo-credit { margin-bottom: 0; }
-}
-#slide1 .slide-description,
-#slide2 .slide-description,
-#slide5 .slide-description,
-#slide9 .slide-description,
-#slide15 .slide-description,
-#slide16 .slide-description,
-#slide17 .slide-description,
-#slide20 .slide-description { left: auto; right: 0; }
+}*/
 
-
-// TITLE AND CLOSING SCREENS
-.slide-open, .slide-end { 
-	background: @slide-bg-color url('@{img-root}/black_thread.png') repeat;
-	/* Background pattern via Subtle Patterns: http://subtlepatterns.com/black-thread/ */
-}
 #title-button {
 	display: block;
 	width: 60%;
@@ -311,15 +264,6 @@ body { background-color: @slide-bg-color }
 	}
 	h2:hover { color: @text-gray; }
 	h5, p { font: italic normal 24px/1.5 Georgia, serif; }
-}
-.slide-end {
-	text-shadow: @shadow;
-	overflow-x: hidden;
-	overflow-y: auto;
-	
-	.slide-wrap { padding: 20px; }
-	h3 { font-weight: normal; font-size: 18px; }
-	p { color: @text-gray; }
 }
 #list-nav-end {
 	margin-bottom: 20px;
@@ -370,10 +314,6 @@ body { background-color: @slide-bg-color }
 @media (min-width: 1200px) {
 	.jp-audio { width: 600px; }
 	.jp-progress-container { width: 493px; }
-	.slide-description { 
-		h2 { font-size: 48px; }
-		p { font-size: 18px; }
-	}
 	#list-nav .browse-artist  { width: 20%; }
 	#list-nav .browse-artist.browse26 { width: 100%; float: none; }
     #browse-btn { display: none; }
@@ -383,11 +323,6 @@ body { background-color: @slide-bg-color }
 	.jp-audio { width: 271px; }
 	.jp-progress-container { width: 225px; }
 
-	.slide-description { 
-		h2 { font-size: 42px; }
-		p { font-size: 16px; }
-	}
-	
 	#list-nav {
 		.browse-artist  { width: 33%; }
 		.browse-artist:nth-child(3n+3) { width: 34%; }
@@ -405,11 +340,6 @@ body { background-color: @slide-bg-color }
 
 	#title-button {  width: auto; border: none; background: none; padding: 0; margin: 20px; }
 
-	.slide-description { 
-		h2 { font-size: 32px; }
-		p { font-size: 14px; }
-	}
-	
 	#list-nav { 
 		img { display: none; }
 		a { padding-top: 15px; padding-bottom: 15px; border-right: 1px solid @nav-border; }
@@ -424,15 +354,6 @@ body { background-color: @slide-bg-color }
 		h2 { font-size: 24px; }
 		h5, p { font-size: 18px; }
 	}
-	.slide-description { 
-		bottom: 0; width: auto; padding-bottom: 15px;
-		
-		h2 { font-size: 24px; }
-		p { font-size: 13px; }
-		p.dates, p.now-playing { display: inline; padding-right: 5px; border-right: 1px solid #CCC; }
-		p.desc, p.photo-credit { display: inline; }
-		p.npr-obit { margin-top: 10px; }
-	}
 	#list-nav {
 		.browse-artist, .browse-artist.browse26, .browse-artist:nth-child(3n+3)  { width: 50%; }
 		h2 { font-size: 12px; }
@@ -444,19 +365,6 @@ body { background-color: @slide-bg-color }
 @media (max-width: 480px) {
 	#audio-navbar { padding-left: 0; }
 	#audio-navbar .branding { display: none; }
-	.slide-bg { height: 300px; position: relative; top: auto; left: auto; }
-	.slide-description { 
-		position: relative; bottom: auto; left: auto; top: auto; right: auto;
-		width: auto; 
-		background: none; 
-		padding: 20px;
-		margin: 0;
-		
-		h2 { font-size: 30px; }
-
-		p.dates, p.now-playing { display: block; padding-right: 0; border-right: none; }
-		p.desc, p.photo-credit { display: block; }
-	}
 	#list-nav-end .browse-artist { width: 100%; float: none; height: auto; }
 	
 	#list-nav {

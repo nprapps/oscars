@@ -1,18 +1,19 @@
 $(document).ready(function() {
 	/* VARS */
-	var active_slide = 0;
+	var active_cue = 0;
 	var audio_length = APP_CONFIG['AUDIO']['LENGTH']; 
-	var num_slides = 0;
-	var slideshow_data = [];
-	var pop;
+	var num_cues = 0;
+	var cue_data = [];
+	var pop = null;
     var video_supported = !($.browser.msie === true && $.browser.version < 9);
-    var slide_list_open = false;
+    var cue_list_open = false;
 
 	/* ELEMENTS */
     var $main_content = $('#main-content');
-	var $slideshow= $('#slideshow');
-	var $slide_wrap = $('#slideshow-wrap');
-	var $slide_nav = $('#slide-nav');
+    var $video = $('#video');
+    var $title = $('#title');
+    var $credits = $('#credits');
+	var $cue_nav = $('#cue-nav');
 	var $next = $('#next-btn');
 	var $back = $('#back-btn');
     var $audio_nav = $('#audio-navbar');
@@ -20,17 +21,15 @@ $(document).ready(function() {
     var $audio = $('#audio');
 	var $progress = $audio.find('.jp-progress-container');
 	var $player = $('#pop-audio');
-	var $slide_list = $('#list-nav');
-	var $slide_list_end = $('#list-nav-end');
-	var $slide_browse_btn = $('#browse-btn');
-	var $slides = [];
-	var $slide_images = [];
+	var $cue_list = $('#list-nav');
+	var $cue_list_end = $('#list-nav-end');
+	var $cue_browse_btn = $('#browse-btn');
 
     if (!video_supported) {
         $audio.hide(); 
     }
     
-    slide_list_toggle('close');
+    cue_list_toggle('close');
     
     if (video_supported) {
         /* 
@@ -50,101 +49,80 @@ $(document).ready(function() {
         });
     }
 
-    function scroll_to_slide(id) {
-        /*
-         * Scroll horizontally to the correct slide position.
-         */
-        slide_list_toggle('close');
+    function set_active_cue(id) {
+        cue_list_toggle('close');
 
-        $.smoothScroll({
-            direction: 'left',
-            scrollElement: $slideshow,
-            scrollTarget: '#slide' + id,
-            afterScroll: function() {
-                $slide_nav.find('li').removeClass('active');
-                $slide_nav.find('#slidenav' + id).addClass('active');
-            }
-        });
+        $cue_nav.find('li').removeClass('active');
+        $cue_nav.find('#cue-nav' + id).addClass('active');
 
-        active_slide = id;
+        active_cue = id;
 
         return false;
     }
 
-    function goto_slide(id) {
+    function goto_cue(id) {
     	/*
-    	 * Determine whether to shift to the next slide
+    	 * Determine whether to shift to the next cue 
     	 * with audio, or without audio.
     	 */
         if (!video_supported) {
-            scroll_to_slide(id);
-        } else if (pop.paused() || slideshow_data[id] == undefined) {
-            scroll_to_slide(id);
+            set_active_cue(id);
+        } else if (pop.paused() || cue_data[id] == undefined) {
+            set_active_cue(id);
 
-            if (slideshow_data[id] != undefined) {
-                pop.pause(slideshow_data[id]['cue_start']);
+            if (cue_data[id] != undefined) {
+                pop.pause(cue_data[id]['cue_start']);
             } else if (id == 0) {
                 pop.pause(0);
-			} else if (id == (num_slides - 1)) {
+			} else if (id == (num_cues - 1)) {
                 pop.pause(audio_length);
 			}
         } else {
-            pop.play(slideshow_data[id]['cue_start']);
+            pop.play(cue_data[id]['cue_start']);
         }
 		
         return false; 
     }
 
-    function slide_list_toggle(mode) {
+    function cue_list_toggle(mode) {
         /*
-         * Toggle visibility of the slide browser.
+         * Toggle visibility of the cue browser.
          */
-		if (slide_list_open || mode == 'close') {
-			$slide_list.hide();
-			$slide_browse_btn.removeClass('active');
-			slide_list_open = false;
-		} else if (!slide_list_open || mode == 'open') {
-			$slide_list.show();
-			$slide_browse_btn.addClass('active');
-			slide_list_open = true;
+		if (cue_list_open || mode == 'close') {
+			$cue_list.hide();
+			$cue_browse_btn.removeClass('active');
+			cue_list_open = false;
+		} else if (!cue_list_open || mode == 'open') {
+			$cue_list.show();
+			$cue_browse_btn.addClass('active');
+			cue_list_open = true;
 		}
 	}
 
-	function load_slideshow_data() {
+	function load_cue_data() {
         /* 
-         * Load slideshow data from external JSON
+         * Load cue data from external JSON
          */
-		var slide_output = '';
 		var audio_output = '';
         var browse_output = '';
         var endlist_output = '';
 
 		$.getJSON('live-data/slides.json', function(data) {
-			// Title card (slide 0) has no slide data
-            slideshow_data.push(undefined);
+			// Title card (cue 0) has no cue data
+            cue_data.push(undefined);
 
 			$.each(data, function(i, v) {
-				slideshow_data.push(v);
+				cue_data.push(v);
 			
-				var slide_position = (v["cue_start"] / audio_length) * 100;
-
-				// Markup for this slide and its entry in the slide nav
+				// Markup for this cue in the cue nav
 				// via Underscore template / JST
                 var context = v;
                 context['id'] = i + 1;
 
-                if ($main_content.width() <= 480) {
-                    context['image_width'] = 480;
-                } else if ($main_content.width() <= 979) {
-                    context['image_width'] = 979;
-                } else {
-                    context['image_width'] = 1200;
-                }
+                context['position'] = (v["cue_start"] / audio_length) * 100;
+;
 
-                context['position'] = slide_position;
-
-                slide_output += JST.slide(context);
-				audio_output += JST.slidenav(context);
+				audio_output += JST.cuenav(context);
 				browse_output += JST.browse(context);
 				endlist_output += JST.endlist(context);
 				
@@ -152,7 +130,7 @@ $(document).ready(function() {
                     pop.code({
                         start: v["cue_start"],
                         onStart: function( options ) {         
-                            // scroll_to_slide(i + 1);
+                            // set_active_cue(i + 1);
                             $('#footnote').text(v['id']);
 
                             return false;
@@ -160,43 +138,41 @@ $(document).ready(function() {
                     });
                 }
 				
-                num_slides++;
+                num_cues++;
 			});
 			
-            // Title slide and closing slide
-			$('#slide0').after(slide_output);
+            // Title cue and closing cue
 			$('#credits-nav').before(audio_output);
-			num_slides += 2;
+			num_cues += 2;
 
-			var end_id = num_slides - 1;
+			var end_id = num_cues - 1;
 			var end_cue = audio_length - 30;
 
 			$('#credits-nav').attr('id', 's' + end_id);
-			$('#slidenav' + end_id).attr('data-id', end_id);
-			$('#slidenav' + end_id).css('left', ((end_cue / audio_length) * 100) + '%');
-			$('#slideend').attr('id', 'slide' + end_id);
+			$('#cuenav' + end_id).attr('data-id', end_id);
+			$('#cuenav' + end_id).css('left', ((end_cue / audio_length) * 100) + '%');
 
-			slideshow_data.push({
+			cue_data.push({
 				id: end_id,
 				cue_start: end_cue
 			});
 
 			if (video_supported) {
-				// Popcorn cuepoint for opening slide
+				// Popcorn cuepoint for opening cue 
 				pop.code({
 					start: 0,
 					onStart: function(options) {         
-						// scroll_to_slide(0); 
+						// set_active_cue(0); 
 
 						return false;
 					}
 				});
 
-				// Popcorn cuepoint for closing slide
+				// Popcorn cuepoint for closing cue
 				pop.code({
 					start: end_cue,
 					onStart: function(options) {         
-						// scroll_to_slide(end_id); 
+						// set_active_cue(end_id); 
 
 						return false;
 					}
@@ -204,66 +180,62 @@ $(document).ready(function() {
 			}
 
             // Setup navigation
-			$slide_nav.find('.slide-nav-item').click( function() {
+			$cue_nav.find('.cue-nav-item').click( function() {
 				var id = parseInt($(this).attr('data-id'));
 
-                goto_slide(id);
+                goto_cue(id);
 			});
 	
-            $slide_nav.find('.slide-nav-item').hover(function() {
+            $cue_nav.find('.cue-nav-item').hover(function() {
 				var id = parseInt($(this).attr('data-id'));
 
-                $slide_list.find('a[data-id="' + id + '"]').addClass('active');
+                $cue_list.find('a[data-id="' + id + '"]').addClass('active');
             }, function() {
 				var id = parseInt($(this).attr('data-id'));
                 
-                $slide_list.find('a[data-id="' + id + '"]').removeClass('active');
+                $cue_list.find('a[data-id="' + id + '"]').removeClass('active');
             });
 
-            // Setup slide browser
-			$slide_list.append(browse_output);
+            // Setup cue browser
+			$cue_list.append(browse_output);
 
-			$slide_list.append(JST.browse({
-                'id': num_slides - 1,
+			$cue_list.append(JST.browse({
+                'id': num_cues - 1,
                 'image_name': null,
                 'artist_first_name': '',
                 'artist_last_name': 'Index & Credits'
             }));
 
-            $slide_list.find('a').click(function() {
+            $cue_list.find('a').click(function() {
 				var id = parseInt($(this).attr('data-id'));
 
-                goto_slide(id);
-                slide_list_toggle('close');
+                goto_cue(id);
+                cue_list_toggle('close');
             });
 
-            $slide_list.find('a').hover(function() {
+            $cue_list.find('a').hover(function() {
 				var id = parseInt($(this).attr('data-id'));
-                $slide_nav.find('.slide-nav-item[data-id="' + id + '"]').addClass('active');
+                $cue_nav.find('.cue-nav-item[data-id="' + id + '"]').addClass('active');
             }, function() {
 				var id = parseInt($(this).attr('data-id'));
-                $slide_nav.find('.slide-nav-item[data-id="' + id + '"]').removeClass('active');
+                $cue_nav.find('.cue-nav-item[data-id="' + id + '"]').removeClass('active');
             });
 
-            // Setup final slide
-			$slide_list_end.append(endlist_output);
-            $slide_list_end.find('a.slidelink').click(function() {
+            // Setup final cue
+			$cue_list_end.append(endlist_output);
+            $cue_list_end.find('a.cuelink').click(function() {
 				var id = parseInt($(this).attr('data-id'));
                 
-                goto_slide(id);
+                goto_cue(id);
             });
 
-            // Store slide list
-            $slides = $slide_wrap.find('.slide');
-            $slide_images = $slides.find('.slide-bg');
-
-            resize_slideshow();
+            resize_app();
 		});
 	}
 	
-	function resize_slideshow() {
+	function resize_app() {
         /* 
-         * Resize slideshow based on screen width
+         * Resize based on screen width
          */
 		var new_width = $main_content.width();
 		var new_height = $(window).height() - $audio.height();
@@ -276,16 +248,9 @@ $(document).ready(function() {
 			new_height = height_43;
 		}
 
-		$slideshow.width(new_width + 'px').height(new_height + 'px');
-		$slide_wrap.width((num_slides * new_width) + 'px').height(new_height + 'px');
-		$slides.width(new_width + 'px').height(new_height + 'px');
-        $('#video').width(new_width + 'px').height(new_height - $('#footer').height() + 'px');
-
-		if (new_width <= 480) {
-			$slide_images.height((Math.ceil(new_width * 9) / 16) + 'px');
-		} else {
-			$slide_images.height('100%');
-		}
+		$title.width(new_width + 'px').height(new_height + 'px');
+		$credits.width(new_width + 'px').height(new_height + 'px');
+        $video.width(new_width + 'px').height(new_height - $('#footer').height() + 'px');
 
         if (new_width <= 767) {
             $('#next-btn').html('&gt;');
@@ -297,13 +262,10 @@ $(document).ready(function() {
 		
 		// reset navbar position
 		var navpos = $audio_nav.position;
-		$slide_list.css('top', navpos.top + $audio_nav.height());
-		
-		// reset slide position
-		scroll_to_slide(active_slide);
+		$cue_list.css('top', navpos.top + $audio_nav.height());
 	}
 
-	$(window).resize(resize_slideshow);
+	$(window).resize(resize_app);
 
 	/* 
 	 * Click actions
@@ -312,7 +274,7 @@ $(document).ready(function() {
         if (video_supported) {
             pop.play();
         } else {
-            goto_slide(1);
+            goto_cue(1);
         }
 	});
 
@@ -333,35 +295,35 @@ $(document).ready(function() {
             pop.pause(0);
         }
 
-		goto_slide(0);
+		goto_cue(0);
 	});
 
-	$slide_browse_btn.on('click', function(e){
-		slide_list_toggle();
+	$cue_browse_btn.on('click', function(e){
+		cue_list_toggle();
 	});
 
-	$slide_nav.on('mouseenter', function(e){
-		slide_list_toggle('open');
+	$cue_nav.on('mouseenter', function(e){
+		cue_list_toggle('open');
 	});
 
-	$slide_list.on('mouseleave', function(e){
-		slide_list_toggle('close');
+	$cue_list.on('mouseleave', function(e){
+		cue_list_toggle('close');
 	});
 	
 	$next.click(function() {
-		if (active_slide < (num_slides-1)) {
-            var id = active_slide + 1;
+		if (active_cue < (num_cues-1)) {
+            var id = active_cue + 1;
 
-            goto_slide(id);
+            goto_cue(id);
 		}
 		return false;
 	});
 
 	$back.click(function() {
-		if (active_slide > 0) {
-            var id = active_slide - 1;
+		if (active_cue > 0) {
+            var id = active_cue - 1;
 
-            goto_slide(id);
+            goto_cue(id);
 		}
 		return false;
 	});
@@ -392,6 +354,5 @@ $(document).ready(function() {
 	/* 
 	 * INIT
 	 */
-    $slideshow.hide(); // TODO - remove
-	load_slideshow_data();
+	load_cue_data();
 });
