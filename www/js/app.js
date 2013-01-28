@@ -50,29 +50,6 @@ $(document).ready(function() {
         });
     }
 
-    function format_ap_date(mmnt) {
-        /*
-         * Hacky AP date-formatter for moment().
-         */
-        var out = mmnt.format('MMM');
-
-        if (mmnt.month() == 4) {
-            // May
-        } else if (mmnt.month() == 5) {
-            out = 'June';
-        } else if (mmnt.month() == 6) {
-            out = 'July';
-        } else if (mmnt.month() == 8) {
-            out = 'Sept.';
-        } else {
-            out += '.';
-        }
-
-        out += ' ' + mmnt.format('D, YYYY');
-
-        return out;
-    }
-
     function scroll_to_slide(id) {
         /*
          * Scroll horizontally to the correct slide position.
@@ -166,11 +143,6 @@ $(document).ready(function() {
 
                 context['position'] = slide_position;
 
-                if (v['dob'] != '') {
-                    context['dob'] = format_ap_date(moment(v['dob'], 'MM DD YYYY'));
-                    context['dod'] = format_ap_date(moment(v['dod'], 'MM DD YYYY'));
-                }
-                
                 slide_output += JST.slide(context);
 				audio_output += JST.slidenav(context);
 				browse_output += JST.browse(context);
