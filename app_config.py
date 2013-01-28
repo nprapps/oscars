@@ -10,7 +10,7 @@ They will be exposed to users. Use environment variables instead.
 import os
 
 PROJECT_NAME = 'oscars'
-DEPLOYED_NAME = PROJECT_NAME 
+DEPLOYED_NAME = PROJECT_NAME
 
 PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
 PRODUCTION_SERVERS = ['cron.nprapps.org']
@@ -20,7 +20,7 @@ STAGING_SERVERS = ['cron-staging.nprapps.org']
 
 S3_BUCKETS = []
 SERVERS = []
-DEBUG = True 
+DEBUG = True
 
 PROJECT_DESCRIPTION = 'foo'
 SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME)
@@ -47,7 +47,7 @@ GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
 VIDEO = {
     'LENGTH': 337,
-    'URL': 'http://www.youtube.com/watch?v=WJoTxywiRG0&controls=0&autoplay=0&showinfo=0&fs=0&disablekb=1'
+    'URL': 'http://www.youtube.com/watch?&v=nUlolmZ0hig&controls=0&autoplay=0&showinfo=0&fs=0&disablekb=1'
 }
 
 def configure_targets(deployment_target):
@@ -68,7 +68,7 @@ def configure_targets(deployment_target):
         S3_BUCKETS = STAGING_S3_BUCKETS
         SERVERS = STAGING_SERVERS
         DEBUG = True
- 
+
 DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
 
 configure_targets(DEPLOYMENT_TARGET)
