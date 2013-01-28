@@ -26,6 +26,7 @@ $(document).ready(function() {
     var $cue_list = $('#list-nav');
     var $cue_list_end = $('#list-nav-end');
     var $cue_browse_btn = $('#browse-btn');
+    var $current_time = $('.jp-current-time');
 
     if (!video_supported) {
         $video.hide();
@@ -47,6 +48,14 @@ $(document).ready(function() {
         pop.on('playing', function() {
             $pause_button.show();
             $play_button.hide();
+        });
+        pop.on('timeupdate', function() {
+            var s = parseInt(pop.currentTime() % 60);
+            if (s < 10) {
+                s = '0' + s;
+            }
+            var m = parseInt((pop.currentTime() / 60) % 60);
+            $current_time.text(m + ':' + s);
         });
     }
 
