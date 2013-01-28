@@ -217,10 +217,17 @@ body { background-color: @bg-color }
 
 // TITLE AND CLOSING SCREENS
 #title, #credits {
-    display: none;
+    position: absolute;
+    left: 0;
+    top: @audio-height;
+    z-index: 1000;
 	
     /* Background pattern via Subtle Patterns: http://subtlepatterns.com/black-thread/ */
 	background: @bg-color url('@{img-root}/black_thread.png') repeat;
+}
+
+#credits {
+    display: none;
 }
 
 #title-button {
@@ -283,18 +290,6 @@ body { background-color: @bg-color }
     .fb-like {
         margin-bottom:10px;
     }
-}
-
-// VIDEO
-
-#footnote {
-    position: absolute;
-    left: 50px;
-    top: 100px;
-    z-index: 100;
-    width: 100px;
-    height: 50px;
-    background-color: red;
 }
 
 // MEDIA QUERIES

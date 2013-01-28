@@ -58,9 +58,7 @@ $(document).ready(function() {
             pop.on('canplay', function() {
                 pop.play(cue);
             });
-            $video.show();
         } else {
-            $video.show();
             pop.play(cue);
         }
     }
@@ -73,9 +71,7 @@ $(document).ready(function() {
             pop.on('canplay', function() {
                 pop.pause(cue);
             });
-            $video.show();
         } else {
-            $video.show();
             pop.pause(cue);
         }
     }
@@ -85,16 +81,13 @@ $(document).ready(function() {
 
         if (id === 0) {
             $credits.hide();
-            $video.hide();
             $title.show();
         } else if (id === num_cues - 1) {
             $title.hide();
-            $video.hide();
             $credits.show();
         } else {
             $title.hide();
             $credits.hide();
-            $video.show();
         }
 
         $cue_nav.find('li').removeClass('active');
@@ -206,7 +199,6 @@ $(document).ready(function() {
                     onStart: function(options) {
                         set_active_cue(0);
                         $credits.hide();
-                        $video.hide();
                         $title.show();
 
                         return false;
@@ -220,7 +212,6 @@ $(document).ready(function() {
                         set_active_cue(end_id);
 
                         $title.hide();
-                        $video.hide();
                         $credits.show();
 
                         return false;
@@ -282,7 +273,7 @@ $(document).ready(function() {
          * Resize based on screen width
          */
         var new_width = $main_content.width();
-        var new_height = $(window).height() - $audio.height();
+        var new_height = $(window).height() - ($audio.height() + $('#footer').height());
         var height_43 = Math.ceil(($main_content.width() * 3) / 4);
 
         if (new_width <= 480) {
@@ -292,9 +283,10 @@ $(document).ready(function() {
             new_height = height_43;
         }
 
-        $title.width(new_width + 'px').height(new_height + 'px');
-        $credits.width(new_width + 'px').height(new_height + 'px');
-        $video.width(new_width + 'px').height(new_height - $('#footer').height() + 'px');
+        // NB: the "2" accounts for a peculiar gap between content and footer in Chrome
+        $title.width(new_width + 'px').height(new_height + 2 + 'px');
+        $credits.width(new_width + 'px').height(new_height + 2 + 'px');
+        $video.width(new_width + 'px').height(new_height + 'px');
 
         if (new_width <= 767) {
             $('#next-btn').html('&gt;');
