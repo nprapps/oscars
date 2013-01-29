@@ -37,7 +37,8 @@ def oscars_json():
             'movie_name': row[0],
             'cue_start': 0,
             'img_filename': row[2],
-            'content_url': row[3]
+            'link1_title': row[3],
+            'link1_url': row[4]
         }
 
         # Compute cue_start in seconds

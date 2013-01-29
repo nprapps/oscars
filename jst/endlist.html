@@ -4,6 +4,8 @@
             <img src='img/thumbs/<%= img_filename %>' />
         <% } %>
         <h2><%= movie_name %></h2>
-        <p><a href="<%= content_url %>">More on NPR &rarr;</a></p>
+        <% if (link1_url) { %>
+        <p><a href="<%= link1_url %>"><%= link1_title %> &rarr;</a></p>
+        <% } %>
     </a>
 </div>
