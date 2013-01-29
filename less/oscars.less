@@ -220,13 +220,21 @@ body { background-color: @bg-color }
     left: 0;
     top: @audio-height;
     z-index: 1000;
-	
+    padding: 40px;
     /* Background pattern via Subtle Patterns: http://subtlepatterns.com/black-thread/ */
 	background: @bg-color url('@{img-root}/black_thread.png') repeat;
 }
 
 #credits {
     display: none;
+    text-shadow: 1px 2px 10px rgba(32,32,32,0.7);
+
+    h3 {
+        color: white;
+        font-size: 18px;
+        font-weight: normal;
+        line-height: 1.35em;
+    }
 }
 
 #title-button {
