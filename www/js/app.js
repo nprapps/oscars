@@ -28,6 +28,8 @@ $(document).ready(function() {
     var $cue_browse_btn = $('#browse-btn');
     var $current_time = $('.jp-current-time');
 
+    resize_app();
+
     if (!video_supported) {
         $video.hide();
     }
@@ -271,8 +273,6 @@ $(document).ready(function() {
                 var id = parseInt($(this).attr('data-id'));
                 goto_cue(id);
             });
-
-            resize_app();
         });
     }
 
