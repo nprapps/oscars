@@ -5,8 +5,7 @@ $(document).ready(function() {
     var num_cues = 0;
     var cue_data = [];
     var pop = null;
-    //var video_supported = !($.browser.msie === true && $.browser.version < 9);
-    var video_supported = true;
+    var video_supported = !($.browser.msie === true && $.browser.version < 9);
     var cue_list_open = false;
 
     /* ELEMENTS */
