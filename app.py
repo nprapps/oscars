@@ -35,13 +35,13 @@ def oscars_json():
         slide = {
             'sort': row[0],
             'movie_name': row[0],
-            'npr_content': row[1],
             'cue_start': 0,
-            'img_filename': row[3]
+            'img_filename': row[2],
+            'content_url': row[3]
         }
 
         # Compute cue_start in seconds
-        cue_start = row[2]
+        cue_start = row[1]
         hours, mins, secs = map(int, cue_start.split(':'))
         slide['cue_start'] = (mins * 60) + secs
 
