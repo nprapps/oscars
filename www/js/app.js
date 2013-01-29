@@ -5,7 +5,8 @@ $(document).ready(function() {
     var num_cues = 0;
     var cue_data = [];
     var pop = null;
-    var video_supported = !($.browser.msie === true && $.browser.version < 9);
+    //var video_supported = !($.browser.msie === true && $.browser.version < 9);
+    var video_supported = true;
     var cue_list_open = false;
 
     /* ELEMENTS */
@@ -33,6 +34,10 @@ $(document).ready(function() {
     }
 
     cue_list_toggle('close');
+
+    window.bleh = function print_curr_time() {
+        console.log(pop.currentTime());
+    }
 
     if (video_supported) {
         /*
@@ -88,6 +93,7 @@ $(document).ready(function() {
     }
 
     function set_active_cue(id) {
+        console.log('func set_active_cue');
         cue_list_toggle('close');
 
         if (id === 0) {
@@ -105,8 +111,23 @@ $(document).ready(function() {
         $cue_nav.find('#cue-nav' + id).addClass('active');
 
         active_cue = id;
+        console.log('THIS IS ACTIVE CUE: ' + active_cue);
+
+        if (cue_data[id]) {
+            window.location.hash = cue_data[id]['slug'];
+        }
 
         return false;
+    }
+
+    function goto_hash(hash) {
+        _.find(cue_data, function(cue, i) {
+            if (cue && cue['slug'] == hash) {
+                console.log('goto ' + i);
+                goto_cue(i);
+                return true;
+            }
+        });
     }
 
     function goto_cue(id) {
@@ -147,6 +168,17 @@ $(document).ready(function() {
             cue_list_open = true;
         }
     }
+
+    function init_routes() {
+        var hash = window.location.hash;
+        hash = hash.replace('#', '');
+        if (hash) {
+            console.log('hash is' + hash);
+            goto_hash(hash);
+        }
+    }
+
+    window.GO = init_routes;
 
     function load_cue_data() {
         /*
@@ -273,6 +305,11 @@ $(document).ready(function() {
             });
 
             resize_app();
+
+            pop.on('canplaythrough', function() {
+                console.log('like whoa');
+                init_routes();
+            });
         });
     }
 
@@ -397,5 +434,6 @@ $(document).ready(function() {
     /*
      * INIT
      */
+
     load_cue_data();
 });
