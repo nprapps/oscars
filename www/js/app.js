@@ -156,7 +156,7 @@ $(document).ready(function() {
         var browse_output = '';
         var endlist_output = '';
 
-        $.getJSON('live-data/test-data.json', function(data) {
+        $.getJSON('live-data/oscars.json', function(data) {
             // Title card (cue 0) has no cue data
             cue_data.push(undefined);
 
@@ -246,7 +246,8 @@ $(document).ready(function() {
 
             $cue_list.append(JST.browse({
                 'id': end_id,
-                'movie_name': 'Index & Credits'
+                'movie_name': 'Index & Credits',
+                'img_filename': ''
             }));
 
             $cue_list.find('a').click(function() {

@@ -60,11 +60,11 @@
 </div>
 
 <div id="credits">
+    <div class="wrapper">
         <h3>Pass it on</h3>
         <div id="share-buttons">
-            <div class="fb-like" data-href="http://apps.npr.org/music-memoriam-2012/" data-send="false" data-width="300" data-show-faces="false" data-font="arial" data-colorscheme="dark"></div>
-            <a href="https://twitter.com/share" class="twitter-share-button" data-via="nprmusic">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <li class="twitter"><a rel="external" href="http://twitter.com/share?text={{ TWITTER.TEXT|urlencode }}&amp;url={{ TWITTER.URL|urlencode }}" alt="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Credits', '{{ PROJECT_NAME }}']);">Share This Page On Twitter</a></li>
+            <li class="facebook"><a rel="external" href="https://www.facebook.com/dialog/feed?app_id={{ FACEBOOK.APP_ID }}&amp;link={{ FACEBOOK.URL|urlencode }}&name={{ FACEBOOK.TITLE|urlencode }}" alt="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Credits', '{{ PROJECT_NAME }}']);">Like This Page On Facebook</a></li>
         </div>
         <h3>Featured films</h3>
         <div id="list-nav-end"></div>
