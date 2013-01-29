@@ -4,6 +4,7 @@ from glob import glob
 import os
 
 from fabric.api import *
+import requests
 
 import app
 import app_config
@@ -273,3 +274,14 @@ def shiva_the_destroyer():
 
         if env.get('deploy_to_servers', False):
             run('rm -rf %(path)s' % env)
+
+"""
+App-specific utils
+"""
+def update_csv():
+    """
+    Pulls the latest version of Oscars data from Google Doc
+    """
+    response = requests.get('https://docs.google.com/spreadsheet/pub?key=0AiINjEdvBDPadGI5T3M1emo4cDY4WGFPd0dvRW53a0E&output=csv')
+    with open('data/oscars.csv', 'w') as f:
+        f.write(response.text)
