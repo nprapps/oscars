@@ -1,10 +1,10 @@
-Movie Name,NPR Content,Start time,Image file
-Hugo,http://www.npr.org/blogs/monkeysee/2012/02/25/147408688/oscars-2012-time-to-make-your-final-picks,0:00:06,hugo.jpg
-War Horse,http://www.npr.org/blogs/monkeysee/2012/02/22/147213729/oscars-2011-your-best-picture-cheat-sheet,0:00:17,war_horse.jpg
-The Artist,http://www.npr.org/2012/02/26/147467128/and-the-oscars-go-to,0:00:30,artist.jpg
-The Descendants,http://www.npr.org/blogs/monkeysee/2012/02/23/147293806/the-silent-treatment-how-the-artist-stacks-up-to-crazier-movie-throwbacks,0:01:00,descendants.jpg
-Extremely Loud and Incredibly Close,http://www.npr.org/blogs/monkeysee/2013/01/10/169028669/oscar-nominations-lincoln-leads-the-pack-but-where-is-kathryn-bigelow,0:01:24,extremely_loud.jpg
-Midnight in Paris,http://www.npr.org/blogs/monkeysee/2013/01/09/168962761/in-django-and-lincoln-two-very-different-takes-on-americas-racial-past,0:01:45,midnight_in_paris.jpg
-Tree of Life,http://www.npr.org/blogs/monkeysee/2012/12/11/166975825/lets-rush-to-judgment-man-of-steel,0:02:00,tree_of_life.jpg
-The Help,http://www.npr.org/blogs/monkeysee/2012/11/27/165989232/is-that-a-budweiser-in-your-hand-product-placement-booze-and-denzel-washington,0:02:15,help.jpg
-Moneyball,http://www.npr.org/blogs/monkeysee/2012/09/21/161559499/dustin-hoffman-directs-maggie-smith-but-how-is-his-direction-like-dentistry,0:02:30,moneyball.jpg
+Movie Name,NPR Content,Start time,Image file,Link
+Hugo,http://www.npr.org/blogs/monkeysee/2012/02/25/147408688/oscars-2012-time-to-make-your-final-picks,0:00:06,hugo.jpg,http://www.npr.org/2012/12/18/167204930/a-touching-tragic-look-at-amour-in-autumn
+War Horse,http://www.npr.org/blogs/monkeysee/2012/02/22/147213729/oscars-2011-your-best-picture-cheat-sheet,0:00:17,war_horse.jpg,http://www.npr.org/2013/01/15/167719729/affleck-on-argo-and-the-1979-hostage-crisis
+The Artist,http://www.npr.org/2012/02/26/147467128/and-the-oscars-go-to,0:00:30,artist.jpg,http://www.npr.org/2012/06/26/155704471/post-storm-a-fairy-tale-and-reality-check-in-one
+The Descendants,http://www.npr.org/blogs/monkeysee/2012/02/23/147293806/the-silent-treatment-how-the-artist-stacks-up-to-crazier-movie-throwbacks,0:01:00,descendants.jpg,http://www.npr.org/2012/12/24/166898958/tarantinos-genius-unchained
+Extremely Loud and Incredibly Close,http://www.npr.org/blogs/monkeysee/2013/01/10/169028669/oscar-nominations-lincoln-leads-the-pack-but-where-is-kathryn-bigelow,0:01:24,extremely_loud.jpg,http://www.npr.org/2012/12/25/168014350/les-miserable-the-film-does-the-musical-proud
+Midnight in Paris,http://www.npr.org/blogs/monkeysee/2013/01/09/168962761/in-django-and-lincoln-two-very-different-takes-on-americas-racial-past,0:01:45,midnight_in_paris.jpg,http://www.npr.org/2012/11/15/164879536/a-mental-breakdown-with-many-silver-linings
+Tree of Life,http://www.npr.org/blogs/monkeysee/2012/12/11/166975825/lets-rush-to-judgment-man-of-steel,0:02:00,tree_of_life.jpg,http://www.npr.org/2012/12/19/166896991/shedding-grim-light-on-a-dark-story
+The Help,http://www.npr.org/blogs/monkeysee/2012/11/27/165989232/is-that-a-budweiser-in-your-hand-product-placement-booze-and-denzel-washington,0:02:15,help.jpg,http://www.npr.org/2012/11/23/165593687/a-boy-a-boat-a-tiger-reflecting-on-life-of-pi
+Moneyball,http://www.npr.org/blogs/monkeysee/2012/09/21/161559499/dustin-hoffman-directs-maggie-smith-but-how-is-his-direction-like-dentistry,0:02:30,moneyball.jpg,http://www.npr.org/2012/11/20/165489197/for-pi-a-wonderful-life-finds-its-way-to-film
