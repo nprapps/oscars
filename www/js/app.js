@@ -93,6 +93,8 @@ $(document).ready(function() {
     function set_active_cue(id) {
         cue_list_toggle('close');
 
+        console.log('setting ' + id);
+
         if (id === 0) {
             $credits.hide();
             $title.show();
@@ -117,9 +119,7 @@ $(document).ready(function() {
     	 * Determine whether to shift to the next cue
     	 * with video, or without video.
     	 */
-        if (!video_supported) {
-            set_active_cue(id);
-        } else if (pop.paused() || cue_data[id] === undefined) {
+        if (pop.paused() || cue_data[id] === undefined) {
             if (cue_data[id] != undefined) {
                 pause_video(cue_data[id]['cue_start']);
             } else if (id == 0) {
@@ -127,11 +127,11 @@ $(document).ready(function() {
 			} else if (id == (num_cues - 1)) {
                 pause_video(video_length);
 			}
-
-            set_active_cue(id);
-        } else {
+        } else if (video_supported) {
             play_video(cue_data[id]['cue_start']);
         }
+            
+        set_active_cue(id);
 
         return false;
     }
