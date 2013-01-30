@@ -207,6 +207,7 @@ $(document).ready(function() {
                     start: 0,
                     onStart: function(options) {
                         set_active_cue(0);
+
                         $credits.hide();
                         $title.show();
 
