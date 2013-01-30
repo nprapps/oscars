@@ -46,8 +46,14 @@ NPR_DFP = {
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
 VIDEO = {
-    'LENGTH': 267,
-    'URL': 'http://www.youtube.com/watch?&v=nUlolmZ0hig&controls=0&autoplay=0&showinfo=0&fs=0&disablekb=1'
+    'best-picture': {
+        'LENGTH': 267,
+        'URL': 'http://www.youtube.com/watch?&v=nUlolmZ0hig&controls=0&autoplay=0&showinfo=0&fs=0&disablekb=1'
+    },
+    'best-actor': {
+        'LENGTH': 267,
+        'URL': 'http://www.youtube.com/watch?&v=nUlolmZ0hig&controls=0&autoplay=0&showinfo=0&fs=0&disablekb=1'
+    }
 }
 
 def configure_targets(deployment_target):

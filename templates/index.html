@@ -8,8 +8,6 @@
 	{{ JS.push('js/lib/jquery.smooth-scroll.min.js') }}
 	{{ JS.push('js/lib/popcorn-complete.js') }}
 {% endblock %}
-{% block extra_head %}{% endblock %}
-
 
 {% block content %}
 
@@ -53,7 +51,7 @@
 <div id="title">
     <a id="title-button" href="javascript:;">
         <h5>NPR presents</h5>
-        <h1>Oscars 2013</h1>
+        <h1>Oscars 2013 - {{ PAGE_NAME }}</h1>
         <p>TKTK</p>
         <h2>Begin &rsaquo;</h2>
     </a>
@@ -77,4 +75,9 @@
 
 
 {% block extra_foot_js %}{% endblock %}
-{% block extra_foot %}{% endblock %}
+
+{% block extra_foot %}
+<script type="text/javascript">
+    window.PAGE_NAME = '{{ PAGE_NAME }}'; 
+</script>
+{% endblock %}

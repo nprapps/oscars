@@ -1,7 +1,7 @@
 $(document).ready(function() {
     /* VARS */
     var active_cue = 0;
-    var video_length = APP_CONFIG['VIDEO']['LENGTH'];
+    var video_length = APP_CONFIG['VIDEO'][window.PAGE_NAME]['LENGTH'];
     var num_cues = 0;
     var cue_data = [];
     var pop = null;
@@ -40,7 +40,7 @@ $(document).ready(function() {
         /*
          * Load video player
          */
-        pop = Popcorn.youtube('#video', APP_CONFIG['VIDEO']['URL']);
+        pop = Popcorn.youtube('#video', APP_CONFIG['VIDEO'][window.PAGE_NAME]['URL']);
 
         pop.on('pause', function() {
             $play_button.show();
@@ -158,7 +158,7 @@ $(document).ready(function() {
         var browse_output = '';
         var endlist_output = '';
 
-        $.getJSON('live-data/oscars.json', function(data) {
+        $.getJSON('live-data/' + window.PAGE_NAME + '.json', function(data) {
             // Title card (cue 0) has no cue data
             cue_data.push(undefined);
 

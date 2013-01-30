@@ -3,30 +3,39 @@
 import csv
 import json
 from mimetypes import guess_type
-import os
 import urllib
 
 import envoy
-from flask import Flask, Markup, abort, render_template
+from flask import Flask, Markup, abort, redirect, render_template
 
 import app_config
 from render_utils import flatten_app_config, make_context
 app = Flask(app_config.PROJECT_NAME)
 
-# Example application views
 @app.route('/')
-def index():
-    """
-    Example view demonstrating rendering a simple HTML page.
-    """
-    return render_template('index.html', **make_context())
+def _index():
+    return redirect('/best-picture.html')
 
-@app.route('/live-data/oscars.json')
-def oscars_json():
+# Example application views
+@app.route('/best-picture.html')
+def best_picture():
+    context = make_context()
+    context['PAGE_NAME'] = 'best-picture'
+
+    return render_template('index.html', **context)
+
+@app.route('/best-actor.html')
+def best_actor():
+    context = make_context()
+    context['PAGE_NAME'] = 'best-actor'
+
+    return render_template('index.html', **context)
+
+def _make_data_json(filename):
     """
-    Generate slide data.
+    Generate data.
     """
-    with open('data/oscars.csv') as f:
+    with open('data/%s.csv' % filename) as f:
         rows = list(csv.reader(f))
 
     slides = []
@@ -49,6 +58,14 @@ def oscars_json():
         slides.append(slide)
 
     return json.dumps(slides), 200, { 'Content-Type': 'application/javascript' }
+
+@app.route('/live-data/best-picture.json')
+def best_picture_json():
+    return _make_data_json('best-picture')
+
+@app.route('/live-data/best-actor.json')
+def best_actor_json():
+    return _make_data_json('best-actor')
 
 @app.route('/widget.html')
 def widget():
