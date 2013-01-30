@@ -5,7 +5,8 @@ $(document).ready(function() {
     var num_cues = 0;
     var cue_data = [];
     var pop = null;
-    var video_supported = !($.browser.msie === true && $.browser.version < 9);
+    // http://stackoverflow.com/questions/8890460/how-to-detect-ie7-and-ie8-using-jquery-support
+    var video_supported = $.support.leadingWhitespace;
     var cue_list_open = false;
 
     /* ELEMENTS */
