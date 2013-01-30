@@ -93,8 +93,6 @@ $(document).ready(function() {
     function set_active_cue(id) {
         cue_list_toggle('close');
 
-        console.log('setting ' + id);
-
         if (id === 0) {
             $credits.hide();
             $title.show();
