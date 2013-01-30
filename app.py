@@ -31,6 +31,10 @@ def best_actor():
 
     return render_template('index.html', **context)
 
+@app.route('/chat.html')
+def chat():
+    return render_template('chat.html', **make_context())
+
 def _make_data_json(filename):
     """
     Generate data.
