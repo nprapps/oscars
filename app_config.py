@@ -43,6 +43,12 @@ NPR_DFP = {
     'TARGET': '\/news_election_results;storyid=139482413'
 }
 
+CHAT = {
+    'ID': '74796',
+    'TOKEN': 'FtP7wRfX',
+    'UPDATE_INTERVAL': 5000
+}
+
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
 VIDEO = {
@@ -65,15 +71,20 @@ def configure_targets(deployment_target):
     global SERVERS
     global DEBUG
     global AUDIO
+    global CHAT
 
     if deployment_target == 'production':
         S3_BUCKETS = PRODUCTION_S3_BUCKETS
         SERVERS = PRODUCTION_SERVERS
         DEBUG = False
+
+        CHAT['ID'] = '74796'
     else:
         S3_BUCKETS = STAGING_S3_BUCKETS
         SERVERS = STAGING_SERVERS
         DEBUG = True
+
+        CHAT['ID'] = '74796'
 
 DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
 
