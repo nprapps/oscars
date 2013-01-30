@@ -275,16 +275,26 @@ $(document).ready(function() {
                 goto_cue(id);
             });
 
-            $cue_list_end.find('a.toggle-links').click(function() {
-                var $content_links = $(this).parent().find('.content-links')
+            $cue_list_end.find('a.hide-links').click(function() {
+                var $hide_links = $(this);
+                var $parent = $hide_links.parent();
+                var $content_links = $parent.find('.content-links');
+                var $show_links = $parent.find('.show-links');
                 
-                if ($content_links.is(':visible')) {
-                    $content_links.hide();
-                    $(this).text('Show links');
-                } else {
-                    $content_links.show();
-                    $(this).text('Hide links');
-                }
+                $hide_links.hide();
+                $content_links.hide();
+                $show_links.show();
+            });
+
+            $cue_list_end.find('a.show-links').click(function() {
+                var $show_links = $(this);
+                var $parent = $show_links.parent();
+                var $content_links = $parent.find('.content-links');
+                var $hide_links = $parent.find('.hide-links');
+                
+                $show_links.hide();
+                $content_links.show();
+                $hide_links.show();
             });
         });
     }

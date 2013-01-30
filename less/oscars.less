@@ -208,7 +208,7 @@ body { background-color: @bg-color; -webkit-font-smoothing: antialiased; }
 	a { padding: 0; display: inline; border: none; }
 	a:hover, a.active { background-color: none; }
     
-    .toggle-links {
+    .show-links,.hide-links {
         display: none;
     }
 }
@@ -401,9 +401,27 @@ body { background-color: @bg-color; -webkit-font-smoothing: antialiased; }
 	#list-nav-end {
         .browse-cue { width: 100%; float: none; height: auto; }
 
-        .toggle-links { display: inline; }
+        h2 {
+            font: bold 14px/1.4 Arial, Helvetica, sans-serif;
+            float: left;
+            margin: 0 0 2px 5px;
+            color:#fff;
+        }
 
-        .content-links { display: none; }
+        .show-links,.hide-links {
+            display: block;
+            width: 50px;
+            height: 50px;;
+            float: right;
+            font-size: 48px;
+            text-align: center;
+        }
+
+        .hide-links {
+            display: none;
+        } 
+
+        .content-links { display: none; clear: both; }
     }
 	
 	#list-nav {
