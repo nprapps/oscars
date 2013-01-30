@@ -1,0 +1,21 @@
+{% extends '_base_chat.html' %}
+
+{% block extra_css %}
+    {{ CSS.push('less/chat.less') }}
+    {{ CSS.push('less/app-chat.less') }}
+{% endblock %}
+
+{% block top_content %}
+    <h1>Oscars 2013</h1>
+{% endblock %}
+
+{% block main_content %}
+    <div id="live-chat"></div>
+{% endblock %}
+
+{% block extra_foot_js %}
+    {{ JS.push('js/lib/jquery.smooth-scroll.min.js') }}
+    {{ JS.push('js/auth.js') }}
+    {{ JS.push('js/chat.js') }}
+    {{ JS.push('js/app-chat.js') }}
+{% endblock %}

@@ -74,10 +74,12 @@
 {% endblock %}
 
 
-{% block extra_foot_js %}{% endblock %}
+{% block extra_foot_js %}
+    {{ JS.push('js/app.js') }}
+{% endblock %}
 
 {% block extra_foot %}
 <script type="text/javascript">
-    window.PAGE_NAME = '{{ PAGE_NAME }}'; 
+    window.PAGE_NAME = '{{ PAGE_NAME }}';
 </script>
 {% endblock %}
