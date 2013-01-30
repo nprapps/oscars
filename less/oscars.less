@@ -207,6 +207,10 @@ body { background-color: @bg-color; -webkit-font-smoothing: antialiased; }
 	img { margin-right: 0; }
 	a { padding: 0; display: inline; border: none; }
 	a:hover, a.active { background-color: none; }
+    
+    .toggle-links {
+        display: none;
+    }
 }
 #browse-btn { float: left; }
 #browse-btn.active { background-color: @nav-button-color; }
@@ -394,7 +398,13 @@ body { background-color: @bg-color; -webkit-font-smoothing: antialiased; }
 @media (max-width: 480px) {
 	#audio-navbar { padding-left: 0; }
 	#audio-navbar .branding { display: none; }
-	#list-nav-end .browse-cue { width: 100%; float: none; height: auto; }
+	#list-nav-end {
+        .browse-cue { width: 100%; float: none; height: auto; }
+
+        .toggle-links { display: inline; }
+
+        .content-links { display: none; }
+    }
 	
 	#list-nav {
 		width: 300px; left: 10px;

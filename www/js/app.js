@@ -269,9 +269,22 @@ $(document).ready(function() {
 
             // Setup final cue
             $cue_list_end.append(endlist_output);
+            
             $cue_list_end.find('a.cuelink').click(function() {
                 var id = parseInt($(this).attr('data-id'));
                 goto_cue(id);
+            });
+
+            $cue_list_end.find('a.toggle-links').click(function() {
+                var $content_links = $(this).parent().find('.content-links')
+                
+                if ($content_links.is(':visible')) {
+                    $content_links.hide();
+                    $(this).text('Show links');
+                } else {
+                    $content_links.show();
+                    $(this).text('Hide links');
+                }
             });
         });
     }
