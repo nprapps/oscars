@@ -65,16 +65,6 @@ $(document).ready(function() {
             $pause_button.show();
             $play_button.hide();
         });
-        pop.on('timeupdate', function() {
-            var s = parseInt(pop.currentTime() % 60);
-            if (s < 10) {
-                s = '0' + s;
-            }
-            var m = parseInt((pop.currentTime() / 60) % 60);
-            $current_time.text(m + ':' + s);
-
-            $progress.width(Math.floor((pop.currentTime() / video_length) * 100) + '%');
-        });
     }
 
     function play_video(cue) {
