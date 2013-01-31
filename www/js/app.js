@@ -8,6 +8,7 @@ $(document).ready(function() {
     // http://stackoverflow.com/questions/8890460/how-to-detect-ie7-and-ie8-using-jquery-support
     var video_supported = $.support.leadingWhitespace;
     var cue_list_open = false;
+    var have_shown_ad = false;
 
     /* ELEMENTS */
     var $main_content = $('#main-content');
@@ -58,8 +59,6 @@ $(document).ready(function() {
             }
         });
 
-        window.init_pre_roll_ad();
-
         pop.on('pause', function() {
             $play_button.show();
             $pause_button.hide();
@@ -74,6 +73,19 @@ $(document).ready(function() {
     function play_video(cue) {
         $title.hide();
         $credits.hide();
+
+        if (!have_shown_ad) {
+            $video.hide();
+            
+            window.init_pre_roll_ad(function() {
+                $pre_roll.hide();
+                $video.show();
+
+                pop.play(cue);
+
+                have_shown_ad = true;
+            });
+        }
 
         pop.play(cue);
     }

@@ -1,4 +1,4 @@
-window.init_pre_roll_ad = function() {    
+window.init_pre_roll_ad = function(on_complete) {    
     var ads_manager;
     var ads_loader;
     var ad_display_container;
@@ -58,9 +58,6 @@ window.init_pre_roll_ad = function() {
         try {
             ads_manager.init($video.width(), $video.height(), google.ima.ViewMode.NORMAL);
 
-            // TODO - temporary
-            $("#title").hide();
-
             ads_manager.start();
         } catch (adError) {
             // An error may be thrown if there was a problem with the VAST response.
@@ -68,7 +65,7 @@ window.init_pre_roll_ad = function() {
     }
 
     function on_ad_complete(ad_event) {
-        console.log('Ad complete');
+        on_complete();
     }
 
     function on_ad_error(ad_error) {
