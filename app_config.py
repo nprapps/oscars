@@ -53,12 +53,14 @@ GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
 VIDEO = {
     'best-picture': {
-        'LENGTH': 267,
-        'URL': 'http://www.youtube.com/watch?&v=nUlolmZ0hig&controls=0&autoplay=0&showinfo=0&fs=0&disablekb=1'
+        'LENGTH': 665,
+        'MP4_URL': 'http://stage-apps.npr.org/oscars/ofmontreal.mp4',
+        'OGV_URL': 'http://stage-apps.npr.org/oscars/ofmontreal.ogv'
     },
     'best-actor': {
-        'LENGTH': 267,
-        'URL': 'http://www.youtube.com/watch?&v=nUlolmZ0hig&controls=0&autoplay=0&showinfo=0&fs=0&disablekb=1'
+        'LENGTH': 665,
+        'MP4_URL': 'http://stage-apps.npr.org/oscars/ofmontreal.mp4',
+        'OGV_URL': 'http://stage-apps.npr.org/oscars/ofmontreal.ogv'
     }
 }
 

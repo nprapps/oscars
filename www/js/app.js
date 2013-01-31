@@ -41,7 +41,20 @@ $(document).ready(function() {
         /*
          * Load video player
          */
-        pop = Popcorn.youtube('#video', APP_CONFIG['VIDEO'][window.PAGE_NAME]['URL']);
+        pop = Popcorn.jplayer('#video', {
+            media: {
+                m4v: APP_CONFIG['VIDEO'][window.PAGE_NAME]['MP4_URL'], 
+                ogv: APP_CONFIG['VIDEO'][window.PAGE_NAME]['OGV_URL'] 
+            },
+            options: {
+                swfPath: 'Jplayer.swf',
+                supplied: 'm4v, ogv',
+                size: {
+                    width: $('#video').width(),
+                    height: $('#video').height()
+                }
+            }
+        });
 
         pop.on('pause', function() {
             $play_button.show();
@@ -68,26 +81,14 @@ $(document).ready(function() {
         $title.hide();
         $credits.hide();
 
-        if (pop.readyState < 2) {
-            pop.on('canplay', function() {
-                pop.play(cue);
-            });
-        } else {
-            pop.play(cue);
-        }
+        pop.play(cue);
     }
 
     function pause_video(cue) {
         $title.hide();
         $credits.hide();
 
-        if (pop.readyState < 2) {
-            pop.on('canplay', function() {
-                pop.pause(cue);
-            });
-        } else {
-            pop.pause(cue);
-        }
+        pop.pause(cue);
     }
 
     function set_active_cue(id) {
