@@ -9,6 +9,7 @@ $(document).ready(function() {
     var video_supported = $.support.leadingWhitespace;
     var cue_list_open = false;
     var have_shown_ad = false;
+    var ad_running = false;
 
     /* ELEMENTS */
     var $main_content = $('#main-content');
@@ -70,21 +71,29 @@ $(document).ready(function() {
         });
     }
 
+    function run_ad() {
+        ad_running = true;
+        $video.hide();
+        
+        window.init_pre_roll_ad(function() {
+            $pre_roll.hide();
+            $video.show();
+
+            pop.play();
+
+            have_shown_ad = true;
+            ad_running = false;
+        });
+    }
+
     function play_video(cue) {
         $title.hide();
         $credits.hide();
 
-        if (!have_shown_ad) {
-            $video.hide();
-            
-            window.init_pre_roll_ad(function() {
-                $pre_roll.hide();
-                $video.show();
-
-                pop.play(cue);
-
-                have_shown_ad = true;
-            });
+        if (ad_running) {
+            // Do nothing
+        } else if (!have_shown_ad) {
+            run_ad();
         } else {
             pop.play(cue);
         }
@@ -94,7 +103,13 @@ $(document).ready(function() {
         $title.hide();
         $credits.hide();
 
-        pop.pause(cue);
+        if (ad_running) {
+            // Do nothing
+        } else if (!have_shown_ad) {
+            run_ad();
+        } else {
+            pop.pause(cue);
+        }
     }
 
     function set_active_cue(id) {
