@@ -52,7 +52,7 @@ window.init_pre_roll_ad = function(on_complete) {
             ads_manager.init($video.width(), $video.height(), google.ima.ViewMode.NORMAL);
 
             ads_manager.start();
-        } catch (adError) {
+        } catch (ad_error) {
             // An error may be thrown if there was a problem with the VAST response.
         }
     }

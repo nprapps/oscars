@@ -24,8 +24,8 @@ $(document).ready(function() {
     var $audio = $('#audio');
     var $progress = $audio.find('.jp-play-bar');
     var $player = $('#pop-audio');
-    var $play_button = $('.jp-play');
-    var $pause_button = $('.jp-pause');
+    var $play_button = $('.play');
+    var $pause_button = $('.pause');
     var $cue_list = $('#list-nav');
     var $cue_list_end = $('#list-nav-end');
     var $cue_browse_btn = $('#browse-btn');
@@ -85,9 +85,9 @@ $(document).ready(function() {
 
                 have_shown_ad = true;
             });
+        } else {
+            pop.play(cue);
         }
-
-        pop.play(cue);
     }
 
     function pause_video(cue) {
@@ -356,14 +356,10 @@ $(document).ready(function() {
 
     $play_button.click(function() {
         play_video()
-        $(this).hide();
-        $pause_button.show();
     });
 
     $pause_button.click(function() {
         pop.pause();
-        $(this).hide();
-        $play_button.show();
     });
 
     $audio_branding.click(function() {
