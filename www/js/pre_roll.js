@@ -35,13 +35,6 @@ window.init_pre_roll_ad = function(on_complete) {
         var ads_request = new google.ima.AdsRequest();
         ads_request.adTagUrl = ad_tag_url;
 
-        // TODO -- wtf do these mean?
-        ads_request.linearAdSlotWidth = 640;
-        ads_request.linearAdSlotHeight = 400;
-
-        ads_request.nonLinearAdSlotWidth = 640;
-        ads_request.nonLinearAdSlotHeight = 150;
-
         ads_loader.requestAds(ads_request);
     }
 
@@ -65,6 +58,7 @@ window.init_pre_roll_ad = function(on_complete) {
     }
 
     function on_ad_complete(ad_event) {
+        ad_display_container.destroy();
         on_complete();
     }
 
@@ -72,6 +66,6 @@ window.init_pre_roll_ad = function(on_complete) {
         console.log(ad_error.getError());
     }
 
-    //Kick off the ads request
+    // Kick off the ads request
     request_ads();
 }
