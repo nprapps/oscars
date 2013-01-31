@@ -12,6 +12,7 @@ $(document).ready(function() {
     /* ELEMENTS */
     var $main_content = $('#main-content');
     var $video = $('#video');
+    var $pre_roll = $('#pre-roll-ad');
     var $title = $('#title');
     var $credits = $('#credits');
     var $cue_nav = $('#cue-nav');
@@ -33,6 +34,7 @@ $(document).ready(function() {
 
     if (!video_supported) {
         $video.hide();
+        $pre_roll.hide();
     }
 
     cue_list_toggle('close');
@@ -55,6 +57,8 @@ $(document).ready(function() {
                 }
             }
         });
+
+        window.init_pre_roll_ad();
 
         pop.on('pause', function() {
             $play_button.show();
@@ -87,6 +91,7 @@ $(document).ready(function() {
         if (id === 0) {
             $credits.hide();
             $title.show();
+            $pre_roll.show();
         } else if (id === num_cues - 1) {
             $title.hide();
             $credits.show();
@@ -309,6 +314,7 @@ $(document).ready(function() {
         $title.width(new_width + 'px').height(new_height + 2 + 'px');
         $credits.width(new_width + 'px').height(new_height + 2 + 'px');
         $video.width(new_width + 'px').height(new_height + 'px');
+        $pre_roll.width(new_width + 'px').height(new_height + 'px');
 
         if (new_width <= 767) {
             $('#next-btn').html('&gt;');

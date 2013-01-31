@@ -10,6 +10,10 @@
 	{{ JS.push('js/lib/popcorn.jplayer.js') }}
 {% endblock %}
 
+{% block extra_head %}
+<script type="text/javascript" src="http://s0.2mdn.net/instream/html5/ima3.js"></script>
+{% endblock %}
+
 {% block content %}
 
 <div id="audio-navbar">
@@ -47,6 +51,7 @@
 
 <div id="list-nav" class="cue-list"></div>
 
+<div id="pre-roll-ad"></div>
 <div id="video"></div>
 
 <div id="title">
@@ -76,6 +81,7 @@
 
 
 {% block extra_foot_js %}
+    {{ JS.push('js/pre_roll.js') }}
     {{ JS.push('js/app.js') }}
 {% endblock %}
 
