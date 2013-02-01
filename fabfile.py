@@ -13,7 +13,7 @@ from etc import github
 """
 Base configuration
 """
-env.project_name = app_config.PROJECT_NAME 
+env.project_name = app_config.PROJECT_NAME
 env.deployed_name = app_config.DEPLOYED_NAME
 env.deploy_to_servers = False
 env.repo_url = 'git@github.com:nprapps/%(project_name)s.git' % env
@@ -105,7 +105,7 @@ def render():
     Render HTML templates and compile assets.
     """
     from flask import g
-    
+
     less()
     jst()
     app_config_js()
@@ -257,7 +257,7 @@ def deploy(remote='origin'):
 
     if env.get('deploy_to_servers', False):
         checkout_latest(remote)
-    
+
 """
 Destruction
 """
@@ -267,7 +267,7 @@ def shiva_the_destroyer():
     """
     with settings(warn_only=True):
         s3cmd = 's3cmd del --recursive %s'
-        
+
         for bucket in env.s3_buckets:
             env.s3_bucket = bucket
             local(s3cmd % ('s3://%(s3_bucket)s/%(deployed_name)s' % env))
