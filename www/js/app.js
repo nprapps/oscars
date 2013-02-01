@@ -16,11 +16,6 @@ $(document).ready(function() {
 
     resize_app();
 
-    if (!video_supported) {
-        $video.hide();
-        $pre_roll.hide();
-    }
-
     if (video_supported) {
         /*
          * Load video player
@@ -30,8 +25,8 @@ $(document).ready(function() {
             //solution: 'flash, html',
             supplied: 'm4v, ogv',
             size: {
-                width: $('#video').width(),
-                height: $('#video').height()
+                width: $video.width(),
+                height: $video.height()
             },
             ready: function() {
                 // Never show the ad if falling back to flash
@@ -55,16 +50,19 @@ $(document).ready(function() {
                 }
             }
         });
+    } else {
+        $video_wrapper.hide();
     }
 
+
     function run_ad() {
+        width = $main_content.width();
+
         ad_running = true;
-        $video.hide();
-        $pre_roll.show();
+        $pre_roll.width(width + 'px');
         
         window.init_pre_roll_ad(function() {
             $pre_roll.hide();
-            $video.show();
 
             $video.jPlayer('play');
 
