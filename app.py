@@ -45,14 +45,28 @@ def _make_data_json(filename):
     slides = []
 
     for row in rows[1:]:
-        slide = {
-            'sort': row[0],
-            'movie_name': row[0],
-            'cue_start': 0,
-            'img_filename': row[2],
-            'link1_title': row[3],
-            'link1_url': row[4]
-        }
+        if filename == 'best-picture':
+            slide = {
+                'sort': row[0],
+                'movie_name': row[0],
+                'cue_start': 0,
+                'img_filename': row[2],
+                'link1_title': row[3],
+                'link1_url': row[4],
+                'link2_title': row[5],
+                'link2_url': row[6],
+                'link3_title': row[7],
+                'link3_url': row[8]
+            }
+        elif filename == 'best-actor':
+            slide = {
+                'sort': row[0],
+                'movie_name': row[0],
+                'cue_start': 0,
+                'img_filename': row[2],
+                'link1_title': row[3],
+                'link1_url': row[4],
+            }
 
         # Compute cue_start in seconds
         cue_start = row[1]
@@ -110,7 +124,7 @@ def _templates_js():
 def _app_config_js():
     config = flatten_app_config()
     js = 'window.APP_CONFIG = ' + json.dumps(config)
-    
+
     return js, 200, { 'Content-Type': 'application/javascript' }
 
 # Server arbitrary static files on-demand
@@ -130,7 +144,7 @@ def urlencode_filter(s):
     """
     if type(s) == 'Markup':
         s = s.unescape()
-        
+
     s = s.encode('utf8')
     s = urllib.quote_plus(s)
 
