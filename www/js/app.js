@@ -37,14 +37,14 @@ $(document).ready(function() {
                     'tracktime': 'true'
                 },
                 googima: {
-                    ad:  
+                    ad:
                     {
-                        ad1: 
+                        ad1:
                         {
                             tag: AD_TAG_URL,
                             type: "video",
                             position: "pre"
-                        }                               
+                        }
                     },
                     admessagedynamic: "Your video will begin in XX seconds",
                     admessagedynamickey: "XX",
@@ -84,7 +84,7 @@ $(document).ready(function() {
                 var $parent = $hide_links.parent();
                 var $content_links = $parent.find('.content-links');
                 var $show_links = $parent.find('.show-links');
-                
+
                 $hide_links.hide();
                 $content_links.hide();
                 $show_links.show();
@@ -95,7 +95,7 @@ $(document).ready(function() {
                 var $parent = $show_links.parent();
                 var $content_links = $parent.find('.content-links');
                 var $hide_links = $parent.find('.hide-links');
-                
+
                 $show_links.hide();
                 $content_links.show();
                 $hide_links.show();
