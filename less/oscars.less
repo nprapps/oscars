@@ -1,53 +1,20 @@
 // Global variables
 @img-root: '../img';
-@bg-color: #262626;
-@shade-bg: rgba(50,50,50,.6);
-@shadow: 1px 2px 10px rgba(32,32,32,.7);
-@text-gray: #8b9094;
-@nav-border: #39393a;
-@audio-height: 50px;
-@nav-button-color: #343434;
-@nav-button-hover: #33363b;
-@nav-text-color: #88919a;
-@nav-text-hover: #b0b0b0;
-
-
-// TEMPLATE
-body { background-color: @bg-color; -webkit-font-smoothing: antialiased; }
-#footer ul.bottomlist li.help a,
-#footer ul.bottomlist li.contact a { color: #fff; font-weight: bold; }
-
-
-// TITLE AND CLOSING SCREENS
-#title, #credits {
-    /* Background pattern via Subtle Patterns: http://subtlepatterns.com/black-thread/ */
-	background: @bg-color url('@{img-root}/black_thread.png') repeat;
-}
 
 #credits {
-    .wrapper {
-        padding: 20px 0;
-        width: 80%;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
     h3 {
         font: normal 18px/1.2 Arial, Helvetica, sans-serif;
-        color: #ddd;
         text-transform: capitalize;
         margin-bottom: 11px;
         margin-top: 33px;
         clear: both;
         padding-top: 22px;
-        border-top: 2px solid @nav-border;
-
-        .date { font-size: 14px; text-transform: none; color: #808080; padding-left: 11px; }
+        border-top: 2px solid gray;
     }
     h3:first-child { margin-top: 0; padding-top: 0; border: none; }
-    p { color: @text-gray; margin-top: 0;}
-    a, a:link, a:visited { color: #fff; font-weight: bold; }
-    a:hover, a:active { color: #aeb1b9; }
+    p { margin-top: 0;}
+    a, a:link, a:visited { font-weight: bold; }
+    a:hover, a:active { }
 }
 
 #list-nav-end {
@@ -58,7 +25,6 @@ body { background-color: @bg-color; -webkit-font-smoothing: antialiased; }
 		float: left;
 		height: 60px;
 		overflow: hidden;
-		border-top: 1px solid @nav-button-color;
 		padding: 10px 0;
 	}
 	.browse-cue:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
@@ -66,62 +32,12 @@ body { background-color: @bg-color; -webkit-font-smoothing: antialiased; }
 		float: left;
 		width: 60px;
 		height: 44px;
-		border: 1px solid @nav-border;
+		border: 1px solid @gray;
 	}
-	h2 { font: bold 13px/1.4 Arial, Helvetica, sans-serif; margin: 0 0 2px 70px; color:#fff; }
+	h2 { font: bold 13px/1.4 Arial, Helvetica, sans-serif; margin: 0 0 2px 70px; }
 	p { font: 12px/1.4 Arial, Helvetica, sans-serif; margin: 0 0 0 70px; }
-	a { color: @nav-text-color; }
-	a:hover, a.active { color: @nav-text-hover; text-decoration: none; }
-	a:hover img, a.active img { border-color: @text-gray; }
 }
 #list-nav-end:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
-
-#share-buttons {
-    margin-bottom: 22px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-    &:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
-    li {
-        width: 50%;
-        float: left;
-    }
-    a {
-        display: block;
-        line-height: 44px;
-        height: 44px;
-        overflow: hidden;
-        text-shadow: none;
-        color: @nav-text-color;
-        background-color: @nav-button-color;
-        background-positon: 0 0;
-        background-repeat: no-repeat;
-        padding-left: 55px;
-        white-space: nowrap;
-    }
-    li.twitter a {
-        margin-right: 2px;
-        background-image: url('@{img-root}/share-twitter-dark.gif');
-    }
-    li.facebook a {
-        background-image: url('@{img-root}/share-facebook-dark.gif');
-    }
-    a:hover, a:active {
-        color: @nav-text-hover;
-        background-color: @nav-button-hover;
-    }
-}
-
-#oscars {
-  color: #8b9094;
-  text-align: center;
-
-  h2 {
-    color: #8b9094;
-    text-shadow: @shadow;
-  }
-}
 
 // MEDIA QUERIES
 @media (min-width: 1200px) {
@@ -144,7 +60,6 @@ body { background-color: @bg-color; -webkit-font-smoothing: antialiased; }
             font: bold 14px/1.4 Arial, Helvetica, sans-serif;
             float: left;
             margin: 0 0 2px 5px;
-            color:#fff;
         }
 
         .show-links,.hide-links {
@@ -168,10 +83,4 @@ body { background-color: @bg-color; -webkit-font-smoothing: antialiased; }
 
 		.browse-cue a { display: table-cell; width: 150px; vertical-align: middle; height: 40px; padding-top: 0; padding-bottom: 0; }
 	}
-
-    #share-buttons {
-        li { width: auto; float: none; }
-        a { margin-bottom: 2px; }
-        li.twitter a { margin-right: 0; }
-    }
 }
