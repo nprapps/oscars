@@ -9,6 +9,7 @@ $(document).ready(function() {
 
     /* ELEMENTS */
     var $main_content = $('#main-content');
+    var $video_wrapper = $('#video-wrapper');
     var $video = $('#video');
     var $pre_roll = $('#pre-roll-ad');
     var $cue_list_end = $('#list-nav-end');
@@ -24,7 +25,7 @@ $(document).ready(function() {
         /*
          * Load video player
          */
-        jplayer = $video.jPlayer({
+        $video.jPlayer({
             swfPath: 'Jplayer.swf',
             supplied: 'm4v, ogv',
             size: {
@@ -41,9 +42,10 @@ $(document).ready(function() {
                 if (ad_running) {
                     // Do nothing
                 } else if (!have_shown_ad) {
+                    $video.jPlayer('stop');
                     run_ad();
                 } else {
-                    jplayer.play();
+                    $video.jPlayer('play');
                 }
             }
         });
@@ -51,12 +53,14 @@ $(document).ready(function() {
 
     function run_ad() {
         ad_running = true;
+        $video.hide();
         $pre_roll.show();
         
         window.init_pre_roll_ad(function() {
             $pre_roll.hide();
+            $video.show();
 
-            jplayer.play();
+            $video.jPlayer('play');
 
             have_shown_ad = true;
             ad_running = false;
@@ -109,6 +113,7 @@ $(document).ready(function() {
          */
         var new_width = $main_content.width();
 
+        $video_wrapper.width(new_width + 'px');
         $video.width(new_width + 'px');
         $pre_roll.width(new_width + 'px');
     }

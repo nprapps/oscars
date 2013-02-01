@@ -339,14 +339,24 @@ body { background-color: @bg-color; -webkit-font-smoothing: antialiased; }
     }
 }
 
+#video-wrapper {
+    position: relative;
+    height: 400px;
+}
+
 #video {
+    position: absolute;
+    top: 0px;
+    left: 0px;
     height: 400px;
 }
 
 #pre-roll-ad {
+    z-index: 1000;
     position: absolute;
-    top: @audio-height;
+    top: 0px;
     left: 0px;
+    height: 400px;
 }
 
 // MEDIA QUERIES
