@@ -5,6 +5,17 @@ $(document).ready(function() {
     var $video = $('#video');
     var $cue_list_end = $('#list-nav-end');
 
+    function lights_down() {
+        $('body').append('<div id="fade"></div>');
+        $('#fade').fadeIn(250);
+    }
+
+    function lights_up() {
+        $('#fade').fadeOut(500, function() {
+            $("#fade").remove();
+        });
+    }
+
     function init_player() {
         jwplayer('video').setup({
             modes: [{
@@ -62,16 +73,9 @@ $(document).ready(function() {
             }
         });
 
-        jwplayer().onPlay(function() {
-            $('body').append('<div id="fade"></div>');
-            $('#fade').fadeIn(250);
-        });
-
-        jwplayer().onPause(function() {
-            $('#fade').fadeOut(500, function() {
-                $("#fade").remove();
-            }); 
-        });
+        jwplayer().onPlay(lights_down);
+        jwplayer().onPause(lights_up);
+        jwplayer().onComplete(lights_up);
     }
 
     function load_cue_data() {
