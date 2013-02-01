@@ -79,6 +79,8 @@ $(document).ready(function() {
                 endlist_output += JST.endlist(context);
             });
 
+            $cue_list_end.append(endlist_output);
+
             $cue_list_end.find('a.hide-links').click(function() {
                 var $hide_links = $(this);
                 var $parent = $hide_links.parent();
