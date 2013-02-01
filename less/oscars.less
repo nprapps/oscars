@@ -217,17 +217,11 @@ body { background-color: @bg-color; -webkit-font-smoothing: antialiased; }
 
 // TITLE AND CLOSING SCREENS
 #title, #credits {
-    position: absolute;
-    left: 0;
-    top: @audio-height;
-    z-index: 1000;
     /* Background pattern via Subtle Patterns: http://subtlepatterns.com/black-thread/ */
 	background: @bg-color url('@{img-root}/black_thread.png') repeat;
 }
 
 #credits {
-    display: none;
-
     .wrapper {
         padding: 20px 0;
         width: 80%;
@@ -343,6 +337,10 @@ body { background-color: @bg-color; -webkit-font-smoothing: antialiased; }
         color: @nav-text-hover;
         background-color: @nav-button-hover;
     }
+}
+
+#video {
+    height: 400px;
 }
 
 #pre-roll-ad {
