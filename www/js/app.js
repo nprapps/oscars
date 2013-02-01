@@ -1,73 +1,70 @@
 $(document).ready(function() {
-    /* VARS */
-    var video_length = APP_CONFIG['VIDEO'][window.PAGE_NAME]['LENGTH'];
-    var jplayer = null;
-    // http://stackoverflow.com/questions/8890460/how-to-detect-ie7-and-ie8-using-jquery-support
-    var video_supported = $.support.leadingWhitespace;
-    var have_shown_ad = false;
-    var ad_running = false;
+    var AD_TAG_URL = 'http://ad.doubleclick.net/pfadx/n6735.NPR.MUSIC/music_music_videos;agg=92071316;theme=92071316;storyid=141845299;genre=latin_alternative_world;artists=16635253;embed=npr;mediatype=video;sz=400x300;dcmt=text/xml;ord=1291488419';
 
-    /* ELEMENTS */
     var $main_content = $('#main-content');
-    var $video_wrapper = $('#video-wrapper');
     var $video = $('#video');
-    var $pre_roll = $('#pre-roll-ad');
     var $cue_list_end = $('#list-nav-end');
 
     resize_app();
 
-    if (video_supported) {
-        /*
-         * Load video player
-         */
-        $video.jPlayer({
-            swfPath: 'Jplayer.swf',
-            //solution: 'flash, html',
-            supplied: 'm4v, ogv',
-            size: {
-                width: $video.width(),
-                height: $video.height()
-            },
-            ready: function() {
-                // Never show the ad if falling back to flash
-                if ($(this).data('jPlayer').flash.used) {
-                    have_shown_ad = true;
+    function init_player() {
+        jwplayer('video').setup({
+            modes: [{
+                type: 'flash',
+                src: 'http://www.npr.org/templates/javascript/jwplayer/player.swf',
+                config: {
+                    skin: 'http://media.npr.org/templates/javascript/jwplayer/skins/mle/npr-video-archive/npr-video-archive.zip',
+                    file: APP_CONFIG['VIDEO'][window.PAGE_NAME]['MP4_URL']
                 }
-
-                $(this).jPlayer('setMedia', {
-                    m4v: APP_CONFIG['VIDEO'][window.PAGE_NAME]['MP4_URL'], 
-                    ogv: APP_CONFIG['VIDEO'][window.PAGE_NAME]['OGV_URL'],
-                });
-            },
-            play: function() {
-                if (ad_running) {
-                    // Do nothing
-                } else if (!have_shown_ad) {
-                    $video.jPlayer('stop');
-                    run_ad();
-                } else {
-                    $video.jPlayer('play');
+            }, {
+                type: 'html5',
+                config: {
+                    levels: [
+                        { file: APP_CONFIG['VIDEO'][window.PAGE_NAME]['MP4_URL'] },
+                        { file: APP_CONFIG['VIDEO'][window.PAGE_NAME]['OGV_URL'] }
+                    ]
+                }
+            }],
+            bufferlength: '5',
+            controlbar: 'over',
+            icons: 'true',
+            autostart: false,
+            width: $video.width(),
+            height: $video.height(),
+            plugins: {
+                'gapro-2': {
+                    'trackingobject': '_gaq',
+                    'trackstarts': 'true',
+                    'trackpercentage': 'true',
+                    'tracktime': 'true'
+                },
+                googima: {
+                    ad:  
+                    {
+                        ad1: 
+                        {
+                            tag: AD_TAG_URL,
+                            type: "video",
+                            position: "pre"
+                        }                               
+                    },
+                    admessagedynamic: "Your video will begin in XX seconds",
+                    admessagedynamickey: "XX",
+                    // adcounterdynamic: "Ad X of Y",
+                    // adcountercountkey: "X",
+                    // adcountertotalkey: "Y",
+                    allowadskip: true,
+                    allowadskippastseconds: "10",
+                    click_tracking: true,
+                    invertmutebutton: false,
+                    allowplayercontrols: false,
+                    companionDiv: "event_card_sponsor",
+                    pauseOnAdOpen: false
+                },
+                'sharing-3': {
+                    link: '' 
                 }
             }
-        });
-    } else {
-        $video_wrapper.hide();
-    }
-
-
-    function run_ad() {
-        width = $main_content.width();
-
-        ad_running = true;
-        $pre_roll.width(width + 'px');
-        
-        window.init_pre_roll_ad(function() {
-            $pre_roll.hide();
-
-            $video.jPlayer('play');
-
-            have_shown_ad = true;
-            ad_running = false;
         });
     }
 
@@ -117,9 +114,7 @@ $(document).ready(function() {
          */
         var new_width = $main_content.width();
 
-        $video_wrapper.width(new_width + 'px');
         $video.width(new_width + 'px');
-        $pre_roll.width(new_width + 'px');
     }
 
     $(window).resize(resize_app);
@@ -127,5 +122,6 @@ $(document).ready(function() {
     /*
      * INIT
      */
+    init_player();
     load_cue_data();
 });
