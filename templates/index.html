@@ -12,8 +12,6 @@
 <script type="text/javascript" src="http://s0.2mdn.net/instream/html5/ima3.js"></script>
 {% endblock %}
 
-{% block content %}
-
 <div id="audio-navbar">
 	<div class="branding">
 		<h2>Oscars 2013</h2>
@@ -48,20 +46,69 @@
 </div>
 
 <div id="list-nav" class="cue-list"></div>
+{% block header_content %}
+<header>
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<h1>Across-The-Top Header</h1>
+				<h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h2>
+			</div>
+		</div>
+	</div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div id="title">
+    <a id="title-button" href="javascript:;">
+        <h5>NPR presents</h5>
+        <h1>Oscars 2013</h1>
+        <p>TKTK</p>
+    </a>
+</div>
+
+<div class="row">
+	<div class="span8">
+                <h2>So, Ben Affleck.</h2>
+		<p>Like you, I used to think the world was this great place where everybody lived by the same standards I did, then some kid with a nail showed me I was living in his world, a world where chaos rules not order, a world where righteousness is not rewarded. That's Cesar's world, and if you're not willing to play by his rules, then you're gonna have to pay the price.</p>
+	</div>
+</div>
+
+<div id="audio-navbar">
+	<div id="audio">
+		<div id="pop-audio" class="jp-jplayer"></div>
+			<div id="jp_container_1" class="jp-audio">
+				<div class="jp-type-single">
+					<div class="jp-gui jp-interface">
+						<div class="jp-controls">
+							<a href="javascript:;" class="jp-play nav-btn" tabindex="1"><i class="icon-play icon-white">play</i></a>
+							<a href="javascript:;" class="jp-pause nav-btn" tabindex="1" style="display: none;"><i class="icon-pause icon-white">pause</i></a>
+						</div>
+						<div class="jp-progress-container">
+							<div class="jp-progress">
+                                <div class="jp-play-bar"></div>
+							</div>
+							<ul id="cue-nav">
+							</ul>
+						</div>
+						<div class="jp-current-time"></div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+    <div id="next-btn" class="nav-btn back-next" title="Next">Next&nbsp;&rsaquo;</div>
+    <div id="back-btn" class="nav-btn back-next" title="Back">&lsaquo;&nbsp;Back</div>
+</div>
+
+<div id="list-nav" class="cue-list"></div>
 
 <div id="video-wrapper">
     <div id="pre-roll-ad"></div>
     <div id="video"></div>
 </div>
 
-<div id="title">
-    <a id="title-button" href="javascript:;">
-        <h5>NPR presents</h5>
-        <h1>Oscars 2013 - {{ PAGE_NAME }}</h1>
-        <p>TKTK</p>
-        <h2>Begin &rsaquo;</h2>
-    </a>
-</div>
 
 <div id="credits">
     <div class="wrapper">
@@ -76,7 +123,6 @@
         <p>By: TKTK / Feb. 4, 2012</p>
     </div>
 </div>
-
 {% endblock %}
 
 

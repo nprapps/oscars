@@ -190,7 +190,6 @@ body { background-color: @bg-color; -webkit-font-smoothing: antialiased; }
 }
 .cue-list:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
 #list-nav {
-	width: 80%;
 	position: absolute;
 	left: 10%; // (100 - width)/2
 	z-index: 1100;
@@ -357,6 +356,16 @@ body { background-color: @bg-color; -webkit-font-smoothing: antialiased; }
     top: 0px;
     left: 0px;
     height: 400px;
+}
+
+#main-content {
+  color: #8b9094;
+  text-align: center;
+
+  h2 {
+    color: #8b9094;
+    text-shadow: @shadow;
+  }
 }
 
 // MEDIA QUERIES
