@@ -36,6 +36,27 @@
 {% endblock %}
 
 {% block wide_content %}
+	<div id="audio">
+		<div id="pop-audio" class="jp-jplayer"></div>
+			<div id="jp_container_1" class="jp-audio">
+				<div class="jp-type-single">
+					<div class="jp-gui jp-interface">
+						<div class="jp-controls">
+							<a href="javascript:;" class="jp-play nav-btn" tabindex="1"><i class="icon-play icon-white">play</i></a>
+							<a href="javascript:;" class="jp-pause nav-btn" tabindex="1" style="display: none;"><i class="icon-pause icon-white">pause</i></a>
+						</div>
+						<div class="jp-progress-container">
+							<div class="jp-progress">
+                                <div class="jp-play-bar"></div>
+							</div>
+							<ul id="cue-nav">
+							</ul>
+						</div>
+						<div class="jp-current-time"></div>
+					</div>
+				</div>
+			</div>
+	</div>
 
 <div id="video-wrapper">
     <div id="pre-roll-ad"></div>
