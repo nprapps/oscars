@@ -27,12 +27,18 @@ $(document).ready(function() {
          */
         $video.jPlayer({
             swfPath: 'Jplayer.swf',
+            //solution: 'flash, html',
             supplied: 'm4v, ogv',
             size: {
                 width: $('#video').width(),
                 height: $('#video').height()
             },
             ready: function() {
+                // Never show the ad if falling back to flash
+                if ($(this).data('jPlayer').flash.used) {
+                    have_shown_ad = true;
+                }
+
                 $(this).jPlayer('setMedia', {
                     m4v: APP_CONFIG['VIDEO'][window.PAGE_NAME]['MP4_URL'], 
                     ogv: APP_CONFIG['VIDEO'][window.PAGE_NAME]['OGV_URL'],
