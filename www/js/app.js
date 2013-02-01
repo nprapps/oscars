@@ -1,11 +1,9 @@
 $(document).ready(function() {
     var AD_TAG_URL = 'http://ad.doubleclick.net/pfadx/n6735.NPR.MUSIC/music_music_videos;agg=92071316;theme=92071316;storyid=141845299;genre=latin_alternative_world;artists=16635253;embed=npr;mediatype=video;sz=400x300;dcmt=text/xml;ord=1291488419';
 
-    var $main_content = $('#main-content');
+    var $oscars = $('#oscars');
     var $video = $('#video');
     var $cue_list_end = $('#list-nav-end');
-
-    resize_app();
 
     function init_player() {
         jwplayer('video').setup({
@@ -60,9 +58,6 @@ $(document).ready(function() {
                     allowplayercontrols: false,
                     companionDiv: "event_card_sponsor",
                     pauseOnAdOpen: false
-                },
-                'sharing-3': {
-                    link: '' 
                 }
             }
         });
@@ -112,9 +107,13 @@ $(document).ready(function() {
         /*
          * Resize based on screen width
          */
-        var new_width = $main_content.width();
+        var new_width = $oscars.width();
+        var new_height = Math.floor(new_width * 9 / 16);
 
-        $video.width(new_width + 'px');
+        console.log(new_width);
+        console.log(new_height);
+
+        $video.width(new_width + 'px').height(new_height + 'px');
     }
 
     $(window).resize(resize_app);
@@ -122,6 +121,7 @@ $(document).ready(function() {
     /*
      * INIT
      */
+    resize_app();
     init_player();
     load_cue_data();
 });
