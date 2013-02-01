@@ -61,6 +61,17 @@ $(document).ready(function() {
                 }
             }
         });
+
+        jwplayer().onPlay(function() {
+            $('body').append('<div id="fade"></div>');
+            $('#fade').fadeIn(250);
+        });
+
+        jwplayer().onPause(function() {
+            $('#fade').fadeOut(500, function() {
+                $("#fade").remove();
+            }); 
+        });
     }
 
     function load_cue_data() {
@@ -109,9 +120,6 @@ $(document).ready(function() {
          */
         var new_width = $oscars.width();
         var new_height = Math.floor(new_width * 9 / 16);
-
-        console.log(new_width);
-        console.log(new_height);
 
         $video.width(new_width + 'px').height(new_height + 'px');
     }
