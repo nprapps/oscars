@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     var $oscars = $('#oscars');
     var $video = $('#video');
-    var $cue_list_end = $('#list-nav-end');
+    var $cue_list_end = $('#film-list');
 
     function lights_down() {
         $('body').append('<div id="fade"></div>');
