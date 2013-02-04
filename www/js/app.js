@@ -76,6 +76,7 @@ $(document).ready(function() {
         jwplayer().onPlay(lights_down);
         jwplayer().onPause(lights_up);
         jwplayer().onComplete(lights_up);
+        jwplayer().onReady(function() { jwplayer().getPlugin('googima').onAdStart(lights_down) });
     }
 
     function load_cue_data() {
