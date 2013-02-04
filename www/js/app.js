@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var AD_TAG_URL = 'http://ad.doubleclick.net/pfadx/n6735.NPR.MUSIC/music_music_videos;agg=92071316;theme=92071316;storyid=141845299;genre=latin_alternative_world;artists=16635253;embed=npr;mediatype=video;sz=400x300;dcmt=text/xml;ord=1291488419';
 
-    var $oscars = $('#oscars');
+    var $oscars = $('#main-content');
     var $video = $('#video');
     var $cue_list_end = $('#film-list');
 
