@@ -26,12 +26,19 @@
 </header>
 {% endblock %}
 
-{% block content %}
+{% block wide_content %}
 <div class="row">
     <div id="main-content" class="span12">
         <div id="video"></div>
 
-        <div id="film-info" class="span8 center">
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div id="main-content" class="span12">
+        <div class="span8 center">
             <h3>Featured films</h3>
             <div id="film-list"></div>
         </div>
@@ -39,11 +46,10 @@
 </div>
 {% endblock %}
 
-
 {% block credits_content %}
 <div class="row">
   <div id="project_info" class="span8 center">
-    <h3>Pass it on</h3>
+    <h3 class="share">Pass it on</h3>
     <ul id="share-buttons">
       <li class="twitter">
         <a rel="external" href="http://twitter.com/share?text={{ TWITTER.TEXT|urlencode }}&amp;url={{ TWITTER.URL|urlencode }}" alt="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Credits', '{{ PROJECT_NAME }}']);">Share On Twitter</a>
@@ -52,8 +58,9 @@
       <li class="facebook">
         <a rel="external" href="https://www.facebook.com/dialog/feed?app_id={{ FACEBOOK.APP_ID }}&amp;link={{ FACEBOOK.URL|urlencode }}&name={{ FACEBOOK.TITLE|urlencode }}" alt="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Credits', '{{ PROJECT_NAME }}']);">Like This Page On Facebook</a>
       </li>
+    </ul>
 
-    <h3>Project Credits</h3>
+    <h3 class="credits">Project Credits</h3>
     <p>By: TKTK / Feb. 4, 2012</p>
   </div>
 </div>

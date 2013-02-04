@@ -1,6 +1,6 @@
 <div class="browse<%= id %> browse-cue">
     <% if (img_filename) { %>
-        <img src='img/thumbs/<%= img_filename %>' />
+        <div class="thumb" style="background-image: url('img/thumbs/<%= img_filename %>')"></div>
     <% } %>
     <h2><%= movie_name %></h2>
 
@@ -8,19 +8,19 @@
         <ul>
             <li>
                 <% if (link1_url) { %>
-                <a href="<%= link1_url %>"><%= link1_title %></a>
+                <a href="<%= link1_url %>">&rsaquo; <%= link1_title %></a>
                 <% } %>
             </li>
 
           <li>
                 <% if (link2_url) { %>
-                <a href="<%= link2_url %>"><%= link2_title %></a>
+                <a href="<%= link2_url %>">&rsaquo; <%= link2_title %></a>
                 <% } %>
           </li>
 
           <li>
                 <% if (link3_url) { %>
-                <a href="<%= link3_url %>"><%= link3_title %></a>
+                <a href="<%= link3_url %>">&rsaquo; <%= link3_title %></a>
                 <% } %>
           </li>
     </div>
