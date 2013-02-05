@@ -50,11 +50,11 @@
 	margin-bottom: 20px;
 
 	.browse-cue {
-		width: 49%;
+		width: 48%;
 		float: left;
-		height: 60px;
+		height: 330px;
 		overflow: hidden;
-		padding: 11px 2px;
+		padding: 11px 11px 11px 0px;
 	}
 	.browse-cue:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
 	img {
@@ -143,40 +143,36 @@
 @media (min-width: 1200px) {
 	#film-list .browse-cue { height: 330px; }
 }
+
 @media (max-width: 979px) {
-	#film-list .browse-cue { width: 33%; float: left; }
+	#film-list .browse-cue { width: 100%; float: left; }
 }
+
 @media (max-width: 767px) {
-	#film-list .browse-cue { height: 200px; }
+	#film-list .browse-cue { height: 360px; }
+        .film-info, .proj-info { padding-left: 20px; padding-right: 20px; }
+        #film-list .thumb { background-position: 50% 20%; }
 }
-@media (max-width: 640px) {
-	#film-list .browse-cue { width: 50%; float: left; height: 220px; }
-}
+
 @media (max-width: 480px) {
+        .film-info, .proj-info {
+            padding-left: 0px;
+            padding-right: 0px;
+            & h3, & p { text-indent: 20px; }
+        }
+
 	#film-list {
-        .browse-cue { width: 100%; float: none; height: auto; }
+            .browse-cue { width: 100%; float: none; }
 
-        h2 {
-            font: bold 14px/1.4 Arial, Helvetica, sans-serif;
-            float: left;
-            margin: 0 0 2px 5px;
+            h2 {
+                font: bold 14px/1.4 Arial, Helvetica, sans-serif;
+                float: left;
+                margin: 0 0 2px 5px;
+                text-indent: 20px;
+            }
+
+            .content-links { text-indent: 20px; clear: both; }
         }
-
-        .show-links,.hide-links {
-            display: block;
-            width: 50px;
-            height: 50px;;
-            float: right;
-            font-size: 48px;
-            text-align: center;
-        }
-
-        .hide-links {
-            display: none;
-        }
-
-        .content-links { display: none; clear: both; }
-    }
 
 	#list-nav {
 		width: 300px; left: 10px;
