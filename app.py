@@ -49,29 +49,22 @@ def _make_data_json(filename):
             slide = {
                 'sort': row[0],
                 'movie_name': row[0],
-                'cue_start': 0,
-                'img_filename': row[2],
-                'link1_title': row[3],
-                'link1_url': row[4],
-                'link2_title': row[5],
-                'link2_url': row[6],
-                'link3_title': row[7],
-                'link3_url': row[8]
+                'img_filename': row[1],
+                'link1_title': row[2],
+                'link1_url': row[3],
+                'link2_title': row[4],
+                'link2_url': row[5],
+                'link3_title': row[6],
+                'link3_url': row[7]
             }
         elif filename == 'best-actor':
             slide = {
                 'sort': row[0],
                 'movie_name': row[0],
-                'cue_start': 0,
-                'img_filename': row[2],
-                'link1_title': row[3],
-                'link1_url': row[4],
+                'img_filename': row[1],
+                'link1_title': row[2],
+                'link1_url': row[3],
             }
-
-        # Compute cue_start in seconds
-        cue_start = row[1]
-        hours, mins, secs = map(int, cue_start.split(':'))
-        slide['cue_start'] = (mins * 60) + secs
 
         slides.append(slide)
 

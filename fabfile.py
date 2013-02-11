@@ -282,6 +282,6 @@ def update_csv():
     """
     Pulls the latest version of Oscars data from Google Doc
     """
-    response = requests.get('https://docs.google.com/spreadsheet/pub?key=0AiINjEdvBDPadGI5T3M1emo4cDY4WGFPd0dvRW53a0E&output=csv')
+    response = requests.get('https://docs.google.com/spreadsheet/pub?key=0AiINjEdvBDPadFUtUWk5MEpqWDNrODlULU9VSG1MM3c&output=csv')
     with open('data/best-picture.csv', 'w') as f:
         f.write(response.text)
