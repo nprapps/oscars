@@ -40,7 +40,7 @@
 .thumb {
     display: inline-block;
     width: 100%;
-    height: 75%;
+    height: 56.25%;
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
@@ -50,11 +50,11 @@
 	margin-bottom: 20px;
 
 	.browse-cue {
-		width: 48%;
+		width: 47%;
 		float: left;
 		height: 330px;
 		overflow: hidden;
-		padding: 11px 11px 11px 0px;
+		padding: 0 3% 22px 0px;
 	}
 	.browse-cue:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
 	img {
@@ -63,74 +63,36 @@
 		height: 130px;
 	}
 	h2 {
-            font: bold italic 18px/1.6 Georgia, serif;
-            margin: 0px;
-        }
-
+		font-size: 18px;
+		color: #333;
+		margin: 11px 0 11px 0;
+	}
 	p { font: 12px/1.4 Arial, Helvetica, sans-serif; margin: 0 0 0 70px; }
-
-        li {
-            list-style-type: none;
-        }
+	li { list-style-type: none; }
 }
 #film-list:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
 
 .content-links {
-  font-size: 11px;
-  li { line-height: 18px; }
-  ul { margin: 0px; }
+	font-size: 14px;
+	
+	ul { margin: 0; }
+	li { 
+		line-height: 1.3;
+		padding-left: 16px;
+		background: url('http://media.npr.org/chrome/news/bullet_5x5.png') no-repeat left 6px;
+		margin-top: 6px;
+		
+		&:first-child { margin-top: 0; }
+	}
 }
 
 #project_info {
-  h3.credits { margin-top: 44px; }
-}
-
-#share-buttons {
-  display: block;
-  margin-bottom: 22px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  &:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-  }
-
-  li {
-    width: 50%;
-    float: left;
-
-    &.twitter a {
-      margin-right: 2px;
-      background-image: url('@{img-root}/share-twitter-dark.gif');
-    }
-
-    &.facebook a {
-      background-image: url('@{img-root}/share-facebook-dark.gif');
-    }
-  }
-
-  a {
-    display: block;
-    height: 44px;
-    line-height: 44px;
-    overflow: hidden;
-    text-shadow: none;
-    background-color: @dark-grey;
-    background-position: 0 0;
-    background-repeat: no-repeat;
-    padding-left: 55px;
-    white-space: nowrap;
-
-    &:hover, &:active {
-      color: @light-blue-grey-hover;
-      background-color: @dark-grey-hover;
-    }
-  }
+	h3.credits { margin-top: 44px; }
+	p { 
+		color: #666; 
+		font-size: 12px;
+		margin-bottom: 5px;
+	}
 }
 
 .center {
@@ -150,33 +112,26 @@
 
 @media (max-width: 767px) {
 	#film-list .browse-cue { height: 360px; }
-        .film-info, .proj-info { padding-left: 20px; padding-right: 20px; }
-        #film-list .thumb { background-position: 50% 20%; }
+	.film-info, .proj-info { padding-left: 20px; padding-right: 20px; }
+	#film-list .thumb { background-position: 50% 20%; }
 }
 
 @media (max-width: 480px) {
-        .film-info, .proj-info {
-            padding-left: 0px;
-            padding-right: 0px;
-            & h3, & p { text-indent: 20px; }
-        }
-
+	.film-info, .proj-info {
+		padding-left: 0px;
+		padding-right: 0px;
+		& h3, & p { text-indent: 20px; }
+	}
+	
 	#film-list {
-            .browse-cue { width: 100%; float: none; }
-
-            h2 {
-                font: bold 14px/1.4 Arial, Helvetica, sans-serif;
-                float: left;
-                margin: 0 0 2px 5px;
-                text-indent: 20px;
-            }
-
-            .content-links { text-indent: 20px; clear: both; }
-        }
-
+		h2 { padding-left: 20px; padding-right: 20px; }
+		.browse-cue { width: 100%; float: none; }
+		.content-links { margin-left: 20px; margin-right: 20px; clear: both; }
+	}
+	
 	#list-nav {
 		width: 300px; left: 10px;
-
+		
 		.browse-cue a { display: table-cell; width: 150px; vertical-align: middle; height: 120px; padding-top: 0; padding-bottom: 0; }
 	}
 }

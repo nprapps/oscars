@@ -108,12 +108,12 @@ section.oscars-video {
 
 section.film-info {
   padding-top: 44px;
-  background-color: #ebebeb;
+  background-color: #e4e4e4;
 }
 
 section.proj-info {
   padding-bottom: 44px;
-  background-color: #ebebeb;
+  background-color: #e4e4e4;
 }
 
 #story-meta {
@@ -126,6 +126,44 @@ section.proj-info {
 		&.dateblock .date { margin-right: 0.8em; }	}
 }
 h1 + #story-meta { margin-top: -11px; }
+
+#share-buttons {
+	display: block;
+	margin-bottom: 22px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	
+	&:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+
+	li {
+		width: 50%;
+		float: left;
+		background-color: #ebebeb;
+		font-size: 13px;
+		font-weight: bold;
+		
+		a {
+			display: block;
+			height: 44px;
+			line-height: 44px;
+			overflow: hidden;
+			text-shadow: none;
+			background-image: url(@icon-sprite);
+			background-repeat: no-repeat;
+			background-position: 0 0;
+			padding-left: 55px;
+			white-space: nowrap;
+			color: #6d8ac4;
+		
+			&:hover, &:active {
+				opacity: 0.7;
+			}
+		}
+		&.twitter a { margin-right: 2px; background-position: 0 -96px; }
+		&.facebook a { background-position: 0 -144px; }
+	}
+}
 
 
 // Footer
@@ -192,4 +230,9 @@ footer {
 		h1 { font-size: 36px; }
 	}
 	footer { border-top: 1px solid #CCC; }
+
+	#share-buttons {
+		padding-left: 20px; padding-right: 20px;
+		li { width: auto; float: none; margin-bottom: 2px; }
+	}
 }
