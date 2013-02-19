@@ -60,9 +60,6 @@
             chat_url = 'http://' + plugin.settings.scribble_host + '/event/' + plugin.settings.chat_id +'/all/?Token='+ plugin.settings.chat_token +'&format=json';
             user_url = 'http://' + plugin.settings.scribble_host + '/user';
 
-            // Render
-            plugin.$root.html(JST.chat());
-
             // Cache element references
             // plugin.$chat_title = plugin.$root.find('.chat-title');
             // plugin.$chat_blurb = plugin.$root.find('.chat-blurb');
