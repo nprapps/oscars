@@ -22,7 +22,7 @@ S3_BUCKETS = []
 SERVERS = []
 DEBUG = True
 
-PROJECT_DESCRIPTION = 'foo'
+PROJECT_DESCRIPTION = "Ready to check off your Oscar ballot? Catch up on coverage of this year's Best Picture nominees with reviews, interviews and features from across the NPR network."
 SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME)
 
 TWITTER = {
