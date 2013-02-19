@@ -39,8 +39,8 @@ FACEBOOK = {
 }
 
 NPR_DFP = {
-    'STORY_ID': '139482413',
-    'TARGET': '\/news_election_results;storyid=139482413'
+    'STORY_ID': '172412715',
+    'TARGET': '\/arts_oscars_2013;storyid=172412715'
 }
 
 CHAT = {
