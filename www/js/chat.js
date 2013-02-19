@@ -152,6 +152,7 @@
             $.ajax({
                 url: chat_url + '?Token=' + plugin.settings.chat_token + '&format=json' + content_param + auth_param,
                 dataType: 'jsonp',
+                jsonpCallback: 'nprapps',
                 cache: true,
                 success: function(response) {
                     plugin.$comment.val('');
@@ -316,14 +317,15 @@
              * Fetch latest posts and render them.
              */
             if (first_load) {
-                var url = page_url + 'last?Token=' + plugin.settings.chat_token + '&Max=' + plugin.settings.posts_per_page;
+                var url = page_url + 'last?Token=' + plugin.settings.chat_token + '&Max=' + plugin.settings.posts_per_page + '&randi=' + Math.floor(Math.random() * 10000000);
             } else {
-                var url = chat_url + '?Token=' + plugin.settings.chat_token + '&Max=' + plugin.settings.posts_per_page + '&Since=' + since.format('YYYY/MM/DD HH:mm:ss');
+                var url = chat_url + '?Token=' + plugin.settings.chat_token + '&Max=' + plugin.settings.posts_per_page + '&rand=' + Math.floor(Math.random() * 10000000) + '&Since=' + since.format('YYYY/MM/DD HH:mm:ss');
             }
 
             $.ajax({
                 url: url,
                 dataType: 'jsonp',
+                jsonpCallback: 'nprapps',
                 cache: true,
                 success: function(data, status, xhr) {
                     if (parseInt(data.IsLive, 10) === 1) {
@@ -338,7 +340,7 @@
                         $('#live-chat-widget-wrapper').hide();
                     }
 
-                    since = moment.utc(data.LastModified);
+                    since = moment.utc(data.LastModified).add('seconds', 1);
 
                     if (first_load) {
                         plugin.render_page_back(data);
@@ -359,8 +361,9 @@
 
         plugin.page_back = function() {
             $.ajax({
-                url: page_url + next_page_back + '?Token=' + plugin.settings.chat_token + '&Max=' + plugin.settings.posts_per_page,
+                url: page_url + next_page_back + '?Token=' + plugin.settings.chat_token + '&Max=' + plugin.settings.posts_per_page + '&rand=' + Math.floor(Math.random() * 10000000),
                 dataType: 'jsonp',
+                jsonpCallback: 'nprapps',
                 cache: true,
                 success: function(data, status, xhr) {
                     plugin.render_page_back(data);
@@ -428,7 +431,7 @@
 
             if ((data.auth_route === 'anonymous' && data.username !== '') || (data.auth_route === 'oauth')) {
                 return $.ajax({
-                    url: auth_url +'&format=json&Name='+ data.username +'&Avatar='+ data.avatar,
+                    url: auth_url + '&format=json&Name='+ data.username +'&Avatar='+ data.avatar,
                     dataType: 'jsonp',
                     cache: true,
                     success: function(auth) {
