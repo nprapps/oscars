@@ -18,7 +18,7 @@ def best_picture():
     context = make_context()
     context['PAGE_NAME'] = 'best-picture'
 
-    return render_template('index.html', **context)
+    return render_template('best-picture.html', **context)
 
 @app.route('/')
 def chat():
