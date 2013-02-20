@@ -36,7 +36,7 @@ VIDEO_FACEBOOK = {
     'TITLE': "Everything You Need To Know About The Best Picture Nominees",
     'URL': VIDEO_SHARE_URL,
     'DESCRIPTION': VIDEO_PROJECT_DESCRIPTION,
-    'IMAGE_URL': 'http://%s/%s/img/cheat-sheet-promo_sq.jpg' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME),
+    'IMAGE_URL': 'http://%s/%s/img/cheat-sheet-promo_square.jpg' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME),
     'APP_ID': '138837436154588'
 }
 
