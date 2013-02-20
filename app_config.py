@@ -22,18 +22,20 @@ S3_BUCKETS = []
 SERVERS = []
 DEBUG = True
 
-PROJECT_DESCRIPTION = "Ready to check off your Oscar ballot? Catch up on coverage of this year's Best Picture nominees with reviews, interviews and features from across the NPR network."
-SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME)
+# doesn't make sense with more than one url in an app
 
-TWITTER = {
-    'TEXT': PROJECT_NAME,
-    'URL': SHARE_URL
+VIDEO_PROJECT_DESCRIPTION = "Ready to check off your Oscar ballot? Catch up on coverage of this year's Best Picture nominees with reviews, interviews and features from across the NPR network."
+VIDEO_SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME)
+
+VIDEO_TWITTER = {
+    'TEXT': "Ready to check off your Oscar ballot? Catch up on NPR's coverage of the Best Picture nominees. #oscars",
+    'URL': VIDEO_SHARE_URL
 }
 
-FACEBOOK = {
+VIDEO_FACEBOOK = {
     'TITLE': DEPLOYED_NAME,
-    'URL': SHARE_URL,
-    'DESCRIPTION': PROJECT_DESCRIPTION,
+    'URL': VIDEO_SHARE_URL,
+    'DESCRIPTION': VIDEO_PROJECT_DESCRIPTION,
     'IMAGE_URL': '',
     'APP_ID': '138837436154588'
 }
