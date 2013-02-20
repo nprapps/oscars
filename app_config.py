@@ -9,7 +9,7 @@ They will be exposed to users. Use environment variables instead.
 
 import os
 
-PROJECT_NAME = 'Oscars 2013: Best Picture Cheat Sheet'
+PROJECT_NAME = 'Everything You Need To Know About The Best Picture Nominees'
 DEPLOYED_NAME = 'oscars-2013'
 
 PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
@@ -33,7 +33,7 @@ VIDEO_TWITTER = {
 }
 
 VIDEO_FACEBOOK = {
-    'TITLE': "Oscars 2013: Best Picture Cheat Sheet",
+    'TITLE': "Everything You Need To Know About The Best Picture Nominees",
     'URL': VIDEO_SHARE_URL,
     'DESCRIPTION': VIDEO_PROJECT_DESCRIPTION,
     'IMAGE_URL': 'http://%s/%s/img/cheat-sheet-promo_sq.jpg' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME),
@@ -72,7 +72,8 @@ GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 VIDEO = {
     'best-picture': {
         'LENGTH': 216,
-        'MP4_URL': 'http://pd.npr.org/npr-mp4/npr/nprvid/2013/02/20130219_nprvid_oscars-n-600000.mp4'
+        'MP4_URL': 'http://pd.npr.org/npr-mp4/npr/nprvid/2013/02/20130219_nprvid_oscars-n-600000.mp4',
+        'HD_URL': 'http://pd.npr.org/npr-mp4/npr/nprvid/2013/02/20130219_nprvid_oscars-n-1200000.mp4'
     }
 }
 
