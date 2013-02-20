@@ -46,7 +46,9 @@ def _make_data_json(filename):
                 'link2_title': row[4],
                 'link2_url': row[5],
                 'link3_title': row[6],
-                'link3_url': row[7]
+                'link3_url': row[7],
+                'link4_title': row[8],
+                'link4_url': row[9]
             }
         elif filename == 'best-actor':
             slide = {
