@@ -235,6 +235,49 @@ a:hover, a:active { color: #bccae5; text-decoration: none; }
 }
 
 
+// LIST OF WINNERS
+.awards-list {
+	margin-bottom: 22px;
+	
+	div {
+		margin-top: 15px;
+		cursor: pointer;
+
+		&:hover { opacity: .7; }
+		&:first-child { margin-top: 5px; }
+	}
+	
+	h5 { 
+		margin: 0 0 5px 0;
+		font-size: 13px;
+		font-weight: bold;
+		color: #4774cc;
+		padding-left: 22px;
+		background: url('@{img-root}/nav_arrow_updown.gif') no-repeat 0 -35px;
+	}
+	ul {
+		margin: 0 0 0 22px;
+		list-style: none;
+	}
+	li { 
+		font-size: 13px;
+		line-height: 1.5;
+		color: #666;
+		margin-bottom: 4px;
+		
+		&.nominees { font-size: 11px; color: #999; }
+	}
+	.closed { 
+		h5 { background-position: 0 -142px; }
+		li { display: none; }
+		
+		&.has-winner {
+			li.winner {	display: block; }
+		}
+	}
+}
+
+
 // Footer
 #credits {
 	font: italic 11px Arial, Helvetica, sans-serif;
