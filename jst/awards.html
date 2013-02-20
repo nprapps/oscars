@@ -1,4 +1,8 @@
-<h5><%= category.award %></h5>
-<ul><% _.each(category.nominees, function(nominee){ %>
-    <li><%= nominee %></li><% }); %>
-</ul>
+<% var has_winner_html = ''; if (category.has_winner === true) { has_winner_html = ' class="has-winner"'; } %>
+<div<%= has_winner_html %>>
+    <h5><%= category.award %></h5>
+    <ul><% _.each(category.nominees, function(nominee){ %>
+        <% var winner_html = ''; if (nominee.winner === true) { winner_html = ' class="winner"'; } %>
+        <li<%= winner_html %>><%= nominee.title %></li><% }); %>
+    </ul>
+</div>
