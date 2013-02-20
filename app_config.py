@@ -24,11 +24,11 @@ DEBUG = True
 
 # doesn't make sense with more than one url in an app, namespacing it cuz goddamnitall
 
-VIDEO_PROJECT_DESCRIPTION = "Ready to check off your Oscar ballot? Catch up on coverage of this year's Best Picture nominees with reviews, interviews and features from across the NPR network."
+VIDEO_PROJECT_DESCRIPTION = "Everything you need to know about the Best Picture nominees, from across the NPR network."
 VIDEO_SHARE_URL = 'http://%s/%s/best-picture.html' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME)
 
 VIDEO_TWITTER = {
-    'TEXT': "Ready to check off your Oscar ballot? Catch up on NPR's coverage of the Best Picture nominees. #oscars",
+    'TEXT': "Everything you need to know about the Best Picture nominees, from across the NPR network. #oscars",
     'URL': VIDEO_SHARE_URL
 }
 
@@ -72,8 +72,7 @@ GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 VIDEO = {
     'best-picture': {
         'LENGTH': 216,
-        'MP4_URL': 'http://pd.npr.org/npr-mp4/npr/nprvid/2013/02/20130219_nprvid_oscars-n-600000.mp4',
-        'HD_URL': 'http://pd.npr.org/npr-mp4/npr/nprvid/2013/02/20130219_nprvid_oscars-n-1200000.mp4'
+        'MP4_URL': 'http://pd.npr.org/npr-mp4/npr/nprvid/2013/02/20130219_nprvid_oscars-n.mp4'
     }
 }
 
