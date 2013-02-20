@@ -3,7 +3,7 @@ $(function() {
     // Caching some DOM objects
     var $live_blog = $('#live-blog');
     // var $chat = $('#live-chat');
-    var $live_blog_tab = $('#live-blog-toggle');
+    var $live_blog_tab = $('#blog-toggle');
     var $chat_tab = $('#chat-toggle');
     var $widget = $('#live-chat-widget');
     var $chat_login = $('.chat-login');
