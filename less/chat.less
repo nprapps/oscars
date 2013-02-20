@@ -73,8 +73,6 @@ a:hover, a:active { color: #bccae5; text-decoration: none; }
 }
 
 // Header
-
-
 #radio-topper {
     #toggles {
       ul { margin: 0; padding: 0; list-style: none; display: table; width: 100%; }
@@ -332,6 +330,12 @@ a:hover, a:active { color: #bccae5; text-decoration: none; }
 }
 @media (max-width: 767px) {
 	#nav, #footer, #toggles { margin-left: -20px; margin-right: -20px; }
+	#radio-topper { 
+		margin-left: -20px; margin-right: -20px; 
+		padding-left: 20px; padding-right: 20px; 
+		
+		.span4 { display: none; }
+	}
 	#nav .site-links { margin-left: 20px; }
 	#footer {
 		.primary { display: none; }
@@ -343,6 +347,17 @@ a:hover, a:active { color: #bccae5; text-decoration: none; }
 	.hdr { margin-left: -20px; margin-right: -20px; }
 }
 @media (max-width: 480px) {
+	#radio-topper {
+		h1 { font-size: 33px; padding-top: 40px; }
+		h2 { font-size: 13px; }
+		.promo { 
+			margin-top: 22px; margin-bottom: 11px;
+			
+			.promo-thumb { width: 25px; }
+			.promo-title { padding-top: 0; display: none; }
+			.promo-prompt { font-size: 14px; line-height: 18px; }
+		}
+	}
 	.hdr h2 { font-size: 28px; }
 	#nav .site-links li { display: none; }
 	#nav .site-links .npr { display: block; }
