@@ -16,7 +16,7 @@ Base configuration
 env.project_name = app_config.PROJECT_NAME
 env.deployed_name = app_config.DEPLOYED_NAME
 env.code_root_name = app_config.CODE_ROOT_NAME
-env.deploy_to_servers = False
+env.deploy_to_servers = True
 env.repo_url = 'git@github.com:nprapps/%(code_root_name)s.git' % env
 env.alt_repo_url = None  # 'git@bitbucket.org:nprapps/%(code_root_name)s.git' % env
 env.user = 'ubuntu'
@@ -216,6 +216,25 @@ def install_requirements():
     require('settings', provided_by=[production, staging])
 
     run('%(virtualenv_path)s/bin/pip install -U -r %(repo_path)s/requirements.txt' % env)
+
+
+def install_crontab():
+    """
+    Install cron jobs script into cron.d.
+    """
+    require('settings', provided_by=[production, staging])
+
+    sudo('cp %(repo_path)s/crontab /etc/cron.d/%(deployed_name)s' % env)
+
+
+def uninstall_crontab():
+    """
+    Remove a previously install cron jobs script from cron.d
+    """
+    require('settings', provided_by=[production, staging])
+
+    sudo('rm /etc/cron.d/%(deployed_name)s' % env)
+
 
 def bootstrap_issues():
     """

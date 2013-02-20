@@ -1,0 +1,1 @@
+* * * * * ubuntu cd /home/ubuntu/apps/oscars/repository && source ../virtualenv/bin/activate && ./build_awards_json.py
