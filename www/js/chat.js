@@ -154,9 +154,9 @@
                 success: function(response) {
                     plugin.$comment.val('');
                     alerts.push({
-                      klass: 'alert-info',
-                      title: 'Awaiting moderation!',
-                      text: 'Your comment is awaiting moderation.'
+                        klass: 'alert-info',
+                        title: null,
+                        text: 'Your comment will appear momentarily.'
                     });
 
                 }
