@@ -9,6 +9,7 @@ They will be exposed to users. Use environment variables instead.
 
 import os
 
+CODE_ROOT_NAME = 'oscars'
 PROJECT_NAME = 'Everything You Need To Know About The Best Picture Nominees'
 DEPLOYED_NAME = 'oscars-2013'
 

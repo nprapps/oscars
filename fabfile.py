@@ -15,12 +15,13 @@ Base configuration
 """
 env.project_name = app_config.PROJECT_NAME
 env.deployed_name = app_config.DEPLOYED_NAME
+env.code_root_name = app_config.CODE_ROOT_NAME
 env.deploy_to_servers = False
-env.repo_url = 'git@github.com:nprapps/%(project_name)s.git' % env
-env.alt_repo_url = None #'git@bitbucket.org:nprapps/%(project_name)s.git' % env
+env.repo_url = 'git@github.com:nprapps/%(code_root_name)s.git' % env
+env.alt_repo_url = None  # 'git@bitbucket.org:nprapps/%(code_root_name)s.git' % env
 env.user = 'ubuntu'
 env.python = 'python2.7'
-env.path = '/home/%(user)s/apps/%(project_name)s' % env
+env.path = '/home/%(user)s/apps/%(code_root_name)s' % env
 env.repo_path = '%(path)s/repository' % env
 env.virtualenv_path = '%(path)s/virtualenv' % env
 env.forward_agent = True
