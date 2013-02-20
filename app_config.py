@@ -22,10 +22,10 @@ S3_BUCKETS = []
 SERVERS = []
 DEBUG = True
 
-# doesn't make sense with more than one url in an app
+# doesn't make sense with more than one url in an app, namespacing it cuz goddamnitall
 
 VIDEO_PROJECT_DESCRIPTION = "Ready to check off your Oscar ballot? Catch up on coverage of this year's Best Picture nominees with reviews, interviews and features from across the NPR network."
-VIDEO_SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME)
+VIDEO_SHARE_URL = 'http://%s/%s/best-picture.html' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME)
 
 VIDEO_TWITTER = {
     'TEXT': "Ready to check off your Oscar ballot? Catch up on NPR's coverage of the Best Picture nominees. #oscars",
@@ -33,9 +33,25 @@ VIDEO_TWITTER = {
 }
 
 VIDEO_FACEBOOK = {
-    'TITLE': DEPLOYED_NAME,
+    'TITLE': "Oscars 2013: Best Picture Cheat Sheet",
     'URL': VIDEO_SHARE_URL,
     'DESCRIPTION': VIDEO_PROJECT_DESCRIPTION,
+    'IMAGE_URL': 'http://%s/%s/img/cheat-sheet-promo_sq.jpg' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME),
+    'APP_ID': '138837436154588'
+}
+
+CHAT_PROJECT_DESCRIPTION = "Ready to check off your Oscar ballot? Catch up on coverage of this year's Best Picture nominees with reviews, interviews and features from across the NPR network."
+CHAT_SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME)
+
+CHAT_TWITTER = {
+    'TEXT': "Ready to check off your Oscar ballot? Catch up on NPR's coverage of the Best Picture nominees. #oscars",
+    'URL': CHAT_SHARE_URL
+}
+
+CHAT_FACEBOOK = {
+    'TITLE': DEPLOYED_NAME,
+    'URL': CHAT_SHARE_URL,
+    'DESCRIPTION': CHAT_PROJECT_DESCRIPTION,
     'IMAGE_URL': '',
     'APP_ID': '138837436154588'
 }
