@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var AD_TAG_URL = 'http://ad.doubleclick.net/pfadx/n6735.NPR.MUSIC/music_music_videos;agg=92071316;theme=92071316;storyid=141845299;genre=latin_alternative_world;artists=16635253;embed=npr;mediatype=video;sz=400x300;dcmt=text/xml;ord=1291488419';
+    var AD_TAG_URL = 'http://ad.doubleclick.net/pfadx/n6735.NPR/arts___life_movies;agg=172412715;theme=172412715;storyid=172412316;embed=npr;mediatype=video;sz=400x300;dcmt=text/xml;ord=477250141';
 
     var $oscars = $('#main-content');
     var $video = $('#video');
