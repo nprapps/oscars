@@ -9,8 +9,8 @@ They will be exposed to users. Use environment variables instead.
 
 import os
 
-PROJECT_NAME = 'oscars-2013'
-DEPLOYED_NAME = PROJECT_NAME
+PROJECT_NAME = 'Oscars 2013: Best Picture Cheat Sheet'
+DEPLOYED_NAME = 'oscars-2013'
 
 PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
 PRODUCTION_SERVERS = ['cron.nprapps.org']
@@ -49,7 +49,7 @@ CHAT_TWITTER = {
 }
 
 CHAT_FACEBOOK = {
-    'TITLE': DEPLOYED_NAME,
+    'TITLE': PROJECT_NAME,
     'URL': CHAT_SHARE_URL,
     'DESCRIPTION': CHAT_PROJECT_DESCRIPTION,
     'IMAGE_URL': '',
