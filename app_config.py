@@ -55,9 +55,9 @@ GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
 VIDEO = {
     'best-picture': {
-        'LENGTH': 665,
-        'MP4_URL': 'http://pd.npr.org/npr-mp4/npr/nprvid/2013/02/20130219_nprvid_oscars-n.mp4',
-        'OGV_URL': 'http://stage-apps.npr.org/oscars/ofmontreal.ogv'
+        'LENGTH': 216,
+        'MP4_URL': 'http://stage-apps.npr.org/oscars/oscars.mp4',
+        'OGV_URL': 'http://stage-apps.npr.org/oscars/oscars.ogv'
     },
     'best-actor': {
         'LENGTH': 665,
