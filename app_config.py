@@ -10,7 +10,7 @@ They will be exposed to users. Use environment variables instead.
 import os
 
 PROJECT_NAME = 'oscars-2013'
-DEPLOYED_NAME = PROJECT_NAME
+DEPLOYED_NAME = 'Oscars 2013: Best Picture Cheat Sheet'
 
 PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
 PRODUCTION_SERVERS = ['cron.nprapps.org']
