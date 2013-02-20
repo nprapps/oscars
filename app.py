@@ -24,13 +24,6 @@ def best_picture():
 
     return render_template('index.html', **context)
 
-@app.route('/best-actor.html')
-def best_actor():
-    context = make_context()
-    context['PAGE_NAME'] = 'best-actor'
-
-    return render_template('index.html', **context)
-
 @app.route('/chat.html')
 def chat():
     return render_template('chat.html', **make_context())
@@ -73,10 +66,6 @@ def _make_data_json(filename):
 @app.route('/live-data/best-picture.json')
 def best_picture_json():
     return _make_data_json('best-picture')
-
-@app.route('/live-data/best-actor.json')
-def best_actor_json():
-    return _make_data_json('best-actor')
 
 @app.route('/widget.html')
 def widget():
