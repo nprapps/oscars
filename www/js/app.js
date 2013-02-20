@@ -29,8 +29,7 @@ $(document).ready(function() {
                 type: 'html5',
                 config: {
                     levels: [
-                        { file: APP_CONFIG['VIDEO'][window.PAGE_NAME]['MP4_URL'] },
-                        { file: APP_CONFIG['VIDEO'][window.PAGE_NAME]['OGV_URL'] }
+                        { file: APP_CONFIG['VIDEO'][window.PAGE_NAME]['MP4_URL'] }
                     ]
                 }
             }],
