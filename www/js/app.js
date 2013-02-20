@@ -24,13 +24,17 @@ $(document).ready(function() {
                 config: {
                     skin: 'http://media.npr.org/templates/javascript/jwplayer/skins/mle/npr-video-archive/npr-video-archive.zip',
                     file: APP_CONFIG['VIDEO'][window.PAGE_NAME]['MP4_URL'],
+                    image: APP_CONFIG['VIDEO'][window.PAGE_NAME]['POSTER'],
                     'hd.file': APP_CONFIG['VIDEO'][window.PAGE_NAME]['HD_URL'] 
                 }
             }, {
                 type: 'html5',
                 config: {
                     levels: [
-                        { file: APP_CONFIG['VIDEO'][window.PAGE_NAME]['MP4_URL'] }
+                        {
+                            file: APP_CONFIG['VIDEO'][window.PAGE_NAME]['MP4_URL'],
+                            image: APP_CONFIG['VIDEO'][window.PAGE_NAME]['POSTER']
+                        }
                     ]
                 }
             }],

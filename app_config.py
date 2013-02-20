@@ -71,6 +71,7 @@ GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 VIDEO = {
     'best-picture': {
         'LENGTH': 216,
+        'POSTER': 'http://apps.npr.org/oscars-2013/img/cheat-sheet-promo_wide.jpg',
         'MP4_URL': 'http://pd.npr.org/npr-mp4/npr/nprvid/2013/02/20130219_nprvid_oscars-n-600000.mp4',
         'HD_URL': 'http://pd.npr.org/npr-mp4/npr/nprvid/2013/02/20130219_nprvid_oscars-n-1200000.mp4'
     }
