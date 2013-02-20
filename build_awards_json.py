@@ -1,8 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 import requests
 import json
-import chardet
 
 url = 'https://spreadsheets.google.com/feeds/list/0AjWpFWKpoFHqdDZHaTExd1Rpcl9aLTFIaVhIR2RRdWc/od6/public/values?alt=json-in-script&sq='
 r = requests.get(url)
@@ -15,10 +14,17 @@ if r.status_code == 200:
         award_dict = {}
         award_dict['award'] = row['title']['$t']
         award_dict['nominees'] = []
+        award_dict['has_winner'] = False
         for nominee_number in range(1, 10):
             nominee = row['gsx$nominee%s' % nominee_number]['$t']
             if nominee != u'':
-                award_dict['nominees'].append(nominee)
+                nominee_dict = {}
+                nominee_dict['title'] = nominee
+                nominee_dict['winner'] = False
+                if row['gsx$winner']['$t'] == nominee:
+                    nominee_dict['winner'] = True
+                    award_dict['has_winner'] = True
+                award_dict['nominees'].append(nominee_dict)
 
         awards_list.append(award_dict)
 
