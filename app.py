@@ -12,10 +12,6 @@ import app_config
 from render_utils import flatten_app_config, make_context
 app = Flask(app_config.PROJECT_NAME)
 
-@app.route('/')
-def _index():
-    return redirect('/best-picture.html')
-
 # Example application views
 @app.route('/best-picture.html')
 def best_picture():
@@ -24,8 +20,10 @@ def best_picture():
 
     return render_template('index.html', **context)
 
-@app.route('/chat.html')
+@app.route('/')
 def chat():
+    context = make_context()
+    context['PAGE_NAME'] = 'index'
     return render_template('chat.html', **make_context())
 
 def _make_data_json(filename):
@@ -67,19 +65,19 @@ def _make_data_json(filename):
 def best_picture_json():
     return _make_data_json('best-picture')
 
-@app.route('/widget.html')
-def widget():
-    """
-    Embeddable widget example page.
-    """
-    return render_template('widget.html', **make_context())
+# @app.route('/widget.html')
+# def widget():
+#     """
+#     Embeddable widget example page.
+#     """
+#     return render_template('widget.html', **make_context())
 
-@app.route('/test_widget.html')
-def test_widget():
-    """
-    Example page displaying widget at different embed sizes.
-    """
-    return render_template('test_widget.html', **make_context())
+# @app.route('/test_widget.html')
+# def test_widget():
+#     """
+#     Example page displaying widget at different embed sizes.
+#     """
+#     return render_template('test_widget.html', **make_context())
 
 # Render LESS files on-demand
 @app.route('/less/<string:filename>')
