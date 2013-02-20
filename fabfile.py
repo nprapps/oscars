@@ -217,6 +217,25 @@ def install_requirements():
 
     run('%(virtualenv_path)s/bin/pip install -U -r %(repo_path)s/requirements.txt' % env)
 
+
+def install_crontab():
+    """
+    Install cron jobs script into cron.d.
+    """
+    require('settings', provided_by=[production, staging])
+
+    sudo('cp %(repo_path)s/crontab /etc/cron.d/%(deployed_name)s' % env)
+
+
+def uninstall_crontab():
+    """
+    Remove a previously install cron jobs script from cron.d
+    """
+    require('settings', provided_by=[production, staging])
+
+    sudo('rm /etc/cron.d/%(deployed_name)s' % env)
+
+
 def bootstrap_issues():
     """
     Bootstraps Github issues with default configuration.

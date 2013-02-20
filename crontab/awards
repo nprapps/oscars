@@ -1,0 +1,4 @@
+#!/bin/bash
+
+* * * * * cd /home/ubuntu/apps/oscars/repository && source ../virtualenv/bin/activate && ./build_awards_json.py
+* * * * * s3cmd -P --add-header=Cache-Control:max-age=5 --guess-mime-type sync /home/ubuntu/apps/oscars/repository/www/
