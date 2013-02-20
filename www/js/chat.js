@@ -31,20 +31,14 @@
 
         // State
         var chat_url = null;
+        var page_url = null;
         var user_url = null;
-
-        var posts_on_load = [];
-        var edits = [];
-
-        var post_ids = [];
-        var edit_ids = [];
-        var delete_ids = [];
-
-        var edit_timestamps = {};
+        
+        var since = null;
+        var next_page_back = -1;
 
         var alerts = [];
         var first_load = true;
-        var next_page_index = 0;
 
         var update_timer = null;
         var alert_timer = null;
@@ -57,7 +51,8 @@
              */
             plugin.settings = $.extend({}, defaults, options || {});
 
-            chat_url = 'http://' + plugin.settings.scribble_host + '/event/' + plugin.settings.chat_id +'/all/?Token='+ plugin.settings.chat_token +'&format=json';
+            chat_url = 'http://' + plugin.settings.scribble_host + '/event/' + plugin.settings.chat_id +'/all/';
+            page_url = 'http://' + plugin.settings.scribble_host + '/event/' + plugin.settings.chat_id +'/page/';
             user_url = 'http://' + plugin.settings.scribble_host + '/user';
 
             // Cache element references
@@ -152,8 +147,9 @@
             var content_param = '&Content=' + encodeURIComponent(text);
             var auth_param = '&Auth=' + auth.Auth;
             $.ajax({
-                url: chat_url + content_param + auth_param,
+                url: chat_url + '?Token=' + plugin.settings.chat_token + '&format=json' + content_param + auth_param,
                 dataType: 'jsonp',
+                jsonpCallback: 'nprapps',
                 cache: true,
                 success: function(response) {
                     plugin.$comment.val('');
@@ -248,16 +244,10 @@
             /*
              * Render the latest posts from API data.
              */
-            var scroll_down = false;
             var new_posts = [];
 
             // Handle normal posts
             _.each(data.Posts, function(post) {
-                // Filter posts we've seen before
-                if (_.indexOf(post_ids, post.Id) >= 0) {
-                    return;
-                }
-
                 try {
                     var html = plugin.render_post(post);
                 } catch(err) {
@@ -265,108 +255,31 @@
                 }
 
                 new_posts.push(html);
-                post_ids.push(post.Id);
             });
 
             if (new_posts.length > 0) {
                 plugin.$chat_body.prepend(new_posts);
-
-                scroll_down = true;
             }
 
             // Handle post deletes
             _.each(data.Deletes, function(post) {
-                if (_.indexOf(delete_ids, post.Id) >= 0) {
-                    return;
-                }
-
-                delete_ids.push(post.Id);
-
                 plugin.$chat_body.find('.chat-post[data-id="' + post.Id + '"]').remove();
             });
 
             _.each(data.Edits, function(post) {
-                var exists = _.indexOf(edit_ids, post.Id);
-
-                if (exists >= 0) {
-                    edits[exists] = post;
-
-                    return;
-                }
-
-                edit_ids.push(post.Id);
-                edits.push(post);
-            });
-
-            plugin.process_edits();
-
-            if (scroll_down) {
-                plugin.$chat_body.scrollTop(plugin.$chat_body[0].scrollHeight);
-            }
-        };
-
-        plugin.process_edits = function() {
-            /*
-             * Process edits, replacing and inserting them as needed.
-             *
-             * NB: For simplicity we do this on every update.
-             */
-            _.each(edits, function(post) {
-                var timestamp = parseInt(moment(post.LastModified).valueOf(), 10);
-
                 var html = plugin.render_post(post);
 
-                var $existing = plugin.$chat_body.find('.chat-post[data-id="' + post.Id + '"]');
-
-                // Updating a post already displayed
-                if ($existing.length > 0) {
-                    if (post.Id in edit_timestamps && edit_timestamps[post.Id] >= timestamp) {
-                        return;
-                    }
-
-                    $existing.replaceWith(html);
-                    edit_timestamps[post.Id] = timestamp;
-                // Updating a post never seen before (e.g. on page load)
-                } else {
-                    var $posts = plugin.$chat_body.find('.chat-post');
-                    var $post = null;
-
-                    var comes_before = _.find($posts, function(post_el, i) {
-                        $post = $(post_el);
-
-                        if (post.timestamp > parseInt($post.data('timestamp'), 10)) {
-                            edit_timestamps[post.Id] = timestamp;
-                            $post.before(html);
-
-                            return true;
-                        }
-
-                        return false;
-                    });
-
-                    // If no place in the order, put at the end
-                    if (!comes_before && next_page_index >= posts_on_load.length) {
-                        edit_timestamps[post.Id] = timestamp;
-                        if ($post === null) {
-                            plugin.$chat_body.append(html);
-                        } else {
-                            $post.after(html);
-                        }
-                    }
-                }
+                plugin.$chat_body.find('.chat-post[data-id="' + post.Id + '"]').replaceWith(html);
             });
         };
 
-        plugin.render_post_page = function() {
+        plugin.render_page_back = function(data) {
             /*
              * Render a page of posts from API data.
              */
             var new_posts = [];
-            var start = next_page_index;
-            var end = next_page_index + plugin.settings.posts_per_page;
 
-            // Handle normal posts
-            _.each(posts_on_load.slice(start, end), function(post) {
+            _.each(data.Posts, function(post) {
                 try {
                     var html = plugin.render_post(post);
                 } catch(err) {
@@ -376,15 +289,11 @@
                 new_posts.push(html);
             });
 
-            if (new_posts.length > 0) {
-                plugin.$spinner.before(new_posts);
-            }
+            plugin.$spinner.before(new_posts);
 
-            plugin.process_edits();
+            next_page_back -= 1;
 
-            next_page_index += plugin.settings.posts_per_page;
-
-            if (next_page_index >= posts_on_load.length) {
+            if (next_page_back == -1) {
                 plugin.$spinner.remove();
                 plugin.$spinner = null;
             }
@@ -394,7 +303,7 @@
             var $window = $(window);
 
             if (plugin.$spinner && plugin.$spinner.offset().top < $window.scrollTop() + $window.height()) {
-                plugin.render_post_page();
+                plugin.page_back();
             }
         };
 
@@ -404,9 +313,16 @@
             /*
              * Fetch latest posts and render them.
              */
+            if (first_load) {
+                var url = page_url + 'last?Token=' + plugin.settings.chat_token + '&Max=' + plugin.settings.posts_per_page + '&randi=' + Math.floor(Math.random() * 10000000);
+            } else {
+                var url = chat_url + '?Token=' + plugin.settings.chat_token + '&Max=' + plugin.settings.posts_per_page + '&rand=' + Math.floor(Math.random() * 10000000) + '&Since=' + since.format('YYYY/MM/DD HH:mm:ss');
+            }
+
             $.ajax({
-                url: chat_url + '&Max=10000&Order=desc',
+                url: url,
                 dataType: 'jsonp',
+                jsonpCallback: 'nprapps',
                 cache: true,
                 success: function(data, status, xhr) {
                     if (parseInt(data.IsLive, 10) === 1) {
@@ -421,18 +337,12 @@
                         $('#live-chat-widget-wrapper').hide();
                     }
 
+                    since = moment.utc(data.LastModified).add('seconds', 1);
+
                     if (first_load) {
-                        // plugin.$root.find('.chat-title').text(data.Title);
-                        // plugin.$chat_blurb.text(data.Description);
+                        plugin.render_page_back(data);
 
-                        posts_on_load = data.Posts;
-                        post_ids = _.pluck(posts_on_load, 'Id');
-
-                        edits = data.Edits;
-                        edit_ids = _.pluck(edits, 'Id');
-
-                        plugin.render_post_page();
-                        plugin.$chat_body.scrollTop(plugin.$chat_body[0].scrollHeight);
+                        next_page_back = data.Pages - 2;
 
                         first_load = false;
                     } else {
@@ -442,6 +352,18 @@
             }).then(function() {
                 if (!plugin.paused) {
                     plugin.update_timer = setTimeout(plugin.update_live_chat, plugin.settings.update_interval);
+                }
+            });
+        };
+
+        plugin.page_back = function() {
+            $.ajax({
+                url: page_url + next_page_back + '?Token=' + plugin.settings.chat_token + '&Max=' + plugin.settings.posts_per_page + '&rand=' + Math.floor(Math.random() * 10000000),
+                dataType: 'jsonp',
+                jsonpCallback: 'nprapps',
+                cache: true,
+                success: function(data, status, xhr) {
+                    plugin.render_page_back(data);
                 }
             });
         };
@@ -506,7 +428,7 @@
 
             if ((data.auth_route === 'anonymous' && data.username !== '') || (data.auth_route === 'oauth')) {
                 return $.ajax({
-                    url: auth_url +'&format=json&Name='+ data.username +'&Avatar='+ data.avatar,
+                    url: auth_url + '&format=json&Name='+ data.username +'&Avatar='+ data.avatar,
                     dataType: 'jsonp',
                     cache: true,
                     success: function(auth) {
