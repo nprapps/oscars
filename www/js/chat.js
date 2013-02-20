@@ -314,7 +314,7 @@
              * Fetch latest posts and render them.
              */
             if (first_load) {
-                var url = page_url + 'last?Token=' + plugin.settings.chat_token + '&Max=' + plugin.settings.posts_per_page + '&randi=' + Math.floor(Math.random() * 10000000);
+                var url = page_url + 'last?Token=' + plugin.settings.chat_token + '&Max=' + plugin.settings.posts_per_page + '&rand=' + Math.floor(Math.random() * 10000000);
             } else {
                 var url = chat_url + '?Token=' + plugin.settings.chat_token + '&Max=' + plugin.settings.posts_per_page + '&rand=' + Math.floor(Math.random() * 10000000) + '&Since=' + since.format('YYYY/MM/DD HH:mm:ss');
             }
@@ -344,6 +344,9 @@
 
                         next_page_back = data.Pages - 2;
 
+                        // Always load one extra page
+                        plugin.page_back();
+                        
                         first_load = false;
                     } else {
                         plugin.render_new_posts(data);
