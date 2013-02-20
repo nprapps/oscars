@@ -73,13 +73,56 @@ a:hover, a:active { color: #bccae5; text-decoration: none; }
 }
 
 // Header
+
+
 #radio-topper {
+    #toggles {
+      ul { margin: 0; padding: 0; list-style: none; display: table; width: 100%; }
+      li {
+        margin: 0; padding: 0;
+        display: table-cell;
+        width: 50%;
+        background-color: #3d424c;
+        color: #ddd;
+        font: normal 16px/1.2 Arial, Helvetica, sans-serif;
+        vertical-align: middle;
+
+        &:hover { background-color: #383f4d; cursor: pointer; }
+        &.selected {
+                background-color: #ebebeb;
+                color: #555;
+                border: 1px solid #3d424c;
+                border-bottom: none;
+
+                &:hover { background-color: #ebebeb; cursor: default; }
+        }
+      }
+      li > span {
+          display: block;
+          padding: 22px 15px;
+      }
+      h3 {
+          font: bold 16px/1.2 Arial, Helvetica, sans-serif;
+          text-align: center;
+          text-transform: lowercase;
+          margin: 0;
+      }
+      .live {
+          color: #d54721;
+          display: none;
+      }
+      .pregame {
+          display: none;
+          color: #d54721;
+      }
+    }
+
     background: #484e58 url('@{img-root}/background-image-faded.jpg') no-repeat 50% 50%;
     background-size: cover;
     color: #ddd;
 
     h1 {
-        padding-top: 102px;
+        padding-top: 113px;
         font-size: 54px;
         font: normal 54px Arial, Helvetica, sans-serif;
         margin: 0 0 11px 0;
@@ -87,7 +130,7 @@ a:hover, a:active { color: #bccae5; text-decoration: none; }
         text-shadow: 1px 2px 10px rgba(32,32,32,.4);
     }
 	h2 { font-size: 15px; color: #999; margin: 0; }
-	
+
 	.promo {
 		color: #FFF;
 		background: #2c313a;
@@ -97,7 +140,7 @@ a:hover, a:active { color: #bccae5; text-decoration: none; }
 		-webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;
 		border-top: 1px solid #22262d;
 		border-bottom: 1px solid #353a44;
-	
+
 		&:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
 		a { display: block; }
 		a:hover { opacity: .7; display: block; }
