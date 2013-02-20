@@ -24,7 +24,6 @@ DEBUG = True
 
 # doesn't make sense with more than one url in an app, namespacing it cuz goddamnitall
 
-VIDEO_PROJECT_DESCRIPTION = "Everything you need to know about the Best Picture nominees, from across the NPR network."
 VIDEO_SHARE_URL = 'http://%s/%s/best-picture.html' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME)
 
 VIDEO_TWITTER = {
@@ -35,8 +34,8 @@ VIDEO_TWITTER = {
 VIDEO_FACEBOOK = {
     'TITLE': "Everything You Need To Know About The Best Picture Nominees",
     'URL': VIDEO_SHARE_URL,
-    'DESCRIPTION': VIDEO_PROJECT_DESCRIPTION,
-    'IMAGE_URL': 'http://%s/%s/img/cheat-sheet-promo_sq.jpg' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME),
+    'DESCRIPTION': "Ready to check off your Oscar ballot? Catch up on this year's nominees with reviews, interviews and features from across the NPR network.",
+    'IMAGE_URL': 'http://%s/%s/img/cheat-sheet-promo_square.jpg' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME),
     'APP_ID': '138837436154588'
 }
 
@@ -72,8 +71,8 @@ GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 VIDEO = {
     'best-picture': {
         'LENGTH': 216,
-        'MP4_URL': 'http://ivideo-i.akamaihd.net/i/npr-mp4/npr/ascvid/2013/02/20130219_nprvid_oscars-n-600000.mp4',
-        'HD_URL': 'http://ivideo-i.akamaihd.net/i/npr-mp4/npr/ascvid/2013/02/20130219_nprvid_oscars-n-1200000.mp4'
+        'MP4_URL': 'http://pd.npr.org/npr-mp4/npr/nprvid/2013/02/20130219_nprvid_oscars-n-600000.mp4',
+        'HD_URL': 'http://pd.npr.org/npr-mp4/npr/nprvid/2013/02/20130219_nprvid_oscars-n-1200000.mp4'
     }
 }
 
