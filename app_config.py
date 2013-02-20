@@ -22,7 +22,7 @@ S3_BUCKETS = []
 SERVERS = []
 DEBUG = True
 
-PROJECT_DESCRIPTION = 'foo'
+PROJECT_DESCRIPTION = "Ready to check off your Oscar ballot? Catch up on coverage of this year's Best Picture nominees with reviews, interviews and features from across the NPR network."
 SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME)
 
 TWITTER = {
@@ -39,8 +39,8 @@ FACEBOOK = {
 }
 
 NPR_DFP = {
-    'STORY_ID': '139482413',
-    'TARGET': '\/news_election_results;storyid=139482413'
+    'STORY_ID': '172412715',
+    'TARGET': '\/arts_oscars_2013;storyid=172412715'
 }
 
 CHAT = {
