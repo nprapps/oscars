@@ -75,29 +75,21 @@
                         <h3>Awards List</h3>
                     </div>
 
-                    <div class="chat-schedule">
-                        <h3>Academy Awards Schedule</h3>
-                        <p><em>(All times Eastern)</em></p>
-                        <ul>
-                            <li><span><strong class="time">6 p.m.:</strong> NPR coverage begins with <em>All Things Considered</em></span></li>
-                            <li><span><strong class="time">10 p.m.:</strong> NPR special coverage begins</span></li>
-                        </ul>
+                    <div id="credits">
+                        <p>Banner photo: XXXX photo by XXX/XXX</p>
+                        <p>Credits: Jeremy Bowers, Brian Boyer, Rachel Brody, Christopher Groskopf, Alyson Hurt, Justine Kenin, Becky Lettenberger, Kate Myers, Erica Ryan, Katie Zhu / NPR</p>
                     </div>
-
-                <div id="credits">
-                    <p>Banner photo: XXXX photo by XXX/XXX</p>
-                    <p>Credits: Jeremy Bowers, Brian Boyer, Rachel Brody, Christopher Groskopf, Alyson Hurt, Justine Kenin, Becky Lettenberger, Kate Myers, Erica Ryan, Katie Zhu / NPR</p>
-                </div>
-
-                <div class="terms">
-                    <p>
-                        &copy;2013 NPR
-                        <a href="http://help.npr.org/npr/includes/customer/npr/custforms/contactus.aspx">Contact</a>
-                        <a href="http://www.npr.org/about/termsofuse.html">Terms of Use</a>
-                        <a href="http://www.npr.org/about/privacypolicy.html">Privacy</a>
-                        <a href="http://thin.npr.org/">Text-Only</a>
-                    </p>
-                </div>
+                    <div class="terms">
+                        <ul>
+                            <li><a href="http://help.npr.org/npr/includes/customer/npr/custforms/contactus.aspx">Contact</a></li>
+                            <li><a href="http://www.npr.org/about/termsofuse.html">Terms of Use</a></li>
+                            <li><a href="http://www.npr.org/about/privacypolicy.html">Privacy</a></li>
+                            <li><a href="http://thin.npr.org/">Text-Only</a></li>
+                        </ul>
+                        <p>
+                            &copy;2013 NPR
+                        </p>
+                    </div>
 
                 </div>
                 <div class="span9 chat-body-wrap">
@@ -115,9 +107,9 @@
 {% endblock %}
 
 {% block extra_foot_js %}
+    {{ JS.push('js/winners.js') }}
     {{ JS.push('js/lib/jquery.smooth-scroll.min.js') }}
     {{ JS.push('js/auth.js') }}
     {{ JS.push('js/chat.js') }}
     {{ JS.push('js/app-chat.js') }}
-    {{ JS.push('js/winners.js') }}
 {% endblock %}
