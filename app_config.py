@@ -72,8 +72,8 @@ GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 VIDEO = {
     'best-picture': {
         'LENGTH': 216,
-        'MP4_URL': 'http://pd.npr.org/npr-mp4/npr/nprvid/2013/02/20130219_nprvid_oscars-n-600000.mp4',
-        'HD_URL': 'http://pd.npr.org/npr-mp4/npr/nprvid/2013/02/20130219_nprvid_oscars-n-1200000.mp4'
+        'MP4_URL': 'http://ivideo-i.akamaihd.net/i/npr-mp4/npr/ascvid/2013/02/20130219_nprvid_oscars-n-600000.mp4',
+        'HD_URL': 'http://ivideo-i.akamaihd.net/i/npr-mp4/npr/ascvid/2013/02/20130219_nprvid_oscars-n-1200000.mp4'
     }
 }
 
