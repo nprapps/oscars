@@ -248,13 +248,19 @@
 
             // Handle normal posts
             _.each(data.Posts, function(post) {
-                try {
-                    var html = plugin.render_post(post);
-                } catch(err) {
-                    return;
-                }
+                var $exists = plugin.$chat_body.find('.chat-post[data-id="' + post.Id + '"]');
 
-                new_posts.push(html);
+                if ($exists.length > 0) {
+                    // Skip existing posts
+                } else {
+                    try {
+                        var html = plugin.render_post(post);
+                    } catch(err) {
+                        return;
+                    }
+
+                    new_posts.push(html);
+                }
             });
 
             if (new_posts.length > 0) {
