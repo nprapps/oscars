@@ -1,5 +1,7 @@
 $(document).ready(function(){
-    template_html = '<h3>Awards List</h3>';
+	var $awards_list = $('.awards-list');
+	var template_html = '<h3>Awards List</h3>';
+
     $.ajax('../live-data/awards.json', {
         dataType: 'json',
         cache: false,
@@ -10,7 +12,10 @@ $(document).ready(function(){
                 template_html += JST.awards({category: category});
                 console.log(template_html);
             });
-            $('.awards-list').html(template_html);
+            $awards_list.html(template_html);
+            $awards_list.find('div').on('click', function() {
+            	$(this).toggleClass('closed');
+            }).addClass('closed');
         }
     });
 });
