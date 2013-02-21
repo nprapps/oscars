@@ -1,7 +1,5 @@
 $(document).ready(function(){
 	var $awards_list = $('.awards-list');
-	var template_html = '';
-	var winner_interval;
 	var winner_interval_refresh = 60000;
 
 	function load_oscar_winners() {
@@ -13,16 +11,16 @@ $(document).ready(function(){
 			crossDomain: false,
 			jsonp: false,
 			success: function(data){
-				_.each(data, function(category) {
-					template_html += JST.awards({category: category});
-				});
-				$awards_list.html(template_html);
-				$awards_list.find('div').on('click', function() {
-					$(this).toggleClass('closed');
-				}).addClass('closed');
+				$awards_list.html(JST.awards(data));
 			}
-		});
+		}).then(function() {
+	        setInterval(load_oscar_winners, winner_interval_refresh);
+        });
 	}
+
+    $awards_list.on('click', '.category', function() {
+        $(this).toggleClass('closed');
+    });
+
 	load_oscar_winners();
-	winner_interval = setInterval(load_oscar_winners, winner_interval_refresh);
 });
