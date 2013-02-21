@@ -1,3 +1,3 @@
-cd $0
+cd `dirname "$0"`
 source ../virtualenv/bin/activate
 eval $@
