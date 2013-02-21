@@ -39,11 +39,9 @@
         var since = null;
         var next_page_back = -1;
 
-        var alerts = [];
         var first_load = true;
 
         var update_timer = null;
-        var alert_timer = null;
         var paused = false;
         var is_live = false;
 
@@ -118,12 +116,10 @@
 
             if (plugin.paused) {
                 clearTimeout(plugin.update_timer);
-                clearTimeout(plugin.alert_timer);
 
                 $(window).off('scroll', plugin.debounce_scrolled);
             } else {
                 plugin.update_live_chat();
-                plugin.update_alerts();
 
                 $(window).on('scroll', plugin.debounce_scrolled);
             }
@@ -163,19 +159,18 @@
                 cache: true,
                 success: function(response) {
                     plugin.$comment.val('');
-                    alerts.push({
+                    plugin.alert({
                         klass: 'alert-info',
                         title: null,
                         text: 'Your comment will appear momentarily.'
                     });
-
                 }
             });
         }
 
         plugin.post_comment = function(data) {
             /*
-            * If auth is good, post comment now. Otherwise, reauthenticate and then post comment.
+             * If auth is good, post comment now. Otherwise, reauthenticate and then post comment.
             */
             if (plugin.validate_scribble_auth() === true) {
                 _send_comment(data);
@@ -187,32 +182,16 @@
             }
         };
 
-        plugin.update_alerts = function() {
+        plugin.alert = function(context) {
             /*
-            * Adds and expires alerts.
-            */
+             * Display an alert.
+             * */
+            var $alert = $(JST.chat_alert(context));
+            plugin.$alerts.append($alert);
 
-            // Expires old alerts with each pass.
-            var now = parseInt(moment().valueOf(), 10);
-            _.each($('div.alert'), function(alert_div, index, list) {
-                var expires = alert_div.getAttribute('data-expires');
-                if (now > expires) {
-                    $(alert_div).fadeOut();
-                }
-            });
-
-            // Adds any new alerts with each pass.
-            _.each(alerts, function(chat_alert, index, list) {
-                alerts = [];
-                chat_alert.expires = parseInt(moment().add('seconds', 3).valueOf(), 10);
-                alert_html = JST.chat_alert(chat_alert);
-                plugin.$alerts.append(alert_html);
-            });
-
-            // Ignore if paused.
-            if (!plugin.paused) {
-                plugin.alerts_timer = setTimeout(plugin.update_alerts, plugin.settings.alert_interval);
-            }
+            setTimeout(function() {
+                $alert.fadeOut();
+            }, 3000);
         };
 
         plugin.render_post = function(post) {
@@ -461,7 +440,17 @@
              */
             var auth_url = user_url +'/create?Token='+ plugin.settings.chat_token;
 
-            if ((data.auth_route === 'anonymous' && data.username !== '') || (data.auth_route === 'oauth')) {
+            if (data.username == '') {
+                plugin.alert({
+                    klass: 'alert-error',
+                    title: 'Login failed!',
+                    text: 'You must provide a username.'
+                });
+
+                return;
+            }
+
+            if (data.auth_route === 'anonymous' || data.auth_route === 'oauth') {
                 return $.ajax({
                     url: auth_url + '&format=json&Name='+ data.username +'&Avatar='+ data.avatar,
                     dataType: 'jsonp',
@@ -474,16 +463,26 @@
                     }
                 });
             }
-            else {
-                alert('Missing something. Try filling out the form again.');
-            }
         };
 
         plugin.npr_auth_user = function() {
             /*
             * Authorizes an NPR user.
             */
-            var payload = { username: plugin.$npr_username.val(), password: plugin.$npr_password.val(), remember: null, temp_user: null };
+            var username = plugin.$npr_username.val();
+            var password = plugin.$npr_password.val();
+
+            if (username == '' || password == '') {
+                plugin.alert({
+                    klass: 'alert-error',
+                    title: 'Login failed!',
+                    text: 'You must provide an email and password.'
+                });
+
+                return;
+            }
+
+            var payload = { username: username, password: password, remember: null, temp_user: null };
             var b64_payload = window.btoa(JSON.stringify(payload));
 
             $.ajax({
@@ -492,12 +491,19 @@
                 type: 'POST',
                 crossDomain: true,
                 cache: false,
-                timeout: 2500,
+                timeout: 4000,
                 data: { auth: b64_payload, platform: 'CRMAPP' },
                 success: function(response) {
                     $.totalStorage(OAUTH_KEY, response.user_data);
                     plugin.scribble_auth_user({ auth_route: 'anonymous', username: response.user_data.nick_name });
                     plugin.toggle_user_context(OAUTH_KEY, true);
+                },
+                error: function() {
+                    plugin.alert({
+                        klass: 'alert-error',
+                        title: 'Login failed!',
+                        text: 'Your email or password was incorrect.'
+                    });
                 }
             });
         };
