@@ -241,7 +241,7 @@ a:hover, a:active { color: #bccae5; text-decoration: none; }
 		margin-top: 15px;
 		cursor: pointer;
 
-		&:hover { opacity: .7; }
+		&:hover h5 { opacity: .7; }
 		&:first-child { margin-top: 5px; }
 	}
 	
@@ -359,18 +359,18 @@ a:hover, a:active { color: #bccae5; text-decoration: none; }
 		}
 	}
 	.hdr h2 { font-size: 28px; }
-	#nav .site-links li { display: none; }
-	#nav .site-links .npr { display: block; }
+	#nav .site-links {
+		li { display: none; }
+		.npr { display: block; }
+	}
 	#footer { border-top: 1px solid #CCC; margin-top: 24px; }
 }
 
 
 // Adhesion
-
 .adhesion #bigbox {
     display: none;
 }
-
 #adhesion {
     position: fixed;
     bottom: 0;
@@ -379,37 +379,30 @@ a:hover, a:active { color: #bccae5; text-decoration: none; }
     -webkit-transition: all .3s ease-in-out;
     z-index: 1000;
 }
-
 #adhesion .adhesionWrapper {
     width: 100%;
     position: fixed;
     bottom: 0;
 }
-
 #adhesion img {
     width: 100%;
     -webkit-transition: all .3s ease-in-out;
 }
-
 #adhesion #adhesionClose {
     float: right;
 }
-
 #adhesion #adhesionClose img {
     width: 33px;
     float: right;
 }
-
 #adhesion .expand {
     background: black;
     -webkit-transition: all .3s ease-in-out;
 }
-
 #adhesion .expand img {
     bottom: 50%;
     -webkit-transition: all .3s ease-in-out;
 }
-
 #adhesion {
   position:fixed;
   width:100%;
