@@ -1,24 +1,40 @@
-<% var has_winner_html = ''; if (category.has_winner === true) { has_winner_html = ' class="has-winner"'; } %>
-<div<%= has_winner_html %>>
-    <h5><%= category.award %></h5>
-    <ul>
-		<% if (category.has_winner === true) { %>
-			<% _.each(category.nominees, function(nominee){ %>
-				<% if (nominee.winner === true) { %>
-					<li class="winner"><%= nominee.title %></li>
-				<% } %>
-			<% }); %>
-			<li class="nominees">Also nominated:
-				<% _.each(category.nominees, function(nominee){ %>
-					<% if (nominee.winner != true) { %>
-						<%= nominee.title %>; 
-					<% } %>
-				<% }); %>
-			</li>
-		<% } else { %>
-			<% _.each(category.nominees, function(nominee){ %>
-				<li><%= nominee.title %></li>
-			<% }); %>
-		<% } %>
-    </ul>
-</div>
+<% if (with_winners.length > 0) { %>
+    <h3>And The Oscar Goes To...</h3>
+
+    <% _.each(with_winners, function(category) { %>
+    <div class="category has-winner closed">
+        <h5><%= category.award %></h5>
+        <ul>
+            <% _.each(category.nominees, function(nominee){ %>
+                <% if (nominee.winner === true) { %>
+                    <li class="winner"><%= nominee.title %></li>
+                <% } %>
+            <% }); %>
+            <li class="nominees">Also nominated:
+                <% _.each(category.nominees, function(nominee, i, l){ %>
+                    <% if (nominee.winner != true) { %>
+                    <%= nominee.title %><% if (i < l.length - 1) { %>;<% } %> 
+                    <% } %>
+                <% }); %>
+            </li>
+        </ul>
+    </div>      
+    <% }); %>
+
+    <% if (without_winners.length >= 0) { %>
+    <h4>Winner Not Yet Announced</h4>
+    <% } %>
+<% } else { %>
+    <h3>Awards List</h3>
+<% } %>
+
+<% _.each(without_winners, function(category) { %>
+    <div class="category closed">
+        <h5><%= category.award %></h5>
+        <ul>
+            <% _.each(category.nominees, function(nominee){ %>
+                <li><%= nominee.title %></li>
+            <% }); %>
+        </ul>
+    </div>      
+<% }); %>

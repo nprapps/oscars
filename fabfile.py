@@ -312,10 +312,11 @@ def build_awards_json():
     url = 'https://spreadsheets.google.com/feeds/list/0AjWpFWKpoFHqdDZHaTExd1Rpcl9aLTFIaVhIR2RRdWc/od6/public/values?alt=json-in-script&sq='
     r = requests.get(url)
 
-    awards_list = []
-
     if r.status_code == 200:
         json_data = json.loads(r.content.replace('gdata.io.handleScriptLoaded(', '').replace(');', ''))
+        with_winners = []
+        without_winners = []
+
         for row in json_data['feed']['entry']:
             award_dict = {}
             award_dict['award'] = row['title']['$t']
@@ -332,10 +333,18 @@ def build_awards_json():
                         award_dict['has_winner'] = True
                     award_dict['nominees'].append(nominee_dict)
 
-            awards_list.append(award_dict)
+            if award_dict['has_winner']:
+                with_winners.append(award_dict)
+            else:
+                without_winners.append(award_dict)
+
+    output = {
+        'with_winners': with_winners,
+        'without_winners': without_winners
+    }
 
     with open('www/live-data/awards.json', 'w') as f:
-        f.write(json.dumps(awards_list))
+        f.write(json.dumps(output))
 
 
 def deploy_awards_json():
