@@ -23,7 +23,7 @@
             read_only: false,
             scribble_host: 'apiv1.scribblelive.com',
             posts_per_page: 50,
-            filter_user_id: null,
+            filter_user_ids: [],
             is_filtered: false
         };
 
@@ -226,7 +226,7 @@
             if ($.totalStorage(SCRIBBLE_AUTH_KEY)) {
                 if ($.totalStorage(SCRIBBLE_AUTH_KEY).Id) {
                     if (post.Creator.Id === $.totalStorage(SCRIBBLE_AUTH_KEY).Id) {
-                        post.Highlight = ' highlighted';
+                        post.Highlight = 'highlighted';
                     }
                 }
             }
@@ -241,7 +241,8 @@
                 post.created_string += ' p.m.';
             }
 
-            post.visible = !(plugin.settings.is_filtered && (post.Creator.Id != plugin.settings.filter_user_id));
+            post.filter_user = (_.indexOf(plugin.settings.filter_user_ids, post.Creator.Id) >= 0);
+            post.visible = !plugin.settings.is_filtered || post.filter_user; 
 
             if (post.Type == "TEXT") {
                 return JST.chat_text(post);
@@ -255,10 +256,8 @@
         plugin.filter_posts = function() {
             if (plugin.settings.is_filtered) {
                 plugin.$chat_body.find('.chat-post').hide();
-                plugin.$chat_body.find('.chat-post[data-user-id="' + plugin.settings.filter_user_id + '"]').show();
-            }
-
-            else {
+                plugin.$chat_body.find('.chat-post.filter-user').show();
+            } else {
                 plugin.$chat_body.find('.chat-post').show();
             }
         };

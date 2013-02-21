@@ -16,7 +16,7 @@ $(function() {
         chat_id: APP_CONFIG['CHAT']['ID'],
         chat_token: APP_CONFIG['CHAT']['TOKEN'],
         update_interval: APP_CONFIG['CHAT']['UPDATE_INTERVAL'],
-        filter_user_id: APP_CONFIG['CHAT']['FILTER_USER_ID'],
+        filter_user_ids: APP_CONFIG['CHAT']['FILTER_USER_IDS'],
         is_filtered: true,
         alert_interval: 500,
         read_only: false
