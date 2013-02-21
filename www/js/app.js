@@ -4,6 +4,7 @@ $(document).ready(function() {
     var $oscars = $('#main-content');
     var $video = $('#video');
     var $cue_list_end = $('#film-list');
+    var $catch_up_link = $('#catch-up-link');
 
     function lights_down() {
         $('body').append('<div id="fade"></div>');
@@ -15,6 +16,17 @@ $(document).ready(function() {
             $("#fade").remove();
         });
     }
+    
+    function scroll_to_content() {
+    	console.log("scroll_to_content");
+        $.smoothScroll({
+            scrollElement: null,
+            scrollTarget: '.film-info'
+        });
+        return false;
+    }
+    
+    $catch_up_link.click(scroll_to_content);
 
     function init_player() {
         jwplayer('video').setup({
@@ -80,7 +92,10 @@ $(document).ready(function() {
 
         jwplayer().onPlay(lights_down);
         jwplayer().onPause(lights_up);
-        jwplayer().onComplete(lights_up);
+        jwplayer().onComplete(function() {
+        	lights_up();
+        	scroll_to_content();
+        });
         jwplayer().onReady(function() { jwplayer().getPlugin('googima').onAdStart(lights_down) });
     }
 
