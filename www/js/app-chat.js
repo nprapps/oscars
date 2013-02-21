@@ -31,7 +31,9 @@ $(function() {
         $chat_body.show();
         $widget.show();
         $chat_login.hide();
-        $awards_body.hide();
+        if ($(window).width() <= 767) {
+            $awards_body.hide();
+        }
 
         $(this).addClass('selected');
         $chat_tab.removeClass('selected');
@@ -61,7 +63,9 @@ $(function() {
         $chat_body.show();
         $widget.hide();
         $chat_login.show();
-        $awards_body.hide();
+        if ($(window).width() <= 767) {
+            $awards_body.hide();
+        }
 
         $(this).addClass('selected');
         $live_blog_tab.removeClass('selected');
