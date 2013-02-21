@@ -1,5 +1,0 @@
-#!/bin/bash
-cd /home/ubuntu/apps/oscars/repository
-source /home/ubuntu/apps/oscars/virtualenv/bin/activate
-fab deploy_awards_json
-date >> /tmp/oscars.log

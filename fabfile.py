@@ -342,16 +342,9 @@ def deploy_awards_json():
     """
     Deploy awards JSON to S3
     """
+    require('settings', provided_by=[production, staging])
     build_awards_json()
-
     s3cmd = 's3cmd -P --add-header=Cache-Control:max-age=5 --guess-mime-type put /home/ubuntu/apps/oscars/repository/www/live-data/awards.json %s'
-
-    if os.environ['DEPLOYMENT_TARGET'] == 'production':
-        production()
-
-    else:
-        staging()
-
     for bucket in env.s3_buckets:
         env.s3_bucket = bucket
         local(s3cmd % ('s3://%(s3_bucket)s/%(deployed_name)s/live-data/awards.json' % env))

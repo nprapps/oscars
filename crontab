@@ -1,1 +1,1 @@
-* * * * * ubuntu cd /home/ubuntu/apps/oscars/repository && source ../virtualenv/bin/activate && ../virtualenv/bin/fab deploy_awards_json
+* * * * * ubuntu bash /home/ubuntu/apps/oscars/repository/cron.sh fab $DEPLOYMENT_TARGET deploy_awards_json
