@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var template_html = '';
 	var winner_interval;
 	var winner_interval_refresh = 60000;
-	
+
 	function load_oscar_winners() {
 		var cachebust = new Date().getTime();
 		template_html = '<h3>Awards List</h3>';
