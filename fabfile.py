@@ -311,7 +311,7 @@ def deploy_awards_json():
     """
     Deploy awards JSON to S3
     """
-    s3cmd = 's3cmd -P --add-header=Cache-Control:max-age=5 --guess-mime-type sync /home/ubuntu/apps/oscars/repository/www/live-data/awards.json %s'
+    s3cmd = 's3cmd -P --add-header=Cache-Control:max-age=5 --guess-mime-type put /home/ubuntu/apps/oscars/repository/www/live-data/awards.json %s'
 
     if os.environ['DEPLOYMENT_TARGET'] == 'production':
         production()
