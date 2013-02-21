@@ -5,9 +5,9 @@ $(document).ready(function(){
 	var winner_interval_refresh = 60000;
 	
 	function load_oscar_winners() {
-		console.log('load_oscar_winners');
+		var cachebust = new Date().getTime();
 		template_html = '<h3>Awards List</h3>';
-		$.ajax('live-data/awards.json', {
+		$.ajax('live-data/awards.json?t=' + cachebust, {
 			dataType: 'json',
 			cache: false,
 			crossDomain: false,
