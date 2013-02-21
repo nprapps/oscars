@@ -250,7 +250,7 @@ Deployment
 """
 def _deploy_to_s3():
     """
-    Deploy the gzipped stuff to
+    Deploy the gzipped stuff to S3.
     """
     s3cmd = 's3cmd -P --add-header=Cache-Control:max-age=5 --guess-mime-type --recursive --exclude-from gzip_types.txt sync gzip/ %s'
     s3cmd_gzip = 's3cmd -P --add-header=Cache-Control:max-age=5 --add-header=Content-encoding:gzip --guess-mime-type --recursive --exclude "*" --include-from gzip_types.txt sync gzip/ %s'
@@ -262,7 +262,7 @@ def _deploy_to_s3():
 
 def _gzip_www():
     """
-    Gzips everything in www and puts it all in gzip
+    Gzips everything in www and puts it all in gzip.
     """
     local('python gzip_www.py')
 
@@ -300,8 +300,19 @@ App-specific utils
 """
 def update_csv():
     """
-    Pulls the latest version of Oscars data from Google Doc
+    Pulls the latest version of Oscars data from Google Doc.
     """
     response = requests.get('https://docs.google.com/spreadsheet/pub?key=0AiINjEdvBDPadFUtUWk5MEpqWDNrODlULU9VSG1MM3c&output=csv')
     with open('data/best-picture.csv', 'w') as f:
         f.write(response.text)
+
+
+def deploy_awards_json():
+    """
+    Deploy awards JSON to S3
+    """
+    s3cmd = 's3cmd -P --add-header=Cache-Control:max-age=5 --guess-mime-type sync /home/ubuntu/apps/oscars/repository/www/live-data/awards.json %s'
+
+    for bucket in env.s3_buckets:
+        env.s3_bucket = bucket
+        local(s3cmd % ('s3://%(s3_bucket)s/%(deployed_name)s/live-data/awards.json' % env))
