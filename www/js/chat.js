@@ -91,6 +91,8 @@
             plugin.$logout.on('click', plugin.logout_click);
             plugin.$anonymous_login_button.on('click', plugin.anonymous_login_click);
             plugin.$npr_login_button.on('click', plugin.npr_login_click);
+            plugin.$npr_username.keydown(function(e) { plugin.npr_login_enter_key(e); });
+            plugin.$npr_password.keydown(function(e) { plugin.npr_login_enter_key(e); });
             plugin.$clear.on('click', plugin.clear_click);
             plugin.$comment_button.on('click', plugin.comment_click);
 
@@ -516,6 +518,12 @@
 
         plugin.npr_login_click = function() {
             plugin.npr_auth_user();
+        };
+
+        plugin.npr_login_enter_key = function(e) {
+            if (e.keyCode == 13) {
+                plugin.npr_auth_user();
+            }
         };
 
         plugin.clear_click = function() {
