@@ -49,7 +49,7 @@ CHAT_TWITTER = {
 }
 
 CHAT_FACEBOOK = {
-    'TITLE': PROJECT_NAME,
+    'TITLE': 'Oscars 2013 Live Blog & Chat',
     'URL': CHAT_SHARE_URL,
     'DESCRIPTION': CHAT_PROJECT_DESCRIPTION,
     'IMAGE_URL': 'http://media.npr.org/assets/img/2013/02/22/ap100306122316_sq-6aaf3b3754e09b8dcd0bd3151830019bba911834-s3.jpg',
