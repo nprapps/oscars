@@ -263,6 +263,8 @@
 
                     new_posts.push(html);
                 }
+
+                $exists = null;
             });
 
             if (new_posts.length > 0) {
