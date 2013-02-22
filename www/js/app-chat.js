@@ -68,9 +68,14 @@ $(function() {
 
     $chat_tab.on('click', function() {
         $chat_body.show();
-        $chat_editor.show();
         $widget.hide();
-        $chat_login.show();
+
+        if ($.totalStorage('scribbleOscars2013') === null) {
+            $chat_login.show();
+        }
+        else {
+            $chat_editor.show();
+        }
 
         if ($(window).width() <= 767) {
             $awards_body.hide();
