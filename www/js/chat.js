@@ -354,7 +354,12 @@
                         next_page_back = data.Pages - 2;
 
                         // Always load one extra page
-                        plugin.page_back();
+                        if (next_page_back > -1) {
+                            plugin.page_back();
+                        } else {
+                            plugin.$spinner.remove();
+                            plugin.$spinner = null;
+                        }
 
                         first_load = false;
                     } else {
