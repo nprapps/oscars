@@ -14,7 +14,7 @@ $(document).ready(function(){
 				$awards_list.html(JST.awards(data));
 			}
 		}).then(function() {
-	        setInterval(load_oscar_winners, winner_interval_refresh);
+	        setTimeout(load_oscar_winners, winner_interval_refresh);
         });
 	}
 
