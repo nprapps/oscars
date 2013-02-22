@@ -40,11 +40,11 @@ VIDEO_FACEBOOK = {
     'APP_ID': '138837436154588'
 }
 
-CHAT_PROJECT_DESCRIPTION = "Ready to check off your Oscar ballot? Catch up on coverage of this year's Best Picture nominees with reviews, interviews and features from across the NPR network."
+CHAT_PROJECT_DESCRIPTION = "Join NPR for the Oscars. Read our live blog and chat with us!"
 CHAT_SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME)
 
 CHAT_TWITTER = {
-    'TEXT': "Ready to check off your Oscar ballot? Catch up on NPR's coverage of the Best Picture nominees. #oscars",
+    'TEXT': CHAT_PROJECT_DESCRIPTION + " #oscars",
     'URL': CHAT_SHARE_URL
 }
 
