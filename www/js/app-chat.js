@@ -141,5 +141,13 @@ $(function() {
         if ((window.location.hash == '#awards') && ($(window).width() > 767)) {
             $chat_tab.trigger('click');
         }
+
+        else if ((window.location.hash == '#chat') && ($(window).width() > 767)) {
+            $chat_tab.trigger('click');
+        }
+
+        else if ((window.location.hash == '#') && ($(window).width() > 767)) {
+            $live_blog_tab.trigger('click');
+        }
     });
 });
