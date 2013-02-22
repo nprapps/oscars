@@ -8,6 +8,7 @@ $(function() {
     var $awards_tab = $('#awards-toggle');
     var $widget = $('#live-chat-widget');
     var $chat_login = $('.chat-login');
+    var $chat_editor = $('.chat-editor');
     var $chat_body = $('.chat-body-wrap');
     var $awards_body = $('.chat-schedule-wrap');
 
@@ -61,8 +62,10 @@ $(function() {
 
     $chat_tab.on('click', function() {
         $chat_body.show();
+        $chat_editor.show();
         $widget.hide();
         $chat_login.show();
+
         if ($(window).width() <= 767) {
             $awards_body.hide();
         }
@@ -81,6 +84,7 @@ $(function() {
     });
 
     $awards_tab.on('click', function() {
+        $chat_editor.hide();
         $widget.hide();
         $chat_login.hide();
         $chat_body.hide();
