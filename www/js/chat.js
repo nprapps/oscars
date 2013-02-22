@@ -155,7 +155,7 @@
             $.ajax({
                 url: chat_url + '?Token=' + plugin.settings.chat_token + '&format=json' + content_param + auth_param,
                 dataType: 'jsonp',
-                jsonpCallback: 'nprapps',
+                jsonpCallback: 'nprapps_comment',
                 cache: true,
                 success: function(response) {
                     plugin.$comment.val('');
@@ -333,7 +333,7 @@
             $.ajax({
                 url: url,
                 dataType: 'jsonp',
-                jsonpCallback: 'nprapps',
+                jsonpCallback: 'nprapps_latest',
                 cache: true,
                 success: function(data, status, xhr) {
                     if (parseInt(data.IsLive, 10) === 1) {
@@ -374,7 +374,7 @@
             $.ajax({
                 url: page_url + next_page_back + '?Token=' + plugin.settings.chat_token + '&Max=' + plugin.settings.posts_per_page + '&rand=' + Math.floor(Math.random() * 10000000),
                 dataType: 'jsonp',
-                jsonpCallback: 'nprapps',
+                jsonpCallback: 'nprapps_page_back',
                 cache: true,
                 success: function(data, status, xhr) {
                     plugin.render_page_back(data);
