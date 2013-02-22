@@ -96,12 +96,16 @@ def configure_targets(deployment_target):
         DEBUG = False
 
         CHAT['ID'] = '85189'
+        # Linda Holmes, Stephen Thompson, Trey Graham, Marc Hirsh
+        CHAT['FILTER_USER_IDS'] = [1994734, 4724185, 2311045, 2018793]
+
     else:
         S3_BUCKETS = STAGING_S3_BUCKETS
         SERVERS = STAGING_SERVERS
         DEBUG = True
 
         CHAT['ID'] = '74796'
+        CHAT['FILTER_USER_IDS'] = [23219872]
 
 DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
 
