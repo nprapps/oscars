@@ -33,8 +33,13 @@ $(function() {
         $widget.show();
         $chat_login.hide();
         $chat_editor.hide();
+
         if ($(window).width() <= 767) {
             $awards_body.hide();
+        }
+
+        else {
+            $awards_body.show();
         }
 
         $(this).addClass('selected');
@@ -69,6 +74,10 @@ $(function() {
 
         if ($(window).width() <= 767) {
             $awards_body.hide();
+        }
+
+        else {
+            $awards_body.show();
         }
 
         $(this).addClass('selected');
@@ -110,10 +119,22 @@ $(function() {
     }
 
     else if (window.location.hash == '#awards') {
-        $awards_tab.trigger('click');
+        if ($(window).size <= 767) {
+            $awards_tab.trigger('click');
+        }
+
+        else {
+            $chat_tab.trigger('click');
+        }
     }
 
     else {
         $live_blog_tab.trigger('click');
     }
+
+    $(window).resize(function () {
+        if ((window.location.hash == '#awards') && ($(window).width() > 767)) {
+            $chat_tab.trigger('click');
+        }
+    });
 });
