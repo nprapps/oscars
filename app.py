@@ -6,7 +6,7 @@ from mimetypes import guess_type
 import urllib
 
 import envoy
-from flask import Flask, Markup, abort, redirect, render_template
+from flask import Flask, Markup, abort, render_template
 
 import app_config
 from render_utils import flatten_app_config, make_context

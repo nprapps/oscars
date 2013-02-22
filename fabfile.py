@@ -110,10 +110,11 @@ def render():
 
     less()
     jst()
-    app_config_js()
 
     # Fake out deployment target
     app_config.configure_targets(env.get('settings', None))
+
+    app_config_js()
 
     compiled_includes = []
 
