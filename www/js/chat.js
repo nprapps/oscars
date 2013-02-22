@@ -38,6 +38,7 @@
 
         var since = null;
         var next_page_back = -1;
+        var paging = false;
 
         var first_load = true;
 
@@ -305,9 +306,6 @@
                 plugin.$spinner = null;
             }
 
-            if (plugin.settings.is_filtered) {
-                $(window).trigger('scroll');
-            }
         };
 
         plugin.scrolled = function() {
@@ -371,6 +369,13 @@
         };
 
         plugin.page_back = function() {
+            // Prevent overlapping paging requests when things are slow
+            if (paging) {
+                return;
+            }
+
+            paging = true
+
             $.ajax({
                 url: page_url + next_page_back + '?Token=' + plugin.settings.chat_token + '&Max=' + plugin.settings.posts_per_page + '&rand=' + Math.floor(Math.random() * 10000000),
                 dataType: 'jsonp',
@@ -378,6 +383,13 @@
                 cache: true,
                 success: function(data, status, xhr) {
                     plugin.render_page_back(data);
+                }
+            }).then(function() {
+                paging = false;
+
+                // We may not have loaded anything, so if spinner is still on screen, load more
+                if (plugin.settings.is_filtered) {
+                    $(window).trigger('scroll');
                 }
             });
         };
