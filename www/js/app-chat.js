@@ -32,6 +32,7 @@ $(function() {
         $chat_body.show();
         $widget.show();
         $chat_login.hide();
+        $chat_editor.hide();
         if ($(window).width() <= 767) {
             $awards_body.hide();
         }
