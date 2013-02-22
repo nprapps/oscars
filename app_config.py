@@ -95,7 +95,7 @@ def configure_targets(deployment_target):
         SERVERS = PRODUCTION_SERVERS
         DEBUG = False
 
-        CHAT['ID'] = '74796'
+        CHAT['ID'] = '85189'
     else:
         S3_BUCKETS = STAGING_S3_BUCKETS
         SERVERS = STAGING_SERVERS
