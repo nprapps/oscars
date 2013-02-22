@@ -20,6 +20,7 @@ def best_picture():
 
     return render_template('best-picture.html', **context)
 
+@app.route('/')
 @app.route('/chat.html')
 def chat():
     context = make_context()
