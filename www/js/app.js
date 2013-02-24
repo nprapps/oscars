@@ -96,7 +96,7 @@ $(document).ready(function() {
             scroll_to_content();
         });
         jwplayer().onReady(function() {
-            jwplayer().getPlugin('googima').onAdStart(lights_down);
+            jwplayer().getPlugin('googima');
         });
     }
 
