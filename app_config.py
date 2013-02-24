@@ -44,12 +44,12 @@ CHAT_PROJECT_DESCRIPTION = "Come to NPR's house to watch the awards with NPR's L
 CHAT_SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], DEPLOYED_NAME)
 
 CHAT_TWITTER = {
-    'TEXT': "Come to NPR's house for an Oscars Party! Watch the awards with @nprmonkeysee and friends. #oscars",
+    'TEXT': "Come to NPR's house for an Oscar Party! Watch the awards with @nprmonkeysee and friends. #oscars",
     'URL': CHAT_SHARE_URL
 }
 
 CHAT_FACEBOOK = {
-    'TITLE': 'Oscars Party!',
+    'TITLE': 'Oscar Party!',
     'URL': CHAT_SHARE_URL,
     'DESCRIPTION': CHAT_PROJECT_DESCRIPTION,
     'IMAGE_URL': 'http://media.npr.org/assets/img/2013/02/22/ap100306122316_sq-6aaf3b3754e09b8dcd0bd3151830019bba911834-s3.jpg',
