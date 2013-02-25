@@ -332,6 +332,11 @@ def build_awards_json():
                     if row['gsx$winner']['$t'] == nominee:
                         nominee_dict['winner'] = True
                         award_dict['has_winner'] = True
+
+                    if nominee in row['gsx$winner']['$t']:
+                        nominee_dict['winner'] = True
+                        award_dict['has_winner'] = True
+
                     award_dict['nominees'].append(nominee_dict)
 
             if award_dict['has_winner']:
