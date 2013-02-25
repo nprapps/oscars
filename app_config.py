@@ -105,7 +105,7 @@ def configure_targets(deployment_target):
         DEBUG = True
 
         CHAT['ID'] = '85189'
-        CHAT['FILTER_USER_IDS'] = [23219872]
+        CHAT['FILTER_USER_IDS'] = [1994734, 4724185, 2311045, 2018793]
 
 DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
 
