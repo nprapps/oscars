@@ -30,6 +30,15 @@ $(document).ready(function() {
     function init_player() {
         jwplayer('video').setup({
             modes: [{
+                type: 'flash',
+                src: 'http://www.npr.org/templates/javascript/jwplayer/player.swf',
+                config: {
+                    skin: 'http://media.npr.org/templates/javascript/jwplayer/skins/mle/npr-video-archive/npr-video-archive.zip',
+                    file: APP_CONFIG['VIDEO'][window.PAGE_NAME]['MP4_URL'],
+                    image: APP_CONFIG['VIDEO'][window.PAGE_NAME]['POSTER'],
+                    'hd.file': APP_CONFIG['VIDEO'][window.PAGE_NAME]['HD_URL']
+                }
+            }, {
                 type: 'html5',
                 config: {
                     levels: [
@@ -38,15 +47,6 @@ $(document).ready(function() {
                             image: APP_CONFIG['VIDEO'][window.PAGE_NAME]['POSTER']
                         }
                     ]
-                }
-            }, {
-                type: 'flash',
-                src: 'http://www.npr.org/templates/javascript/jwplayer/player.swf',
-                config: {
-                    skin: 'http://media.npr.org/templates/javascript/jwplayer/skins/mle/npr-video-archive/npr-video-archive.zip',
-                    file: APP_CONFIG['VIDEO'][window.PAGE_NAME]['MP4_URL'],
-                    image: APP_CONFIG['VIDEO'][window.PAGE_NAME]['POSTER'],
-                    'hd.file': APP_CONFIG['VIDEO'][window.PAGE_NAME]['HD_URL']
                 }
             }],
             bufferlength: '5',
