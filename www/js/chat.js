@@ -222,7 +222,7 @@
             }
 
             post.filter_user = (_.indexOf(plugin.settings.filter_user_ids, post.Creator.Id) >= 0);
-            post.visible = !plugin.settings.is_filtered || post.filter_user; 
+            post.visible = !plugin.settings.is_filtered || post.filter_user;
 
             if (post.Type == "TEXT") {
                 return JST.chat_text(post);
