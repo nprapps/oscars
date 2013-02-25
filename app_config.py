@@ -64,7 +64,7 @@ NPR_DFP = {
 CHAT = {
     'ID': '74796',
     'TOKEN': 'FtP7wRfX',
-    'UPDATE_INTERVAL': 5000,
+    'UPDATE_INTERVAL': 1000,
     'FILTER_USER_IDS': [23219872]
 }
 
