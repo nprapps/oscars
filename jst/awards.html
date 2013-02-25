@@ -12,13 +12,14 @@
             <% }); %>
             <li class="nominees">Also nominated:
                 <% _.each(category.nominees, function(nominee, i, l){ %>
+                    <% var fudged_number = 1; if (category.award == 'Sound Editing') { fudged_number = 2; } %>
                     <% if (nominee.winner != true) { %>
-                    <%= nominee.title %><% if (i < l.length - 1) { %>;<% } %> 
+                    <%= nominee.title %><% if (i < l.length - fudged_number) { %>;<% } %>
                     <% } %>
                 <% }); %>
             </li>
         </ul>
-    </div>      
+    </div>
     <% }); %>
 
     <% if (without_winners.length >= 0) { %>
@@ -36,5 +37,5 @@
                 <li><%= nominee.title %></li>
             <% }); %>
         </ul>
-    </div>      
+    </div>
 <% }); %>
