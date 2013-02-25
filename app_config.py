@@ -104,7 +104,7 @@ def configure_targets(deployment_target):
         SERVERS = STAGING_SERVERS
         DEBUG = True
 
-        CHAT['ID'] = '74796'
+        CHAT['ID'] = '85189'
         CHAT['FILTER_USER_IDS'] = [23219872]
 
 DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
