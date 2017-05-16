@@ -52,9 +52,9 @@
              */
             plugin.settings = $.extend({}, defaults, options || {});
 
-            chat_url = 'http://' + plugin.settings.scribble_host + '/event/' + plugin.settings.chat_id +'/all/';
-            page_url = 'http://' + plugin.settings.scribble_host + '/event/' + plugin.settings.chat_id +'/page/';
-            user_url = 'http://' + plugin.settings.scribble_host + '/user';
+            chat_url = 'https://' + plugin.settings.scribble_host + '/event/' + plugin.settings.chat_id +'/all/';
+            page_url = 'https://' + plugin.settings.scribble_host + '/event/' + plugin.settings.chat_id +'/page/';
+            user_url = 'https://' + plugin.settings.scribble_host + '/user';
 
             // Cache element references
             // plugin.$chat_title = plugin.$root.find('.chat-title');

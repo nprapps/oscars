@@ -64,9 +64,9 @@ def _make_data_json(filename):
 
     return json.dumps(slides), 200, { 'Content-Type': 'application/javascript' }
 
-@app.route('/live-data/best-picture.json')
-def best_picture_json():
-    return _make_data_json('best-picture')
+# @app.route('/live-data/best-picture.json')
+# def best_picture_json():
+#     return _make_data_json('best-picture')
 
 # @app.route('/widget.html')
 # def widget():
@@ -91,14 +91,14 @@ def _less(filename):
     except IOError:
         abort(404)
 
-    r = envoy.run('node_modules/.bin/lessc -', data=less)
+    r = envoy.run('node_modules/less/bin/lessc -', data=less)
 
     return r.std_out, 200, { 'Content-Type': 'text/css' }
 
 # Render JST templates on-demand
 @app.route('/js/templates.js')
 def _templates_js():
-    r = envoy.run('node_modules/.bin/jst --template underscore jst')
+    r = envoy.run('node_modules/universal-jst/bin/jst.js --template underscore jst')
 
     return r.std_out, 200, { 'Content-Type': 'application/javascript' }
 
